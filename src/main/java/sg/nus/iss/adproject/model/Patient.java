@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Patient {
@@ -34,6 +35,10 @@ public class Patient {
 	joinColumns = @JoinColumn(name = "patient_id"),
 	inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User>users;
+	
+	@OneToMany(mappedBy = "patient")
+	private List<Appointment> appointments;
+	
 	
 	public Patient() {
 		
@@ -85,6 +90,14 @@ public class Patient {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 	
 }
