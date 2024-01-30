@@ -12,4 +12,7 @@ public interface StaffRepository extends JpaRepository<Staff,Integer> {
 	
 	@Query("Select st from Staff st WHERE id= :id")
 	List<Staff> findStaffById(@Param("id")int id);
+	
+	@Query("Select st from Staff st WHERE name= :username AND password= :password")
+	Staff  staffAuthentication(@Param("username")String username,@Param("password")String password);
 }

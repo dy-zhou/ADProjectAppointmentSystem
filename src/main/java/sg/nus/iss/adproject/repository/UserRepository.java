@@ -12,4 +12,5 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query("Select u FROM User u WHERE u.id= :id")
 	List<User> findUserById(@Param("id")int id);
+	
 }

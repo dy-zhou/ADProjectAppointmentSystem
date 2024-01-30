@@ -6,7 +6,7 @@ import sg.nus.iss.adproject.model.Appointment;
 
 public interface AppointmentService {
 	List<Appointment> findAllAppointments();
-	Appointment createAppointment(Appointment appoinment);
+	Appointment createAppointment(Appointment appointment);
 	Appointment updateAppointmentStatus(Appointment appointment);
 	Appointment getAppointmentDetail(int id);
 	List<Appointment> findAppointmentById(int id);

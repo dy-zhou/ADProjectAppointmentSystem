@@ -72,4 +72,20 @@ public class Appointment {
 		this.medical_condition = medical_condition;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public AppointmentStatusEnum getStatus() {
+		return status;
+	}
+
+	public void setStatus(AppointmentStatusEnum status) {
+		this.status = status;
+	}
+
 }
