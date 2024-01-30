@@ -14,6 +14,7 @@ import jakarta.persistence.OneToOne;
 public class Appointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private LocalDate date;
 	private LocalTime time;
 	private String queue_number;
