@@ -75,7 +75,7 @@ public class NurseController {
 	@PostMapping("/newPatient")
 	public String submitPatient(@ModelAttribute("patient")Patient patient) {
 		
-				patientService.addNewPatient(patient);
+				patientService.addPatient(patient);
 				return "redirect:/patientList";
 	}
 	
@@ -83,7 +83,7 @@ public class NurseController {
 	
 	@GetMapping("/patient/{id}")
 	public String patientDetail(@PathVariable("id") int id, Model model) {
-	Patient patient= patientService.findPatientById(id);
+	Patient patient= patientService.getPatientById(id);
 	if(patient!=null)
 		return "patientDetail";
 	else
