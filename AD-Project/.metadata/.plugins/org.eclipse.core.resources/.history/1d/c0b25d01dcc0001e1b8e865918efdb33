@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Create Patient</title>
+</head>
+
+<body>
+	<h2>Create Patient</h2>
+	<form action="c" method="post" th:object="${patient}">
+		<label for="name">Name:</label><br>
+		<input type="text" id="name" name="name" th:field="*{name}"><br>
+
+		<label for="address">Address:</label><br>
+		<input type="text" id="address" name="address" th:field="*{address}"><br>
+
+
+
+
+		<label for="sex">Sex:</label><br>
+		<select id="sex" name="sex" th:field="*{sex}">
+			<option value="Male">Male</option>
+			<option value="Female">Female</option>
+		</select><br>
+
+		<label for="allergy">Allergy:</label><br>
+		<input type="text" id="allergy" name="allergy" th:field="*{allergy}"><br>
+
+		<label for="medical_condition">Medical Condition:</label><br>
+		<input type="text" id="medical_condition" name="medical_condition" th:field="*{medical_condition}"><br>
+
+		<label for="additional_information">Additional Information:</label><br>
+		<input type="text" id="additional_information" name="additional_information"
+			th:field="*{additional_information}"><br>
+
+		<input type="submit" value="Create">
+	</form>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Details</title>
+</head>
+<body>
+    <h2>Patient Details</h2>
+    <div>
+        <p><strong>ID:</strong> <span th:text="${patient.id}"></span></p>
+        <p><strong>Name:</strong> <span th:text="${patient.name}"></span></p>
+        <p><strong>Address:</strong> <span th:text="${patient.address}"></span></p>
+        <p><strong>Sex:</strong> <span th:text="${patient.sex}"></span></p>
+        <p><strong>Allergy:</strong> <span th:text="${patient.allergy}"></span></p>
+        <p><strong>Medical Condition:</strong> <span th:text="${patient.medical_condition}"></span></p>
+        <p><strong>Additional Information:</strong> <span th:text="${patient.additional_info}"></span></p>
+    </div>
+    <!-- 如果患者有关联的用户 -->
+    <div th:if="${patient.users != null and not #lists.isEmpty(patient.users)}">
+        <h3>Associated Users:</h3>
+        <ul>
+            <li th:each="user : ${patient.users}" th:text="${user.username}"></li>
+        </ul>
+    </div>
+    <!-- 如果患者有关联的预约 -->
+    <div th:if="${patient.appointments != null and not #lists.isEmpty(patient.appointments)}">
+        <h3>Appointments:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="appointment : ${patient.appointments}">
+                    <td th:text="${appointment.date}"></td>
+                    <td th:text="${appointment.time}"></td>
+                    <td th:text="${appointment.description}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
