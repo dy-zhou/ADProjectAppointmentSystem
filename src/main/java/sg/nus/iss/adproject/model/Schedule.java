@@ -63,4 +63,12 @@ public class Schedule {
 	public void setPatient_slot(int patient_slot) {
 		this.patient_slot = patient_slot;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }

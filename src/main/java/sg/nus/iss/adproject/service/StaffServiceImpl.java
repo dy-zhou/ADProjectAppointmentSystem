@@ -3,16 +3,23 @@ package sg.nus.iss.adproject.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import sg.nus.iss.adproject.interfacemethods.StaffService;
 import sg.nus.iss.adproject.model.Staff;
 import sg.nus.iss.adproject.repository.StaffRepository;
 
+
+@Service
+@Transactional(readOnly=true)
 public class StaffServiceImpl implements StaffService{
 
 	@Autowired
 	private StaffRepository staffRepository;
 	
+	
+	@Transactional(readOnly=false)
 	@Override
 	public Staff createStaff(Staff staff) {
 		// TODO Auto-generated method stub
@@ -32,6 +39,8 @@ public class StaffServiceImpl implements StaffService{
 		return staffRepository.findStaffById(id);
 	}
 
+	
+	@Transactional(readOnly=false)
 	@Override
 	public void deleteStaff(int id) {
 		// TODO Auto-generated method stub

@@ -9,13 +9,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Staff {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@NotBlank(message="Username is required")
 	private String name;
+	
+	@NotBlank(message="password is required")
 	private String password;
 	private String designation;
 
@@ -62,6 +67,14 @@ public class Staff {
 
 	public void setDesignation(String designation) {
 		this.designation = designation;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
