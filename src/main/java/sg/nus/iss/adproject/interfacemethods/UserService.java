@@ -7,5 +7,7 @@ import sg.nus.iss.adproject.model.User;
 public interface UserService {
 
 	List<User> findUserById(int id);
+	
+	User authenticate(String username, String password);
 
 }

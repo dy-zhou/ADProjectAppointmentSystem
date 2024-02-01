@@ -22,13 +22,13 @@ public class Appointment {
 	private AppointmentStatusEnum status;
 
 	@OneToOne(mappedBy="appointment")
-	private Feedback feedback;
+	private Feedback feedbacks;
 
 	@ManyToOne
-	private Patient patient;
+	private Patient patients;
 
 	@ManyToOne
-	private Staff staff;
+	private Staff staffs;
 
 	public Appointment() {
 	}

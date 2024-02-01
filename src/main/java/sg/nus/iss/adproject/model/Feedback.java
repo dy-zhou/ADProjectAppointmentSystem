@@ -16,10 +16,10 @@ public class Feedback {
 	private String feedback_type;
 
 	@ManyToOne
-	private User user;
+	private User users;
 
 	@OneToOne
-	private Appointment appointment;
+	private Appointment appointments;
 
 	public Feedback() {
 	}
