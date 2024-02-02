@@ -19,6 +19,7 @@ import sg.nus.iss.adproject.interfacemethods.PatientService;
 import sg.nus.iss.adproject.model.Appointment;
 import sg.nus.iss.adproject.model.Feedback;
 import sg.nus.iss.adproject.model.Patient;
+import sg.nus.iss.adproject.model.Staff;
 import sg.nus.iss.adproject.model.Symptom;
 import sg.nus.iss.adproject.service.AppointmentServiceImpl;
 import sg.nus.iss.adproject.service.FeedbackServiceImpl;
@@ -32,6 +33,7 @@ public class NurseController {
 	private PatientService patientService;
 	private AppointmentService appointmentService;
 	private FeedbackService feedbackService;
+	private DiseaseService diseaseService;
 	
 	public void setPatientService(PatientServiceImpl patientService,
 								  AppointmentServiceImpl appointmentService,
@@ -105,4 +107,11 @@ public class NurseController {
 		sessionObj.setAttribute("symptomsIds", symptomIds);
 		return "pickDoctors";
 	}
+	
+	@GetMapping("/createAppointment/step2")
+	public String pickDoctorsForm(Model model) {
+		List<Staff>doctorListByDepartment=findDeparmentByDisease()
+	}
+	
+	
 }
