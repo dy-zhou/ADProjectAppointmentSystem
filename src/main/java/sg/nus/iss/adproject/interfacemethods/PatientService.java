@@ -10,11 +10,11 @@ public interface PatientService {
 	 
 	 Patient getPatientById(int id);
 
-	    void addPatient(Patient patient);
+	 void addPatient(Patient patient);
 
-	    void updatePatient(int id, Patient patient);
+	 void updatePatient(int id, Patient patient);
 
-	    void deletePatientById(int id);
+	 void deletePatientById(int id);
 
 	
 //	Patient addNewPatient(Patient patient);

@@ -45,4 +45,8 @@ public class Feedback {
 		this.feedback_type = feedback_type;
 	}
 
+	public Appointment getAppointments() {
+		return appointments;
+	}
+
 }

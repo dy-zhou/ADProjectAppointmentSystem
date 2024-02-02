@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.nus.iss.adproject.interfacemethods.FeedbackService;
@@ -31,10 +32,36 @@ public class ManagerController {
 		model.addAttribute("feedbackList",feedbackList);
 		return "homePage_Manager";
 	}
+//	
+//	@GetMapping("/feedback")
+//	public String viewFeedbackDetail() {
+//		
+//		return "feedbackDetail";
+//	}
 	
-	@GetMapping("/feedback")
-	public String viewFeedbackDetail() {
-		
+	
+	//will show feedback list and related doctor
+	@GetMapping("/allFeedbacks")
+	public String showAllFeedbacks(Model model)
+	{
+		List<Feedback> feedbackList = feedbackService.findAllFeedbacksAndDoctorName();
+		model.addAttribute("feedbackList", feedbackList);
+		return "feedbackList";
+	}
+	
+	@GetMapping("/doctorFeedbacks/{id}")
+	public String showDoctorFeedbacks(@PathVariable("id") int doctorId, Model model)
+	{
+		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(doctorId);
+		model.addAttribute("doctorFeedbackList",doctorFeedbackList);
+		return "doctorFeedbackList";
+	}
+	
+	@GetMapping("feedbackDetails/{id}")
+	public String showFeedbackDetails(@PathVariable("id") int feedbackId, Model model)
+	{
+		Feedback feedbackDetails = feedbackService.getFeedbackDetail(feedbackId);
+		model.addAttribute("feedbackDetails", feedbackDetails);
 		return "feedbackDetail";
 	}
 
