@@ -13,24 +13,26 @@ public class PatientServiceImpl implements PatientService {
 
 	@Autowired
 	private PatientRepository patientRepository;
-	
-	
+
 	@Override
 	public List<Patient> getAllPatients() {
+		// TODO Auto-generated method stub
 		return patientRepository.findAll();
 	}
 
 	@Override
 	public Patient getPatientById(int id) {
-		return patientRepository.findById(id).orElse(null);
+		return patientRepository.findById(id).get();
 	}
 
 	@Override
 	public void addPatient(Patient patient) {
+		// TODO Auto-generated method stub
 		patientRepository.save(patient);
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void updatePatient(int id, Patient newPatientInfo) {
 		Optional<Patient> optionalPatient = patientRepository.findById(id);
 		if (optionalPatient.isPresent()) {
@@ -70,5 +72,28 @@ public class PatientServiceImpl implements PatientService {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
+
+	public void updatePatient(int id, Patient patient) {
+		// TODO Auto-generated method stub
+
+		Optional<Patient> optionalPatient = patientRepository.findById(id);
+		if (optionalPatient.isPresent()) {
+			Patient existingPatient = optionalPatient.get();
+			existingPatient.setName(patient.getName());
+			existingPatient.setAddress(patient.getAddress());
+			existingPatient.setSex(patient.getSex());
+			existingPatient.setAllergy(patient.getAllergy());
+			existingPatient.setMedical_condition(patient.getMedical_condition());
+			existingPatient.setAdditional_info(patient.getAdditional_info());
+
+			patientRepository.save(existingPatient);
+		}
+	}
+
+	@Override
+	public void deletePatient(int id) {
+		// TODO Auto-generated method stub
+		patientRepository.deleteById(id);
+	}
 
 }

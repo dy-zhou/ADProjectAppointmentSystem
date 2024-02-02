@@ -73,6 +73,7 @@ public class NurseController {
 
 	@GetMapping("/patient/{id}")
 	public String patientDetail(@PathVariable("id") int id, Model model) {
+		
 		Patient patient = patientService.getPatientById(id);
 		if (patient != null) {
 			model.addAttribute("patient", patient);

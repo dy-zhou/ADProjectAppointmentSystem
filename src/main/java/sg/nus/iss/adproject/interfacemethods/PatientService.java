@@ -5,6 +5,7 @@ import java.util.List;
 import sg.nus.iss.adproject.model.Patient;
 
 public interface PatientService {
+
 	//find all patients
 	 List<Patient> getAllPatients();
 	 
@@ -20,5 +21,5 @@ public interface PatientService {
 //	Patient addNewPatient(Patient patient);
 //	Patient findPatientById(int id);
 //	Patient updatePatientInfo(Patient patient);
-	
+
 }
