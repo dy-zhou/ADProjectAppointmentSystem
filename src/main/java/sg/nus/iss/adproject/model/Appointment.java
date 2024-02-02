@@ -21,14 +21,14 @@ public class Appointment {
 	private String medical_condition;
 	private AppointmentStatusEnum status;
 
-	@OneToOne(mappedBy="appointment")
-	private Feedback feedback;
+	@OneToOne(mappedBy = "appointment")
+	private Feedback feedbacks;
 
 	@ManyToOne
-	private Patient patient;
+	private Patient patients;
 
 	@ManyToOne
-	private Staff staff;
+	private Staff staffs;
 
 	public Appointment() {
 	}
@@ -86,6 +86,10 @@ public class Appointment {
 
 	public void setStatus(AppointmentStatusEnum status) {
 		this.status = status;
+	}
+
+	public Staff getStaffs() {
+		return staffs;
 	}
 
 }

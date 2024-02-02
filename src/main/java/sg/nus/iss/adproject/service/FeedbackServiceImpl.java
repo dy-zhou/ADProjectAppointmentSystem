@@ -2,26 +2,40 @@ package sg.nus.iss.adproject.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.nus.iss.adproject.interfacemethods.FeedbackService;
 import sg.nus.iss.adproject.model.Feedback;
+import sg.nus.iss.adproject.repository.FeedbackRepository;
 
 @Service
-@Transactional(readOnly=true)
-public class FeedbackServiceImpl implements FeedbackService{
+@Transactional(readOnly = true)
+public class FeedbackServiceImpl implements FeedbackService {
+
+	@Autowired
+	private FeedbackRepository feedbackRepository;
 
 	@Override
 	public List<Feedback> findAllFeedbacks() {
-		// TODO Auto-generated method stub
-		return null;
+		return feedbackRepository.findAll();
+	}
+	
+	@Override
+	public List<Feedback> findAllFeedbacksAndDoctorName()
+	{
+		return feedbackRepository.findAllFeedbacksAndDoctorName();
 	}
 
 	@Override
 	public List<Feedback> findFeedbacksByStaffId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return feedbackRepository.findFeedbacksByStaffId(id);
+	}
+
+	@Override
+	public Feedback getFeedbackDetail(int id) {
+	    return feedbackRepository.getFeedbackDetail(id);
 	}
 
 

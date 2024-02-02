@@ -49,5 +49,13 @@ public class User {
 	public void setPatients(List<Patient> patients) {
 		this.patients = patients;
 	}
+	
+	public List<Feedback> getFeedbacks() {
+		return feedbacks;
+	}
+
+	public void setFeedbacks(List<Feedback> feedbacks) {
+		this.feedbacks = feedbacks;
+	}
 
 }
