@@ -20,6 +20,9 @@ public class Department {
 
 	@OneToMany(mappedBy = "department")
 	private List<Room> rooms;
+	
+	@OneToMany(mappedBy="department")
+	private List<Disease>diseases;
 
 	public Department() {
 
