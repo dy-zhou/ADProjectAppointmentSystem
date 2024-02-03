@@ -10,26 +10,30 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sg.nus.iss.adproject.interfacemethods.FeedbackService;
+import sg.nus.iss.adproject.interfacemethods.StaffService;
 import sg.nus.iss.adproject.model.Appointment;
 import sg.nus.iss.adproject.model.Feedback;
 import sg.nus.iss.adproject.service.FeedbackServiceImpl;
+import sg.nus.iss.adproject.service.StaffServiceImpl;
 
 @Controller
 @RequestMapping("Manager")
 public class ManagerController {
-	//view feedback
-	
+	// view feedback
+
 	@Autowired
 	private FeedbackService feedbackService;
-	
-	public void setFeedbackService(FeedbackServiceImpl feedbackService) {
-		this.feedbackService=feedbackService;
+	private StaffService staffService;
+
+	public void setFeedbackService(FeedbackServiceImpl feedbackService, StaffServiceImpl staffService) {
+		this.feedbackService = feedbackService;
+		this.staffService = staffService;
 	}
-	
+
 	@GetMapping
 	public String showDashboard(Model model) {
-		List<Feedback>feedbackList=feedbackService.findAllFeedbacks();
-		model.addAttribute("feedbackList",feedbackList);
+		List<Feedback> feedbackList = feedbackService.findAllFeedbacks();
+		model.addAttribute("feedbackList", feedbackList);
 		return "homePage_Manager";
 	}
 //	
@@ -38,28 +42,29 @@ public class ManagerController {
 //		
 //		return "feedbackDetail";
 //	}
-	
-	
-	//will show feedback list and related doctor
+
+	// will show feedback list and related doctor
 	@GetMapping("/allFeedbacks")
-	public String showAllFeedbacks(Model model)
-	{
+	public String showAllFeedbacks(Model model) {
 		List<Feedback> feedbackList = feedbackService.findAllFeedbacksAndDoctorName();
 		model.addAttribute("feedbackList", feedbackList);
 		return "feedbackList";
 	}
-	
+
 	@GetMapping("/doctorFeedbacks/{id}")
-	public String showDoctorFeedbacks(@PathVariable("id") int doctorId, Model model)
-	{
+	public String showDoctorFeedbacks(@PathVariable("id") int doctorId, Model model) {
 		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(doctorId);
-		model.addAttribute("doctorFeedbackList",doctorFeedbackList);
-		return "doctorFeedbackList";
+		String staffName = staffService.getStaffNameById(doctorId);
+		
+		model.addAttribute("doctorFeedbackList", doctorFeedbackList);
+		//show which doctor's feedback
+		model.addAttribute("staffName", staffName);
+		
+		return "managerDoctorFeedbackList";
 	}
-	
+
 	@GetMapping("feedbackDetails/{id}")
-	public String showFeedbackDetails(@PathVariable("id") int feedbackId, Model model)
-	{
+	public String showFeedbackDetails(@PathVariable("id") int feedbackId, Model model) {
 		Feedback feedbackDetails = feedbackService.getFeedbackDetail(feedbackId);
 		model.addAttribute("feedbackDetails", feedbackDetails);
 		return "feedbackDetail";

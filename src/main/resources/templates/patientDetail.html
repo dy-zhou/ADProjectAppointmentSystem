@@ -2,21 +2,50 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Patient Details</title>
+    <meta charset="UTF-8">
+    <title>Patient Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        div {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-	<h2>Patient Details</h2>
-	<div>
-		<p><strong>ID:</strong> <span th:text="${patient.id}"></span></p>
-		<p><strong>Name:</strong> <span th:text="${patient.name}"></span></p>
-		<p><strong>Address:</strong> <span th:text="${patient.address}"></span></p>
-		<p><strong>Sex:</strong> <span th:text="${patient.sex}"></span></p>
-		<p><strong>Allergy:</strong> <span th:text="${patient.allergy}"></span></p>
-		<p><strong>Medical Condition:</strong> <span th:text="${patient.medical_condition}"></span></p>
-		<p><strong>Additional Information:</strong> <span th:text="${patient.additional_info}"></span></p>
-	</div>
+    <h2>Patient Details</h2>
+    <div>
+        <p><strong>ID:</strong> <span th:text="${patient.id}"></span></p>
+        <p><strong>Name:</strong> <span th:text="${patient.name}"></span></p>
+        <p><strong>Address:</strong> <span th:text="${patient.address}"></span></p>
+        <p><strong>Sex:</strong> <span th:text="${patient.sex}"></span></p>
+        <p><strong>Allergy:</strong> <span th:text="${patient.allergy}"></span></p>
+        <p><strong>Medical Condition:</strong> <span th:text="${patient.medical_condition}"></span></p>
+        <p><strong>Additional Information:</strong> <span th:text="${patient.additional_info}"></span></p>
+    </div>
 	
 	
 //Appointments details

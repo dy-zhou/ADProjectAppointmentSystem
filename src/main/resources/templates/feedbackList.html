@@ -1,0 +1,79 @@
+//This is for manager to see all the feedback and the doctor id and doctor name
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>All Feedbacks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>All Feedbacks</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Feedback Type</th>
+                <th>Doctor Id</th>
+                <th>Doctor Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="feedback : ${feedbacks}">
+                <td th:text="${feedback.id}"></td>
+                <td th:text="${feedback.description}"></td>
+                <td th:text="${feedback.feedback_type}"></td>
+                <td th:text="${feedback.appointments.staffs.id}"></td>
+                <td th:text="${feedback.appointments.staffs.name}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="/Manager/homePage_Manager">Back To Home Page</a>
+</body>
+</html>
