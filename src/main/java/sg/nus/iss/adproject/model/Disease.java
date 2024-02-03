@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -23,6 +24,9 @@ public class Disease {
 	joinColumns = @JoinColumn(name = "disease_id"),
 	inverseJoinColumns = @JoinColumn(name = "symptom_id"))
 	private List<Symptom> symptoms;
+	
+	@ManyToOne
+	private Department department;
 	
 	public Disease() {
 		
@@ -45,6 +49,16 @@ public class Disease {
 
 	public void setSymptoms(List<Symptom> symptoms) {
 		this.symptoms = symptoms;
+	}
+
+
+	public Department getDepartment() {
+		return department;
+	}
+
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 
