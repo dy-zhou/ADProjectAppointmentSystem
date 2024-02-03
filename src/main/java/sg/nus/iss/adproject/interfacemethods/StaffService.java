@@ -10,5 +10,7 @@ public interface StaffService {
 	List<Staff> findStaffById(int id);
 	void deleteStaff(int id);
 	Staff Authentication(String username,String password);
+	
+	String getStaffNameById(int id);
 
 }

@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.servlet.http.HttpSession;
 import sg.nus.iss.adproject.interfacemethods.AppointmentService;
 import sg.nus.iss.adproject.interfacemethods.FeedbackService;
+import sg.nus.iss.adproject.interfacemethods.StaffService;
 import sg.nus.iss.adproject.model.Appointment;
 import sg.nus.iss.adproject.model.Feedback;
 import sg.nus.iss.adproject.service.AppointmentServiceImpl;
 import sg.nus.iss.adproject.service.FeedbackServiceImpl;
+import sg.nus.iss.adproject.service.StaffServiceImpl;
 
 @Controller
 @RequestMapping("/Doctor")
@@ -27,10 +29,13 @@ public class DoctorController {
 	@Autowired
 	private FeedbackService feedbackService;
 	private AppointmentService appointmentService;
+	private StaffService staffService;
 
-	public void setService(FeedbackServiceImpl feedbackService, AppointmentServiceImpl appointmentService) {
+	public void setService(FeedbackServiceImpl feedbackService, AppointmentServiceImpl appointmentService,
+			StaffServiceImpl staffService) {
 		this.appointmentService = appointmentService;
 		this.feedbackService = feedbackService;
+		this.staffService = staffService;
 	}
 
 	@GetMapping("/Docctor/{id}")
@@ -47,9 +52,12 @@ public class DoctorController {
 	public String showDoctorFeedbacks(Model model, HttpSession session) {
 		int staffId = (int) session.getAttribute("staffId");
 
+		String staffName = staffService.getStaffNameById(staffId);
+
 		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(staffId);
 
 		model.addAttribute("doctorFeedbackList", doctorFeedbackList);
+		model.addAttribute("staffName", staffName);
 
 		return "doctorFeedbackList";
 	}
