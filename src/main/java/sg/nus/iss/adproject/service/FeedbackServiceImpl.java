@@ -38,5 +38,12 @@ public class FeedbackServiceImpl implements FeedbackService {
 	    return feedbackRepository.getFeedbackDetail(id);
 	}
 
+	@Override
+	public List<Feedback> findTop15Feedbacks(int id) {
+		return feedbackRepository.findTop15Feedbacks(id);
+	}
+	
+	
+
 
 }

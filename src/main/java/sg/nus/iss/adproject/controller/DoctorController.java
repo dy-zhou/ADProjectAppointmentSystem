@@ -41,7 +41,9 @@ public class DoctorController {
 	@GetMapping("/Docctor/{id}")
 	public String showDashboard(@PathVariable("id") int id, Model model) {
 		List<Appointment> appointmentList = appointmentService.findAppointmentByStaffId(id);
-		List<Feedback> feedbackList = feedbackService.findFeedbacksByStaffId(id);
+		//List<Feedback> feedbackList = feedbackService.findFeedbacksByStaffId(id);
+		//change to show first 15 feedback
+		List<Feedback> feedbackList = feedbackService.findTop15Feedbacks(id);
 		model.addAttribute("feedbackList", feedbackList);
 		model.addAttribute("appointmentList", appointmentList);
 		return "homePage_Doctor";

@@ -13,5 +13,7 @@ public interface FeedbackService {
 	List<Feedback> findFeedbacksByStaffId(int id);
 
 	Feedback getFeedbackDetail(int id);
+	
+	List<Feedback> findTop15Feedbacks(int id);
 }
  

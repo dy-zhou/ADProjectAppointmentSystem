@@ -108,7 +108,7 @@ public class NurseController {
 	
 	@GetMapping("/createAppointment/step2")
 	public String pickDoctorsForm(Model model) {
-		List<Staff>doctorListByDepartment=findDeparmentByDisease()
+		List<Staff>doctorListByDepartment=findDeparmentByDisease();
 	}
 	
 	

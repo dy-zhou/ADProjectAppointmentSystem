@@ -1,3 +1,4 @@
+//For manager I add the related doctor so this is different from doctor to see the details
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -61,8 +62,10 @@
 		<p><strong>Medical Condition:</strong> <span
 				th:text="${feedback.appointments.patients.medical_condition}"></span></p>
 		<p><strong>Appointment Status:</strong> <span th:text="${feedback.appointments.status}"></span></p>
+		<p><strong>Doctor ID:</strong> <span th:text="${feedback.appointments.staffs.id}"></span></p>
+		<p><strong>Doctor ID:</strong> <span th:text="${feedback.appointments.staffs.name}"></span></p>
 	</div>
 </body>
-<a href="/Doctor/homePage_Doctor">Back To Home Page</a>
+<a href="/Manager/homePage_Doctor">Back To Home Page</a>
 
 </html>
