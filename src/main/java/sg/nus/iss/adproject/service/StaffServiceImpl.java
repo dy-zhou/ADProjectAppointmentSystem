@@ -54,4 +54,11 @@ public class StaffServiceImpl implements StaffService{
 		return staffRepository.staffAuthentication(username, password);
 	}
 
+
+	@Override
+	public List<Staff> findStaffByDepartmentId(int id) {
+		// TODO Auto-generated method stub
+		return staffRepository.findstaffsByDepartmentId(id);
+	}
+
 }
