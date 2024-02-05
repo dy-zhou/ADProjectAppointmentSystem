@@ -54,6 +54,7 @@ public class DoctorController {
 	@GetMapping("/doctorFeedbacks")
 	public String showDoctorFeedbacks(Model model, HttpSession session) {
 		int staffId = (int) session.getAttribute("staffId");
+
 		Staff staff=staffService.findStaffById(staffId);
 		String staffName=staff.getName();
 
@@ -79,7 +80,7 @@ public class DoctorController {
 
 			if (feedbackStaffId == staffId) {
 				model.addAttribute("feedbackDetails", feedbackDetails);
-				return "doctorFeedbackDetail";
+				return "feedbackDetail";
 			}
 		}
 
