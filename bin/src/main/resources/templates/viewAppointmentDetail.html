@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .patient-list-title {
+            color: #333;
+            font-weight: 600;
+            margin: 0;
+            padding: 20px 0;
+        }
+        .patient-card {
+            background-color: #fff;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        .patient-card img {
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .patient-card p {
+            margin: 0;
+            color: #333;
+        }
+        .queue {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .queue h3 {
+            font-weight: 600;
+        }
+        .queue-list {
+            list-style: none;
+            padding: 0;
+        }
+        .queue-list li {
+            padding: 5px 0;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        footer {
+            background-color: #fff;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>JANUARY 1st 2024</div>
+        <div>Patient information | Home | My profile</div>
+    </header>
+
+    <h2 class="patient-list-title">Patient List</h2>
+    <p>3 appointments today</p>
+
+    <div class="patient-card">
+        <img src="path-to-tom-image.jpg" alt="Tom" width="50" height="50">
+        <div>
+            <p><strong>Tom</strong></p>
+            <p>Appointment time: 2:00pm-2:30pm</p>
+            <p>Stomachache</p>
+        </div>
+    </div>
+
+    <div class="patient-card">
+        <img src="path-to-jessica-image.jpg" alt="Jessica" width="50" height="50">
+        <div>
+            <p><strong>Jessica</strong></p>
+            <p>Appointment time: 2:30pm-3:00pm</p>
+            <p>Fever</p>
+        </div>
+    </div>
+
+    <div class="patient-card">
+        <img src="path-to-mike-image.jpg" alt="Mike" width="50" height="50">
+        <div>
+            <p><strong>Mike</strong></p>
+            <p>Appointment time: 3:00pm-3:30pm</p>
+            <p>Headache</p>
+        </div>
+    </div>
+
+    <aside class="queue">
+       
+
