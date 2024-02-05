@@ -62,17 +62,23 @@
 				<th>ID</th>
 				<th>Description</th>
 				<th>Feedback Type</th>
+				<th th:if="${designation == 'manager'}">Doctor Id</th>
+                <th th:if="${designation == 'manager'}">Doctor Name</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="feedback : ${feedbacks}">
+			<tr th:each="feedback : ${doctorFeedbackList}">
 				<td th:text="${feedback.id}"></td>
 				<td th:text="${feedback.description}"></td>
 				<td th:text="${feedback.feedback_type}"></td>
+				<td th:if="${designation == 'manager'}" th:text="${feedback.appointments.staffs.id}"></td>
+                <td th:if="${designation == 'manager'}" th:text="${feedback.appointments.staffs.name}"></td>
 			</tr>
 		</tbody>
 	</table>
-	<a href="/Doctor/homePage_Doctor">Back To Home Page</a>
+	<a th:href="@{/homePage_Manager}" th:if="${designation == 'manager'}">Back To Manager Home Page</a>
+    <a th:href="@{/homePage_Doctor}" th:if="${designation == 'doctor'}">Back To Doctor Home Page</a>
 </body>
 
 </html>
+

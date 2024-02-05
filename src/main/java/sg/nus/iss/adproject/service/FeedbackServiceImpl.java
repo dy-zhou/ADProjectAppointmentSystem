@@ -25,7 +25,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Override
 	public List<Feedback> findAllFeedbacksAndDoctorName()
 	{
-		return feedbackRepository.findAllFeedbacksAndDoctorName();
+		return feedbackRepository.findAllFeedbacksAndDoctorIdName();
 	}
 
 	@Override

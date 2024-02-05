@@ -13,6 +13,7 @@ import sg.nus.iss.adproject.interfacemethods.FeedbackService;
 import sg.nus.iss.adproject.interfacemethods.StaffService;
 import sg.nus.iss.adproject.model.Appointment;
 import sg.nus.iss.adproject.model.Feedback;
+import sg.nus.iss.adproject.model.Staff;
 import sg.nus.iss.adproject.service.FeedbackServiceImpl;
 import sg.nus.iss.adproject.service.StaffServiceImpl;
 
@@ -48,26 +49,28 @@ public class ManagerController {
 	public String showAllFeedbacks(Model model) {
 		List<Feedback> feedbackList = feedbackService.findAllFeedbacksAndDoctorName();
 		model.addAttribute("feedbackList", feedbackList);
-		return "managerFeedbackList";
+		return "allFeedbackList";
 	}
 
 	@GetMapping("/doctorFeedbacks/{id}")
 	public String showDoctorFeedbacks(@PathVariable("id") int doctorId, Model model) {
 		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(doctorId);
-		String staffName = staffService.getStaffNameById(doctorId);
-		
+
+		Staff staff = staffService.findStaffById(doctorId);
+		String staffName = staff.getName();
+
 		model.addAttribute("doctorFeedbackList", doctorFeedbackList);
-		//show which doctor's feedback
+		// show which doctor's feedback
 		model.addAttribute("staffName", staffName);
-		
-		return "managerDoctorFeedbackList";
+
+		return "doctorFeedbackList";
 	}
 
 	@GetMapping("feedbackDetails/{id}")
 	public String showFeedbackDetails(@PathVariable("id") int feedbackId, Model model) {
 		Feedback feedbackDetails = feedbackService.getFeedbackDetail(feedbackId);
 		model.addAttribute("feedbackDetails", feedbackDetails);
-		return "managerSeeDoctorFeedbackDetails";
+		return "feedbackDetail";
 	}
 
 }
