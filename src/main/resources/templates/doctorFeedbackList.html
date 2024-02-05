@@ -1,0 +1,78 @@
+//This is for doctor to see all the feedbacks related to himself
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	 <title>Feedbacks For <span th:text="${staffName}"></span></title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+		}
+
+		h2 {
+			color: #333;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 20px;
+		}
+
+		th,
+		td {
+			border: 1px solid #ddd;
+			padding: 8px;
+			text-align: left;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+
+		a {
+			display: inline-block;
+			padding: 10px 20px;
+			background-color: #007bff;
+			color: #fff;
+			text-decoration: none;
+			border-radius: 5px;
+			margin-top: 20px;
+		}
+
+		a:hover {
+			background-color: #0056b3;
+		}
+	</style>
+</head>
+
+<body>
+	 <h2>Feedbacks For <span th:text="${staffName}"></span></h2>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Description</th>
+				<th>Feedback Type</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="feedback : ${feedbacks}">
+				<td th:text="${feedback.id}"></td>
+				<td th:text="${feedback.description}"></td>
+				<td th:text="${feedback.feedback_type}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="/Doctor/homePage_Doctor">Back To Home Page</a>
+</body>
+
+</html>

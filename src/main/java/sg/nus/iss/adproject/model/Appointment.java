@@ -18,26 +18,27 @@ public class Appointment {
 	private LocalDate date;
 	private LocalTime time;
 	private String queue_number;
-	private String medical_condition;
+	// private String medical_condition;
 	private AppointmentStatusEnum status;
 
-	@OneToOne(mappedBy="appointment")
-	private Feedback feedback;
+	@OneToOne(mappedBy = "appointment")
+	private Feedback feedbacks;
 
 	@ManyToOne
-	private Patient patient;
+	private Patient patients;
 
 	@ManyToOne
-	private Staff staff;
+	private Staff staffs;
 
 	public Appointment() {
 	}
 
-	public Appointment(LocalDate date, LocalTime time, String queue_number, String medical_condition) {
+	public Appointment(LocalDate date, LocalTime time, String queue_number, AppointmentStatusEnum status) {
 		this.date = date;
 		this.time = time;
 		this.queue_number = queue_number;
-		this.medical_condition = medical_condition;
+		// this.medical_condition = medical_condition;
+		this.status = status;
 	}
 
 	public LocalDate getDate() {
@@ -63,14 +64,14 @@ public class Appointment {
 	public void setQueue_number(String queue_number) {
 		this.queue_number = queue_number;
 	}
-
-	public String getMedical_condition() {
-		return medical_condition;
-	}
-
-	public void setMedical_condition(String medical_condition) {
-		this.medical_condition = medical_condition;
-	}
+// connected with patient
+//	public String getMedical_condition() {
+//		return medical_condition;
+//	}
+//
+//	public void setMedical_condition(String medical_condition) {
+//		this.medical_condition = medical_condition;
+//	}
 
 	public int getId() {
 		return id;
@@ -86,6 +87,14 @@ public class Appointment {
 
 	public void setStatus(AppointmentStatusEnum status) {
 		this.status = status;
+	}
+
+	public Staff getStaffs() {
+		return staffs;
+	}
+
+	public Patient getPatients() {
+		return patients;
 	}
 
 }

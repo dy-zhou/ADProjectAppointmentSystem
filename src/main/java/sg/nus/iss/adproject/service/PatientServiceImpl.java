@@ -13,7 +13,7 @@ public class PatientServiceImpl implements PatientService {
 
 	@Autowired
 	private PatientRepository patientRepository;
-	
+
 	@Override
 	public List<Patient> getAllPatients() {
 		// TODO Auto-generated method stub
@@ -22,7 +22,6 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public Patient getPatientById(int id) {
-		// TODO Auto-generated method stub
 		return patientRepository.findById(id).get();
 	}
 
@@ -33,29 +32,47 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	@Override
-	public void updatePatient(int id, Patient patient) {
-		// TODO Auto-generated method stub
-		
+
+	public void updatePatient(int id, Patient newPatientInfo) {
+		//// TODO Auto-generated method stub
 		Optional<Patient> optionalPatient = patientRepository.findById(id);
 		if (optionalPatient.isPresent()) {
 			Patient existingPatient = optionalPatient.get();
-			existingPatient.setName(patient.getName());
-			existingPatient.setAddress(patient.getAddress());
-			existingPatient.setSex(patient.getSex());
-			existingPatient.setAllergy(patient.getAllergy());
-			existingPatient.setMedical_condition(patient.getMedical_condition());
-			existingPatient.setAdditional_info(patient.getAdditional_info());
+			existingPatient.setName(newPatientInfo.getName());
+			existingPatient.setAddress(newPatientInfo.getAddress());
+			existingPatient.setSex(newPatientInfo.getSex());
+			existingPatient.setAllergy(newPatientInfo.getAllergy());
+			existingPatient.setMedical_condition(newPatientInfo.getMedical_condition());
+			existingPatient.setAdditional_info(newPatientInfo.getAdditional_info());
 
 			patientRepository.save(existingPatient);
-		} 
+		} else {
+			// SHOW ERROR HTML
+		}
 	}
 
 	@Override
-	public void deletePatient(int id) {
+	public void deletePatientById(int id) {
 		// TODO Auto-generated method stub
 		patientRepository.deleteById(id);
 	}
 
-
+//	@Override
+//	public Patient addNewPatient(Patient patient) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Patient findPatientById(int id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Patient updatePatientInfo(Patient patient) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

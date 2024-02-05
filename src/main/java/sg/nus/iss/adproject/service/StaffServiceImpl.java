@@ -34,7 +34,7 @@ public class StaffServiceImpl implements StaffService{
 	}
 
 	@Override
-	public List<Staff> findStaffById(int id) {
+	public Staff findStaffById(int id) {
 		// TODO Auto-generated method stub
 		return staffRepository.findStaffById(id);
 	}
@@ -60,5 +60,6 @@ public class StaffServiceImpl implements StaffService{
 		// TODO Auto-generated method stub
 		return staffRepository.findstaffsByDepartmentId(id);
 	}
+
 
 }

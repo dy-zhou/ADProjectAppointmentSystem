@@ -16,10 +16,10 @@ public class Feedback {
 	private String feedback_type;
 
 	@ManyToOne
-	private User user;
+	private User users;
 
 	@OneToOne
-	private Appointment appointment;
+	private Appointment appointments;
 
 	public Feedback() {
 	}
@@ -43,6 +43,10 @@ public class Feedback {
 
 	public void setFeedback_type(String feedback_type) {
 		this.feedback_type = feedback_type;
+	}
+
+	public Appointment getAppointments() {
+		return appointments;
 	}
 
 }

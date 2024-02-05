@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import sg.nus.iss.adproject.interfacemethods.AppointmentService;
+<<<<<<< HEAD
 import sg.nus.iss.adproject.interfacemethods.DepartmentService;
+=======
+import sg.nus.iss.adproject.interfacemethods.DiseaseService;
+>>>>>>> 1605a32f0b2474f3e13307b7ed622182480f0bc3
 import sg.nus.iss.adproject.interfacemethods.FeedbackService;
 import sg.nus.iss.adproject.interfacemethods.PatientService;
 import sg.nus.iss.adproject.model.Appointment;
@@ -30,12 +34,13 @@ import sg.nus.iss.adproject.service.PatientServiceImpl;
 @Controller
 @RequestMapping("Nurse")
 public class NurseController {
-	
+
 	@Autowired
 	private PatientService patientService;
 	private AppointmentService appointmentService;
 	private FeedbackService feedbackService;
 	private DepartmentService departmentService;
+	private DiseaseService diseaseService;
 	
 	public void setPatientService(PatientServiceImpl patientService,
 								  AppointmentServiceImpl appointmentService,
@@ -47,70 +52,67 @@ public class NurseController {
 		this.departmentService=departmentService;
 	}
 //make/view/ appointment
-	
-	
-	
-	
+
 	@GetMapping
 	public String showDashboard(Model model) {
-		List<Appointment>appointmentList=appointmentService.findAllAppointments();
-		List<Feedback>feedbackList=feedbackService.findAllFeedbacks();
-		model.addAttribute("feedbackList",feedbackList);
+		List<Appointment> appointmentList = appointmentService.findAllAppointments();
+		List<Feedback> feedbackList = feedbackService.findAllFeedbacks();
+		model.addAttribute("feedbackList", feedbackList);
 		model.addAttribute("appointmentList", appointmentList);
 		return "homePage_Nurse";
 	}
-	
-	
-	
+
 	@GetMapping("/patientList")
-	public String patientList() {
+	public String patientList(Model model) {
+		List<Patient> patients = patientService.getAllPatients();
+		model.addAttribute("patients", patients);
 		return "patientList";
 	}
 
-	
-	
 	@GetMapping("/newPatient")
 	public String showAddPatientForm(Model model) {
-		Patient patient=new Patient();
-		model.addAttribute("patient",patient);
+		Patient patient = new Patient();
+		model.addAttribute("patient", patient);
 		return "addNewPatient";
 	}
-	
-	
-	
+
 	@PostMapping("/newPatient")
-	public String submitPatient(@ModelAttribute("patient")Patient patient) {
-		
-				patientService.addPatient(patient);
-				return "redirect:/patientList";
+	public String submitPatient(@ModelAttribute("patient") Patient patient) {
+
+		patientService.addPatient(patient);
+		return "redirect:/patientList";
 	}
-	
-	
-	
+
 	@GetMapping("/patient/{id}")
 	public String patientDetail(@PathVariable("id") int id, Model model) {
-	Patient patient= patientService.getPatientById(id);
-	if(patient!=null)
-		return "patientDetail";
-	else
-		return "addNewPatient";
+
+		Patient patient = patientService.getPatientById(id);
+		if (patient != null) {
+			model.addAttribute("patient", patient);
+			return "patientDetail";
+		} else
+			return "addNewPatient";
 	}
-	
-	
-	
+
+	@PostMapping("/patient/{id}")
+	public String updatePatient(@PathVariable int id, @ModelAttribute Patient patient) {
+		patientService.updatePatient(id, patient);
+		patientService.deletePatientById(id);
+		return "redirect:/patientList";
+	}
+
 	@GetMapping("/createAppiontment/step1")
 	public String checkSymptoms() {
-		
+
 		return "checkSymptoms";
 	}
-	
-	
-	
+
 	@PostMapping("/createAppiontment/step1")
-	public String addSymptoms(@RequestParam("syptomId") int[]symptomIds, HttpSession sessionObj,Model model) {
+	public String addSymptoms(@RequestParam("syptomId") int[] symptomIds, HttpSession sessionObj, Model model) {
 		sessionObj.setAttribute("symptomsIds", symptomIds);
 		return "pickDoctors";
 	}
+
 	
 	@GetMapping("/createAppointment/step2")
 	public String pickDoctorsForm(Model model) {
@@ -118,4 +120,5 @@ public class NurseController {
 	}
 	
 	
+
 }
