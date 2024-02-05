@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import sg.nus.iss.adproject.interfacemethods.PatientService;
 import sg.nus.iss.adproject.model.Patient;
 import sg.nus.iss.adproject.repository.PatientRepository;
 
+@Service
 public class PatientServiceImpl implements PatientService {
 
 	@Autowired

@@ -15,10 +15,10 @@ public class Room {
 	private String name;
 
 	@ManyToOne
-	private Department departments;
+	private Department department;
 
 	@OneToOne
-	private Staff staffs;
+	private Staff staff;
 
 	public Room() {
 	}
@@ -35,8 +35,8 @@ public class Room {
 		this.name = name;
 	}
 
-	public Department getDepartments() {
-		return departments;
+	public Department getDepartment() {
+		return department;
 	}
 
 }

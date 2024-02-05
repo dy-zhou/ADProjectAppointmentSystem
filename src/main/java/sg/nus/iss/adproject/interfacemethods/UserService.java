@@ -8,6 +8,5 @@ public interface UserService {
 
 	List<User> findUserById(int id);
 	
-	User authenticate(String username, String password);
 
 }

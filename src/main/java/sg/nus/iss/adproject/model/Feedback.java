@@ -16,10 +16,10 @@ public class Feedback {
 	private String feedback_type;
 
 	@ManyToOne
-	private User users;
+	private User user;
 
 	@OneToOne
-	private Appointment appointments;
+	private Appointment appointment;
 
 	public Feedback() {
 	}
@@ -45,8 +45,9 @@ public class Feedback {
 		this.feedback_type = feedback_type;
 	}
 
-	public Appointment getAppointments() {
-		return appointments;
+	public Appointment getAppointment() {
+		return appointment;
 	}
+	
 
 }

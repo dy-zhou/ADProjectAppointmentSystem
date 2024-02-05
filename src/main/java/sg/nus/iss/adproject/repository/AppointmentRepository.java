@@ -19,7 +19,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Integer
 	@Query("Select a From Appointment a WHERE a.patient.id=:id")
 	List<Appointment> findAppointmentByPatientId(@Param("id") int id);
 	
-	@Query("Select a From Appointment a WHERE a.status=:id")
+	@Query("Select a From Appointment a WHERE a.status=:status")
 	List<Appointment> findAppointmentStatus(@Param("status")String status);
 	
 	@Query("Select a From Appointment a WHERE a.staff.id=:id")

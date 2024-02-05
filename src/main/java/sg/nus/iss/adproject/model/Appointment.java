@@ -25,10 +25,10 @@ public class Appointment {
 	private Feedback feedbacks;
 
 	@ManyToOne
-	private Patient patients;
+	private Patient patient;
 
 	@ManyToOne
-	private Staff staffs;
+	private Staff staff;
 
 	public Appointment() {
 	}
@@ -89,12 +89,12 @@ public class Appointment {
 		this.status = status;
 	}
 
-	public Staff getStaffs() {
-		return staffs;
+	public Staff getStaff() {
+		return staff;
 	}
 
-	public Patient getPatients() {
-		return patients;
+	public Patient getPatient() {
+		return patient;
 	}
 
 }

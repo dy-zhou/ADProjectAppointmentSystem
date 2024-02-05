@@ -72,10 +72,10 @@ public class DoctorController {
 
 		Feedback feedbackDetails = feedbackService.getFeedbackDetail(feedbackId);
 //make sure doctor can only see himself's feedback
-		if (feedbackDetails != null && feedbackDetails.getAppointments() != null
-				&& feedbackDetails.getAppointments().getStaffs() != null) {
+		if (feedbackDetails != null && feedbackDetails.getAppointment() != null
+				&& feedbackDetails.getAppointment().getStaff() != null) {
 
-			int feedbackStaffId = feedbackDetails.getAppointments().getStaffs().getId();
+			int feedbackStaffId = feedbackDetails.getAppointment().getStaff().getId();
 
 			if (feedbackStaffId == staffId) {
 				model.addAttribute("feedbackDetails", feedbackDetails);

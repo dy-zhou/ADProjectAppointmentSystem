@@ -14,11 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import sg.nus.iss.adproject.interfacemethods.AppointmentService;
-<<<<<<< HEAD
-import sg.nus.iss.adproject.interfacemethods.DepartmentService;
-=======
-import sg.nus.iss.adproject.interfacemethods.DiseaseService;
->>>>>>> 1605a32f0b2474f3e13307b7ed622182480f0bc3
+
+
 import sg.nus.iss.adproject.interfacemethods.FeedbackService;
 import sg.nus.iss.adproject.interfacemethods.PatientService;
 import sg.nus.iss.adproject.model.Appointment;
@@ -37,19 +34,19 @@ public class NurseController {
 
 	@Autowired
 	private PatientService patientService;
+	@Autowired
 	private AppointmentService appointmentService;
+	@Autowired
 	private FeedbackService feedbackService;
-	private DepartmentService departmentService;
-	private DiseaseService diseaseService;
+	
 	
 	public void setPatientService(PatientServiceImpl patientService,
 								  AppointmentServiceImpl appointmentService,
-								  FeedbackServiceImpl feedbackService,
-								  DepartmentServiceImpl departmentService) {
+								  FeedbackServiceImpl feedbackService) {
 		this.patientService=patientService;
 		this.appointmentService=appointmentService;
 		this.feedbackService=feedbackService;
-		this.departmentService=departmentService;
+
 	}
 //make/view/ appointment
 
@@ -115,8 +112,8 @@ public class NurseController {
 
 	
 	@GetMapping("/createAppointment/step2")
-	public String pickDoctorsForm(Model model) {
-		List<Staff>doctorListByDepartment=DepartmentService.findDeparmentByDisease(int id);
+	public String pickDoctorsForm(Model model, int id) {
+		return "pickDoctors";
 	}
 	
 	
