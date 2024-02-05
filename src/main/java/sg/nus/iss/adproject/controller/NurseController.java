@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import sg.nus.iss.adproject.interfacemethods.AppointmentService;
+import sg.nus.iss.adproject.interfacemethods.DiseaseService;
 import sg.nus.iss.adproject.interfacemethods.FeedbackService;
 import sg.nus.iss.adproject.interfacemethods.PatientService;
 import sg.nus.iss.adproject.model.Appointment;
@@ -40,8 +41,6 @@ public class NurseController {
 		this.patientService = patientService;
 		this.appointmentService = appointmentService;
 		this.feedbackService = feedbackService;
-
-	private DiseaseService diseaseService;
 
 	}
 //make/view/ appointment
@@ -78,7 +77,7 @@ public class NurseController {
 
 	@GetMapping("/patient/{id}")
 	public String patientDetail(@PathVariable("id") int id, Model model) {
-		
+
 		Patient patient = patientService.getPatientById(id);
 		if (patient != null) {
 			model.addAttribute("patient", patient);
@@ -105,11 +104,10 @@ public class NurseController {
 		sessionObj.setAttribute("symptomsIds", symptomIds);
 		return "pickDoctors";
 	}
-	
-	@GetMapping("/createAppointment/step2")
-	public String pickDoctorsForm(Model model) {
-		List<Staff>doctorListByDepartment=findDeparmentByDisease();
-	}
-	
-	
+
+//	@GetMapping("/createAppointment/step2")
+//	public String pickDoctorsForm(Model model) {
+//		List<Staff>doctorListByDepartment=findDeparmentByDisease();
+//	}
+
 }

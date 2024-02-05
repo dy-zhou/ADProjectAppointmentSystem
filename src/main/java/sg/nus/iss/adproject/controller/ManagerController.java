@@ -48,7 +48,7 @@ public class ManagerController {
 	public String showAllFeedbacks(Model model) {
 		List<Feedback> feedbackList = feedbackService.findAllFeedbacksAndDoctorName();
 		model.addAttribute("feedbackList", feedbackList);
-		return "feedbackList";
+		return "managerFeedbackList";
 	}
 
 	@GetMapping("/doctorFeedbacks/{id}")
@@ -67,7 +67,7 @@ public class ManagerController {
 	public String showFeedbackDetails(@PathVariable("id") int feedbackId, Model model) {
 		Feedback feedbackDetails = feedbackService.getFeedbackDetail(feedbackId);
 		model.addAttribute("feedbackDetails", feedbackDetails);
-		return "feedbackDetail";
+		return "managerSeeDoctorFeedbackDetails";
 	}
 
 }

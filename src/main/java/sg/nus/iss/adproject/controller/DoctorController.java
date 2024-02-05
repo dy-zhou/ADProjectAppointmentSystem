@@ -1,4 +1,4 @@
-package sg.nus.iss.adproject.controller;
+ package sg.nus.iss.adproject.controller;
 
 import java.util.List;
 
@@ -78,10 +78,10 @@ public class DoctorController {
 
 			if (feedbackStaffId == staffId) {
 				model.addAttribute("feedbackDetails", feedbackDetails);
-				return "feedbackDetail";
+				return "doctorFeedbackDetail";
 			}
 		}
 
-		return "redirect:/Doctor/doctorFeedbacks";
+		return "redirect:/Doctor/doctorFeedbackList";
 	}
 }
