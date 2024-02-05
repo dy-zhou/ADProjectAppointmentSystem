@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Symptoms Selction</title>
+</head>
+
+<body>
+	<h2>Select Symptoms</h2>
+
+    <form th:action="@{/symptoms/submitSelectedSymptoms}" th:object="${selectedSymptoms}"method="POST">
+        <fieldset>
+            <legend>Symptoms for <span th:text="${selectedSymptomGroup.symptomGroup}"></span> </legend>
+            <div>
+				<input type="checkbox" th:each="symptom : ${relatedSymptoms}"
+						th:value="${symptom}"
+						th:text="${symptom}"
+						th:field="*{symptoms}">
+				</input>
+			</div>			 
+        </fieldset>
+    	<button type="submit" id="submitButton">Submit</button>
+    	
+	</form>
+	 <a th:href="@{/symptoms/disease}" class="goback-button">Go Back</a>
+
+</body>
+
+</html>

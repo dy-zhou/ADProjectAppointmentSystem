@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Symptoms Selction</title>
+</head>
+
+<body>
+	<h2>Select Possible Related Disease</h2>
+	<form th:action="@{/symptoms/selectSymptoms}" method="POST" th:object="${selectedSymptomGroup}">
+	    <select th:field="*{symptomGroup}">
+			<option value="">---Select Possible Related Disease---</option>
+			<option th:each="group : ${symptomGroup}" 
+					th:value="${group}" 
+					th:text="${group}">
+			</option>	
+	     </select>
+     <button type="submit">Submit</button>
+     </form>
+</html>
