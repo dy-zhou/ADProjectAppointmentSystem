@@ -15,6 +15,7 @@ import sg.nus.iss.adproject.interfacemethods.FeedbackService;
 import sg.nus.iss.adproject.interfacemethods.StaffService;
 import sg.nus.iss.adproject.model.Appointment;
 import sg.nus.iss.adproject.model.Feedback;
+import sg.nus.iss.adproject.model.Staff;
 import sg.nus.iss.adproject.service.AppointmentServiceImpl;
 import sg.nus.iss.adproject.service.FeedbackServiceImpl;
 import sg.nus.iss.adproject.service.StaffServiceImpl;
@@ -54,7 +55,8 @@ public class DoctorController {
 	public String showDoctorFeedbacks(Model model, HttpSession session) {
 		int staffId = (int) session.getAttribute("staffId");
 
-		String staffName = staffService.getStaffNameById(staffId);
+		Staff staff = staffService.findStaffById(staffId);
+		String staffName = staff.getName();
 
 		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(staffId);
 
@@ -78,7 +80,7 @@ public class DoctorController {
 
 			if (feedbackStaffId == staffId) {
 				model.addAttribute("feedbackDetails", feedbackDetails);
-				return "doctorFeedbackDetail";
+				return "feedbackDetail";
 			}
 		}
 

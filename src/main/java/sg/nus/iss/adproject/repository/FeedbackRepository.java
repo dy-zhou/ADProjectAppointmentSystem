@@ -19,7 +19,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 	@Query("SELECT f, s.id AS staffId, s.name AS staffName FROM Feedback f "
 	        + "JOIN f.appointments a "
 	        + "JOIN a.staffs s")
-	List<Feedback> findAllFeedbacksAndDoctorName();
+	List<Feedback> findAllFeedbacksAndDoctorIdName();
 	
 	
 	@Query("SELECT f FROM Feedback f JOIN f.appointments a WHERE a.staff.id = :id ORDER BY f.id DESC LIMIT 15" )
