@@ -1,4 +1,4 @@
-package sg.nus.adproject.apiService;
+package sg.nus.iss.adproject.service;
 
 import java.util.List;
 
