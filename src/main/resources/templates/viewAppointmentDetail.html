@@ -85,40 +85,40 @@
     </style>
 </head>
 <body>
+	 
+
     <header>
-        <div>JANUARY 1st 2024</div>
+        <div>
+			<img class="logo-image" src="/images/laps1.svg" alt="Company logo">
+		<input type="text" placeholder="Search">
+		<div>
+			<img class="user-image" src="" alt="user imgae">
+			<a href="/login">Logout</a></div>
         <div>Patient information | Home | My profile</div>
     </header>
+<form th:action="@{/Doctor/AppointmentDetails}" method="post">
+        <label for="datepicker">Choose a date:</label>
+        <input type="date" id="datepicker" name="datepicker">
+        <input type="submit" value="Submit" >
+    </form>
+    <h2 class="patient-list-title">Appointment List</h2>
+    <p> appointments</p>
 
-    <h2 class="patient-list-title">Patient List</h2>
-    <p>3 appointments today</p>
-
-    <div class="patient-card">
+    <div class="patient-card" th:each="appointment:${AppointmentList}">
         <img src="path-to-tom-image.jpg" alt="Tom" width="50" height="50">
         <div>
-            <p><strong>Tom</strong></p>
-            <p>Appointment time: 2:00pm-2:30pm</p>
-            <p>Stomachache</p>
+            <p th:text="${appointment.patient.name}"><strong>Patient Name:</strong></p>
+             <p th:text="${appointment.patient.id}"><strong>Patient ID:</strong></p>
+            <p>Appointment Time:<label th:text="${appointment.time}"></label></p>
+            <p>Address:<label th:text="${appointment.patient.address}"></label></p>
+            <p>Gender:<label th:text="${appointment.patient.sex}"></label></p>
+            <p>Allergy:<label th:text="${appointment.patient.allergy}"></label></p>
+            <p>Medical Condition:<label th:text="${appointment.patient. medical_condition}"></label></p>
+             <p>Addtional info: <label th:text="${appointment.patient.additional_info}"></label></p>
         </div>
     </div>
 
-    <div class="patient-card">
-        <img src="path-to-jessica-image.jpg" alt="Jessica" width="50" height="50">
-        <div>
-            <p><strong>Jessica</strong></p>
-            <p>Appointment time: 2:30pm-3:00pm</p>
-            <p>Fever</p>
-        </div>
-    </div>
-
-    <div class="patient-card">
-        <img src="path-to-mike-image.jpg" alt="Mike" width="50" height="50">
-        <div>
-            <p><strong>Mike</strong></p>
-            <p>Appointment time: 3:00pm-3:30pm</p>
-            <p>Headache</p>
-        </div>
-    </div>
+    
 
     <aside class="queue">
        

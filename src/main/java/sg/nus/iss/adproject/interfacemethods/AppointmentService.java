@@ -1,5 +1,6 @@
 package sg.nus.iss.adproject.interfacemethods;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import sg.nus.iss.adproject.model.Appointment;
@@ -14,5 +15,6 @@ public interface AppointmentService {
 	List<Appointment> findAppointmentStatus(String status);
 	List<Appointment> findAppointmentByStaffId(int id); 
 	void removeAppointment(Appointment appointment);
+	List<Appointment> findAppointmentByDate(LocalDate date);
 	
 }

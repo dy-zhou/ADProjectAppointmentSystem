@@ -1,5 +1,6 @@
  package sg.nus.iss.adproject.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import sg.nus.iss.adproject.interfacemethods.AppointmentService;
@@ -31,7 +34,9 @@ public class DoctorController {
 
 	@Autowired
 	private FeedbackService feedbackService;
+	@Autowired
 	private AppointmentService appointmentService;
+	@Autowired
 	private StaffService staffService;
 
 	public void setService(FeedbackServiceImpl feedbackService, AppointmentServiceImpl appointmentService,
@@ -45,34 +50,48 @@ public class DoctorController {
 	public String showDashboard( Model model,HttpSession sessionObj) {
 		Staff doctor=(Staff) sessionObj.getAttribute("staffObj");
 		List<Appointment>appointments=doctor.getAppointments();
-		List<Feedback>feedbacks=new ArrayList<>();
+		int staffId=doctor.getId();
+		
 		List<Appointment>filteredAppointments=new ArrayList<>();
 		AppointmentStatusEnum status=AppointmentStatusEnum.Proceeding;
-		for(Appointment appointment:appointments) {
-			if(feedbacks.size()<=6) 
-			feedbacks.add(appointment.getFeedback());
-			
-			if(appointment.getStatus().compareTo(status)==0)
+		
+		LocalDate currentDate=LocalDate.now();
+		
+		for(Appointment appointment:appointments) { 
+			if((appointment.getStatus().compareTo(status)==0)&&(appointment.getDate().equals(currentDate)))
 				filteredAppointments.add(appointment);
 			
 		}
-		model.addAttribute("feedbackList", feedbacks);
+		List<Feedback>feedbackListReverse=feedbackService.reverseFeedbacks(staffId);
+		List<Feedback>feedbackList6=new ArrayList<>();
+		for(Feedback feedback:feedbackListReverse)
+			
+			if(feedbackList6.size()<=6) {
+				if(feedback.getAppointment().getStatus().equals(AppointmentStatusEnum.Completed)){
+				feedbackList6.add(feedback);}
+			}
+		
+		model.addAttribute("feedbackList", feedbackList6);
 		model.addAttribute("appointmentList", filteredAppointments);
 		return "homePage_Doctor";
 	}
 
-	// after login ,get this doctor's feedback
-	@GetMapping("/FeedbackDetails")
-	public String showDoctorFeedbacks(Model model, HttpSession session) {
-		int staffId = (int) session.getAttribute("staffId");
 
-		Staff staff=staffService.findStaffById(staffId);
-		String staffName=staff.getName();
-
-		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(staffId);
-
-
-		return "doctorFeedbackList";
+	
+	@GetMapping("/AppointmentDetails")
+	public String showAppointmentDetails(Model model) {
+		List<Appointment>appointmentList=appointmentService.findAllAppointments();
+		model.addAttribute("AppointmentList",appointmentList);
+		return "viewAppointmentDetail";
+	}
+	
+	@PostMapping("/AppointmentDetails")
+	public String showAppointmentDetails(Model model,@RequestParam(name="datepicker")String date) {
+		LocalDate localDate = LocalDate.parse(date);
+		List<Appointment>appointmentListWithDate=appointmentService.findAppointmentByDate(localDate);
+		model.addAttribute("AppointmentList", appointmentListWithDate);
+		model.addAttribute("date",localDate);
+		return "viewAppointmentDetail";
 	}
 
 	

@@ -1,8 +1,38 @@
 <html>
+	<style></style>
+	<link rel="stylesheet" href="/static/homepage.css">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
 		<title>Home Page</title>
+		<style>
+			 body {
+         font-family: Arial, sans-serif;
+         margin: 0;
+         padding: 0;
+         background-color: #f4f4f4;
+      }
+
+      .card {
+         background-color: white;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+         margin: 10px;
+         padding: 20px;
+         border-radius: 8px;
+         width: 300px;
+         text-align: left;
+      }
+
+      .card apphead {
+         margin-top: 0;
+      }
+
+      .card p {
+         color: #666;
+         margin-bottom: 4px;
+      }
+		</style>
 	</head>
 	<header>
 		<img class="logo-image" src="/images/laps1.svg" alt="Company logo">
@@ -14,11 +44,24 @@
 	</header>
 	<body>
 		<div>
-			<h5>Appointment</h5>
+			<h5 style="margin: 10px;">Appointment</h5>
+			<a th:href="@{/Doctor/AppointmentDetails}">View Appointments</a>
+			<div class="card" th:each="appointment:${appointmentList}">
+				<p>Appointment ID:<label th:text="${appointment.id}"></label></p>
+				<p>Date:<label  th:text="${appointment.date}"></label></p>
+				<p>Appointment Time:<label  th:text="${appointment.time}"></label></p>
+				<p>Queue Number:<label  th:text="${appointment.queue_number}"></label></p>
+				<p>Patient ID:<label  th:text="${appointment.patient.id}"></label></p>
+				<p>Name:<label  th:text="${appointment.patient.name}"></label></p>
+				
+			</div>
 			<div>
-				<table>
-					<th></th>
-				</table>
+				<h5 style="margin: 10px;">Feedback</h5>
+				<a th:href="@{/Doctor/FeedbackDetails}">View Feedbacks</a>
+				<div class="card" th:each="feedback:${feedbackList}">
+				<p>Feedback ID:<label th:text="${feedback.id}"></label></p>
+				<p>Content:<label  th:text="${feedback.description}"></label></p>
+				</div>
 			</div>
 		</div>
 	</body>

@@ -1,5 +1,7 @@
 package sg.nus.iss.adproject.repository;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import sg.nus.iss.adproject.model.Appointment;
+
 
 public interface AppointmentRepository extends JpaRepository<Appointment,Integer>{
 	
@@ -25,5 +28,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Integer
 	@Query("Select a From Appointment a WHERE a.staff.id=:id")
 	List<Appointment> findAppointmentByStaffId(@Param("id") int id); 
 	
-
+	@Query("SELECT a FROM Appointment a WHERE a.date = :date")
+	public List<Appointment> findAppointmentByDate(@Param("date")LocalDate date);
 }
