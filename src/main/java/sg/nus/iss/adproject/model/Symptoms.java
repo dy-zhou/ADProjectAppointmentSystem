@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Symptoms {
 private Map<String, List<String>> symptoms;
 	
@@ -15,18 +18,18 @@ private Map<String, List<String>> symptoms;
 		//Skin, Dermatological 
 		symptoms.put("Skin", Arrays.asList("itching", "skin rash", "nodal skin eruptions","dischromic  patches",
 				"constipation", "pain during bowel movements", "pain in anal region", "bloody stool", "irritation in anus", 
-				"skin rash", "pus filled pimples", "blackheads", "scurring", "joint pain", "skin peeling", "silver like dusting",
+				 "pus filled pimples", "blackheads", "scurring", "joint pain", "skin peeling", "silver like dusting",
 				"small dents in nails", "inflammatory nails", "high fever", "blister", "red sore around nose","yellow crust ooze"));
 		
 		//Stomach, Gastrointestinal
 		symptoms.put("Stomach", Arrays.asList("stomach pain", "acidity", "ulcers on tongue", "vomiting", "cough", "chest pain",
-				"itching", "yellowish skin", "nausea", "loss of appetite", "abdominal pain", "yellowing of eyes", "vomiting", 
+				"itching", "yellowish skin", "nausea", "loss of appetite", "abdominal pain", "yellowing of eyes", 
 				"passage of gases", "internal itching", "sunken eyes", "dehydration", "diarrhoea"));
 		
 		//Infectious Disease
 		symptoms.put("Infectious Disease", Arrays.asList("muscle wasting", "patches in throat", "high fever", "extra marital contacts", 
 				"chills", "vomiting", "sweating", "headache", "nausea", "muscle pain", "itching", "skin rash", "fatigue", "lethargy", 
-				"loss of appetite", "mild fever", "swelled lymph nodes", "malaise", "red spots over body", "skin rash", "chills", 
+				"loss of appetite", "mild fever", "swelled lymph nodes", "malaise", "red spots over body", 
 				"joint pain", "pain behind the eyes", "back pain", "constipation", "abdominal pain", "diarrhoea", "toxic look (typhos)",
 				 "belly pain"));
 		
@@ -38,8 +41,8 @@ private Map<String, List<String>> symptoms;
 		
 		//Lungs, Respiratory
 		symptoms.put("Lungs", Arrays.asList("fatigue", "cough", "high fever", "breathlessness", "family history", "mucoid sputum", "chills", 
-				"vomiting", "fatigue", "weight loss", "sweating", "loss of appetite", "mild fever", "yellowing of eyes", "swelled lymph nodes", 
-				"malaise", "phlegm", "chest pain", "blood in sputum", "continuous sneezing", "chills", "headache", "throat irritation", 
+				"vomiting", "weight loss", "sweating", "loss of appetite", "mild fever", "yellowing of eyes", "swelled lymph nodes", 
+				"malaise", "phlegm", "chest pain", "blood in sputum", "continuous sneezing", "headache", "throat irritation", 
 				"redness of eyes", "sinus pressure", "runny nose", "congestion", "loss of smell", "muscle pain", "fast heart rate",
 				 "rusty sputum"));
 		
