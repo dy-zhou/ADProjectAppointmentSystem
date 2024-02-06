@@ -1,4 +1,4 @@
-package sg.nus.adproject.apiService;
+package sg.nus.iss.adproject.service;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

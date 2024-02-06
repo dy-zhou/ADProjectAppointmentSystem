@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import sg.nus.adproject.apiService.predictDiseaseApiService;
 import sg.nus.iss.adproject.model.SympGroup;
 import sg.nus.iss.adproject.model.Symptoms;
 import sg.nus.iss.adproject.model.SymptomsSelected;
+import sg.nus.iss.adproject.service.predictDiseaseApiService;
 
 
 
