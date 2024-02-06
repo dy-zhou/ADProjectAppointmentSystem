@@ -25,7 +25,10 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<Feedback>feedbacks;
-
+	
+	@OneToMany(mappedBy="user")
+	private List<Appointment>appointments;
+	
 	public String getName() {
 		return name;
 	}
@@ -56,6 +59,14 @@ public class User {
 
 	public void setFeedbacks(List<Feedback> feedbacks) {
 		this.feedbacks = feedbacks;
+	}
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
 	}
 
 }

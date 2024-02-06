@@ -38,25 +38,24 @@ public class LoginController {
 	}
 	
 	@PostMapping("")
-	public String login(@Valid @ModelAttribute("staff") Staff staff,BindingResult bindingresult,Model model,@RequestParam("keyword") String keyword, HttpSession sessionobj) {
+	public String login(@Valid @ModelAttribute("staff") Staff staff,BindingResult bindingresult,Model model, HttpSession sessionobj) {
 		if(bindingresult.hasErrors()) {
 			return "login";
 		}
 		Staff rlstaff = staffService.Authentication(staff.getName(), staff.getPassword());
 		if(rlstaff != null) {
-			sessionobj.setAttribute("staffid", rlstaff.getId());
-			sessionobj.setAttribute("username", rlstaff.getName());
+			sessionobj.setAttribute("staffObj", rlstaff);
 			sessionobj.setAttribute("staffDesignation", rlstaff.getDesignation());
 			String designation=(String)sessionobj.getAttribute("staffDesignation");
 			
 			if(designation.compareToIgnoreCase("nurse")==0) {
-				return "homePage_Nurse";
+				return "redirect:/homePage_Nurse";
 			}
 			else if(designation.compareToIgnoreCase("doctor")==0) {
-				return "homePage_Doctor";
+				return "redirect:/Doctor";
 			}
 			else{
-				return "homePage_Manager";
+				return "redirect:/homePage_Manager";
 			}
 		}
 		 else

@@ -1,5 +1,6 @@
  package sg.nus.iss.adproject.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import sg.nus.iss.adproject.interfacemethods.AppointmentService;
 import sg.nus.iss.adproject.interfacemethods.FeedbackService;
 import sg.nus.iss.adproject.interfacemethods.StaffService;
 import sg.nus.iss.adproject.model.Appointment;
+import sg.nus.iss.adproject.model.AppointmentStatusEnum;
 import sg.nus.iss.adproject.model.Feedback;
 import sg.nus.iss.adproject.model.Staff;
 import sg.nus.iss.adproject.service.AppointmentServiceImpl;
@@ -39,19 +41,28 @@ public class DoctorController {
 		this.staffService = staffService;
 	}
 
-	@GetMapping("/Docctor/{id}")
-	public String showDashboard(@PathVariable("id") int id, Model model) {
-		List<Appointment> appointmentList = appointmentService.findAppointmentByStaffId(id);
-		//List<Feedback> feedbackList = feedbackService.findFeedbacksByStaffId(id);
-		//change to show first 15 feedback
-		List<Feedback> feedbackList = feedbackService.findTop15Feedbacks(id);
-		model.addAttribute("feedbackList", feedbackList);
-		model.addAttribute("appointmentList", appointmentList);
+	@GetMapping("")
+	public String showDashboard( Model model,HttpSession sessionObj) {
+		Staff doctor=(Staff) sessionObj.getAttribute("staffObj");
+		List<Appointment>appointments=doctor.getAppointments();
+		List<Feedback>feedbacks=new ArrayList<>();
+		List<Appointment>filteredAppointments=new ArrayList<>();
+		AppointmentStatusEnum status=AppointmentStatusEnum.Proceeding;
+		for(Appointment appointment:appointments) {
+			if(feedbacks.size()<=6) 
+			feedbacks.add(appointment.getFeedback());
+			
+			if(appointment.getStatus().compareTo(status)==0)
+				filteredAppointments.add(appointment);
+			
+		}
+		model.addAttribute("feedbackList", feedbacks);
+		model.addAttribute("appointmentList", filteredAppointments);
 		return "homePage_Doctor";
 	}
 
 	// after login ,get this doctor's feedback
-	@GetMapping("/doctorFeedbacks")
+	@GetMapping("/FeedbackDetails")
 	public String showDoctorFeedbacks(Model model, HttpSession session) {
 		int staffId = (int) session.getAttribute("staffId");
 
@@ -60,30 +71,9 @@ public class DoctorController {
 
 		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(staffId);
 
-		model.addAttribute("doctorFeedbackList", doctorFeedbackList);
-		model.addAttribute("staffName", staffName);
 
 		return "doctorFeedbackList";
 	}
 
-	@GetMapping("feedbackDetails/{id}")
-	public String showFeedbackDetails(@PathVariable("id") int feedbackId, Model model, HttpSession session) {
-
-		int staffId = (int) session.getAttribute("staffId");
-
-		Feedback feedbackDetails = feedbackService.getFeedbackDetail(feedbackId);
-//make sure doctor can only see himself's feedback
-		if (feedbackDetails != null && feedbackDetails.getAppointment() != null
-				&& feedbackDetails.getAppointment().getStaff() != null) {
-
-			int feedbackStaffId = feedbackDetails.getAppointment().getStaff().getId();
-
-			if (feedbackStaffId == staffId) {
-				model.addAttribute("feedbackDetails", feedbackDetails);
-				return "feedbackDetail";
-			}
-		}
-
-		return "redirect:/Doctor/doctorFeedbackList";
-	}
+	
 }

@@ -1,8 +1,10 @@
 package sg.nus.iss.adproject.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,7 +14,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class Staff {
+public class Staff implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -24,7 +26,7 @@ public class Staff {
 	private String password;
 	private String designation;
 
-	@OneToMany(mappedBy = "staff")
+	@OneToMany(mappedBy = "staff",fetch = FetchType.EAGER)
 	private List<Appointment> appointments;
 
 	@OneToMany(mappedBy = "staff")
@@ -75,6 +77,22 @@ public class Staff {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	public List<Schedule> getSchedules() {
+		return schedules;
+	}
+
+	public void setSchedules(List<Schedule> schedules) {
+		this.schedules = schedules;
 	}
 
 }
