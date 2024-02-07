@@ -49,5 +49,9 @@ public class Feedback {
 		return appointment;
 	}
 	
+	public int getId()
+	{
+		return id;
+	}
 
 }

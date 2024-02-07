@@ -49,13 +49,13 @@ public class LoginController {
 			String designation=(String)sessionobj.getAttribute("staffDesignation");
 			
 			if(designation.compareToIgnoreCase("nurse")==0) {
-				return "redirect:/homePage_Nurse";
+				return "redirect:/Nurse";
 			}
 			else if(designation.compareToIgnoreCase("doctor")==0) {
 				return "redirect:/Doctor";
 			}
 			else{
-				return "redirect:/homePage_Manager";
+				return "redirect:/Manager";
 			}
 		}
 		 else

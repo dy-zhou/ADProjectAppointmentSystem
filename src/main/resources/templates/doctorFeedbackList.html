@@ -1,10 +1,9 @@
-//This is for doctor to see all the feedbacks related to himself
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta charset="UTF-8">
-	 <title>Feedbacks For <span th:text="${staffName}"></span></title>
+	<title>Feedbacks For <span th:text="${staffName}"></span></title>
 	<style>
 		body {
 			font-family: Arial, sans-serif;
@@ -15,6 +14,9 @@
 
 		h2 {
 			color: #333;
+			text-align: center;
+			margin-top: 20px;
+			margin-bottom: 20px;
 		}
 
 		table {
@@ -51,19 +53,53 @@
 		a:hover {
 			background-color: #0056b3;
 		}
+
+		.back-button {
+			padding: 10px 20px;
+			background-color: #007bff;
+			color: #fff;
+			text-decoration: none;
+			border-radius: 5px;
+			margin: 0 10px;
+			cursor: pointer;
+			border: none;
+			outline: none;
+			transition: background-color 0.3s ease;
+		}
+
+		.back-button:hover {
+			background-color: #0056b3;
+		}
 	</style>
 </head>
+<div
+	style="position: relative; width: 60%; margin: 0 auto; padding: 20px; background-color: #bfefff; border: 1px solid #5b9bd5; border-radius: 10px;">
+	<p style="margin: 0 0 10px; font-weight: bold; text-align: center;">Keywords:</p>
+	<ul style="list-style-type: none; padding: 0;">
+		<li th:each="keyword, iterStat : ${keywords}"
+			style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 14px; color: #333; position: relative;">
+			<span th:text="${keyword}" style="display: block; padding-left: 10px;"></span>
+			<span
+				style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); font-weight: bold; color: #888;">[[${iterStat.index
+				+ 1}]]</span>
+		</li>
+	</ul>
+</div>
+
+
+
+
 
 <body>
-	 <h2>Feedbacks For <span th:text="${staffName}"></span></h2>
+	<h2>Feedbacks For <span th:text="${staffName}"></span></h2>
 	<table>
 		<thead>
 			<tr>
 				<th>ID</th>
 				<th>Description</th>
 				<th>Feedback Type</th>
-				<th th:if="${designation == 'manager'}">Doctor Id</th>
-                <th th:if="${designation == 'manager'}">Doctor Name</th>
+				<th th:if="${session.designation == 'manager'}">Doctor Id</th>
+				<th th:if="${session.designation == 'manager'}">Doctor Name</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -71,14 +107,22 @@
 				<td th:text="${feedback.id}"></td>
 				<td th:text="${feedback.description}"></td>
 				<td th:text="${feedback.feedback_type}"></td>
-				<td th:if="${designation == 'manager'}" th:text="${feedback.appointments.staffs.id}"></td>
-                <td th:if="${designation == 'manager'}" th:text="${feedback.appointments.staffs.name}"></td>
+				<td th:if="${session.designation == 'manager'}" th:text="${feedback.appointments.staffs.id}"></td>
+				<td th:if="${session.designation == 'manager'}" th:text="${feedback.appointments.staffs.name}"></td>
 			</tr>
 		</tbody>
 	</table>
-	<a th:href="@{/homePage_Manager}" th:if="${designation == 'manager'}">Back To Manager Home Page</a>
-    <a th:href="@{/homePage_Doctor}" th:if="${designation == 'doctor'}">Back To Doctor Home Page</a>
+
+
+
+	<div class="button-container">
+		<button class="back-button" th:if="${session.designation == 'doctor'}"
+			onclick="window.location.href='/Doctor'">Back To Doctor Home Page</button>
+		<button class="back-button" th:if="${session.designation == 'manager'}"
+			onclick="window.location.href='/Manager'">Back To Manager Home Page</button>
+	</div>
+
+
 </body>
 
 </html>
-

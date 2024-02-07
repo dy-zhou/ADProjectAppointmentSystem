@@ -44,6 +44,22 @@ public class FeedbackServiceImpl implements FeedbackService {
 	}
 	
 	
+	@Override
+	public String getAllFeedbackDescriptionsByStaffId(int id)
+	{
+		List<Feedback> feedbackList = feedbackRepository.findFeedbacksByStaffId(id);
+		
+		
+        StringBuilder allDescriptions = new StringBuilder();
 
+        
+        for (Feedback feedback : feedbackList) {
+            allDescriptions.append(feedback.getDescription()).append(" ");
+        }
+
+        return allDescriptions.toString();
+    }
 
 }
+
+

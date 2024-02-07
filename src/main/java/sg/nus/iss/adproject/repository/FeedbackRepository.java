@@ -21,8 +21,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 	        + "JOIN a.staff s")
 	List<Feedback> findAllFeedbacksAndDoctorName();
 
-
-	
 	
 	@Query("SELECT f FROM Feedback f JOIN f.appointment a WHERE a.staff.id = :id ORDER BY f.id DESC LIMIT 15" )
 	List<Feedback> findTop15Feedbacks(@Param("id") int id);
