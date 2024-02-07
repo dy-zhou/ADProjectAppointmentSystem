@@ -21,7 +21,7 @@ public class Appointment implements Serializable {
 	private LocalDate date;
 	private LocalTime time;
 	private int queue_number;
-	// private String medical_condition;
+	private String medical_condition;
 	@Enumerated(EnumType.STRING)
 	private AppointmentStatusEnum status;
 
@@ -44,7 +44,7 @@ public class Appointment implements Serializable {
 		this.date = date;
 		this.time = time;
 		this.queue_number = queue_number;
-		// this.medical_condition = medical_condition;
+		this.medical_condition = medical_condition;
 		this.status = status;
 	}
 
@@ -72,13 +72,13 @@ public class Appointment implements Serializable {
 		this.queue_number = queue_number;
 	}
 // connected with patient
-//	public String getMedical_condition() {
-//		return medical_condition;
-//	}
-//
-//	public void setMedical_condition(String medical_condition) {
-//		this.medical_condition = medical_condition;
-//	}
+	public String getMedical_condition() {
+		return medical_condition;
+	}
+
+	public void setMedical_condition(String medical_condition) {
+		this.medical_condition = medical_condition;
+	}
 
 	public int getId() {
 		return id;

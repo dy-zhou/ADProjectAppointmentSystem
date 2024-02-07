@@ -115,6 +115,7 @@
             <p>Allergy:<label th:text="${appointment.patient.allergy}"></label></p>
             <p>Medical Condition:<label th:text="${appointment.patient. medical_condition}"></label></p>
              <p>Addtional info: <label th:text="${appointment.patient.additional_info}"></label></p>
+             <a type="button"  class="btn btn-outline-secondary" th:href="@{/Doctor/EditAppointmentDetails/}+${appointment.id}">Detail</a>
         </div>
     </div>
 

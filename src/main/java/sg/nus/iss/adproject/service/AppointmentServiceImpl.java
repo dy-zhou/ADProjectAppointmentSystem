@@ -1,6 +1,7 @@
 package sg.nus.iss.adproject.service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public List<Appointment> findAppointmentById(int id) {
+	public Appointment findAppointmentById(int id) {
 		// TODO Auto-generated method stub
 		return appointmentRepository.findAppointmentById(id);
 	}
@@ -91,5 +92,16 @@ public class AppointmentServiceImpl implements AppointmentService {
 		// TODO Auto-generated method stub
 		return appointmentRepository.findAppointmentByDate(date);
 	}
+	@Transactional(readOnly=false)
+	@Override
+	public void updateAppointmentDetails(int id,String medical_condition) {
+		// TODO Auto-generated method stub
+		
+		appointmentRepository.updateAppointmentMedicalCondition(id,medical_condition);
+		
+	}
+
+
+
 
 }

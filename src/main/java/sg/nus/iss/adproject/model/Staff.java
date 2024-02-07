@@ -95,4 +95,12 @@ public class Staff implements Serializable{
 		this.schedules = schedules;
 	}
 
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
 }
