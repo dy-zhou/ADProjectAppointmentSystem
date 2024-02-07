@@ -38,7 +38,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("")
-	public String login(@Valid @ModelAttribute("staff") Staff staff,BindingResult bindingresult,Model model,@RequestParam("keyword") String keyword, HttpSession sessionobj) {
+	public String login(@Valid @ModelAttribute("staff") Staff staff,BindingResult bindingresult,Model model, HttpSession sessionobj) {
 		if(bindingresult.hasErrors()) {
 			return "login";
 		}

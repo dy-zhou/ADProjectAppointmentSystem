@@ -29,6 +29,9 @@ public class Appointment {
 
 	@ManyToOne
 	private Staff staff;
+	
+	@ManyToOne
+	private Department department;
 
 	public Appointment() {
 	}
@@ -92,9 +95,20 @@ public class Appointment {
 	public Staff getStaff() {
 		return staff;
 	}
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
 
 	public Patient getPatient() {
 		return patient;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department departmentId) {
+		this.department = departmentId;
 	}
 
 }

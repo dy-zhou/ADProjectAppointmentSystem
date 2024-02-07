@@ -8,7 +8,7 @@
 
 <body>
 	<h2>Select Possible Related Disease</h2>
-	<form th:action="@{/symptoms/selectSymptoms}" method="POST" th:object="${selectedSymptomGroup}">
+	<form th:action="@{/Nurse/selectSymptoms}" method="POST" th:object="${selectedSymptomGroup}">
 	    <select th:field="*{symptomGroup}">
 			<option value="">---Select Possible Related Disease---</option>
 			<option th:each="group : ${symptomGroup}" 

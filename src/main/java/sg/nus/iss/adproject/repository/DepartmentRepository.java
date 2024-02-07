@@ -8,7 +8,7 @@ import sg.nus.iss.adproject.model.Department;
 
 public interface DepartmentRepository extends JpaRepository <Department, Integer>{
 	@Query("Select d FROM Department d JOIN d.diseases dis WHERE dis.id=:id")
-	Department findDepartmentByDiseaseID(@Param("id") int id);
+	Department findDepartmentByDiseaseId(@Param("id") int id);
 	
 	
 }
