@@ -215,19 +215,34 @@ public class NurseController {
 		//Bind patient appointment
 		model.addAttribute("patientAppointment", patientAppointment);
 		
+		/*
+		 * Select available doctors for appointment
+		 */
+		
 		//Get doctor list from department id
 		List<Staff> departmentStaff = staffService.findStaffByDepartmentId(diseseDepartment.getId());
 		System.out.println("Department staff: " + departmentStaff);
 		
+		//List to hold staffAvailable
+		List<Staff> staffAvailable = new ArrayList<>();
+		
 		//Get schedule from doctor list
 		List<Schedule> staffSchedule = new ArrayList<>();
-		for(Staff staff:departmentStaff) {
-			List<Schedule> schedule = scheduleService.findSchedulesByStaff(staff.getId());
-			staffSchedule.addAll(schedule);//TODO: add staff who have no schedule
-		}
 		
+		//Check if staff have schedule, if no schedule add to available doctors
+		for(Staff staff:departmentStaff) {
+			List<Schedule> schedule = scheduleService.findSchedulesByStaff(staff.getId());//TODO:Not finding the staff
+			if(schedule.isEmpty()) {
+				System.out.println("Schedule in loop: " + scheduleService.findSchedulesByStaff(staff.getId()));
+				staffAvailable.add(staff);
+			}else {
+				staffSchedule.addAll(schedule);//TODO: add staff who have no schedule
+			}
+		}
+		System.out.println("Available staff after check schedules: " + staffAvailable);
+		//For doctors with schedules
 		//Check if schedule clash with appointment
-		//if staffSchdeul isEmpty, staff is free, can add staff
+		//if staffSchdeule isEmpty, staff is free, can add staff
 		if(staffSchedule.isEmpty()) {
 			model.addAttribute("departmentStaff", departmentStaff);
 		}
@@ -238,8 +253,6 @@ public class NurseController {
 			LocalTime appointmentStartTime = patientAppointment.getTime();
 			LocalTime appointmentEndTime = appointmentStartTime.plusMinutes(30);
 			
-			//List to hold staffAvailable
-			List<Staff> staffAvailable = new ArrayList<>();
 			
 			//Check date then time
 			//If appointmentDate same as appointmentDate then check if time clash
@@ -261,6 +274,7 @@ public class NurseController {
 				
 			}
 			
+			model.addAttribute("departmentStaff", staffAvailable);
 		}
 		System.out.println("Staff Schedule: " + staffSchedule);
 		return "predictedDisease";
@@ -289,7 +303,7 @@ public class NurseController {
 		patientAppointment.setStaff(selctedStaff);
 		appointmentService.updateAppointment(patientAppointment);
 		//TODO:Alert window when updateAppointment is successful
-		return "redirect:/patient/" + patientId;// TODO:to redirect back to patient appointments detail
+		return "redirect:patient/" + patientId;// TODO:to redirect back to patient appointments detail
 		
 	}
 	

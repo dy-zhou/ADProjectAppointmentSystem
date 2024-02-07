@@ -11,6 +11,6 @@ import sg.nus.iss.adproject.model.Schedule;
 public interface ScheduleRepository extends JpaRepository<Schedule,Integer> {
 	
 	
-	@Query("Select s From Schedule s WHERE id= :id")
+	@Query("Select s From Schedule s WHERE staff.id= :id")
 	List<Schedule> findSchedulesByStaff(@Param("id") int id);
 }

@@ -14,7 +14,7 @@
 	
 	<div th:if="${departmentStaff != null}">
 		<h2>Select Doctor</h2>
-		<form th:action="@{/Nurse/selectDoctors}" th:object="${patientAppointment}">
+		<form th:action="@{/Nurse/selectDoctors}" th:object="${patientAppointment}" method="POST">
 			<select th:field="*{staff}">
 				<option value="">---Select Appointment Doctor</option>
 				<option th:each="staff : ${departmentStaff}"
