@@ -14,6 +14,7 @@ public class Feedback {
 	private int id;
 	private String Description;
 	private String feedback_type;
+	private double score;
 
 	@ManyToOne
 	private User user;
@@ -52,6 +53,10 @@ public class Feedback {
 	public int getId()
 	{
 		return id;
+	}
+
+	public double getScore() {
+		return score;
 	}
 
 }

@@ -19,6 +19,13 @@
 			margin-bottom: 20px;
 		}
 
+		h3 {
+			color: #333;
+			text-align: center;
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+
 		table {
 			width: 100%;
 			border-collapse: collapse;
@@ -54,6 +61,11 @@
 			background-color: #0056b3;
 		}
 
+		.button-container {
+			text-align: center;
+			margin-top: 20px;
+		}
+
 		.back-button {
 			padding: 10px 20px;
 			background-color: #007bff;
@@ -74,17 +86,24 @@
 </head>
 <div
 	style="position: relative; width: 60%; margin: 0 auto; padding: 20px; background-color: #bfefff; border: 1px solid #5b9bd5; border-radius: 10px;">
-	<p style="margin: 0 0 10px; font-weight: bold; text-align: center;">Keywords:</p>
+	<h3>Keywords:</h3>
 	<ul style="list-style-type: none; padding: 0;">
 		<li th:each="keyword, iterStat : ${keywords}"
 			style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 14px; color: #333; position: relative;">
-			<span th:text="${keyword}" style="display: block; padding-left: 10px;"></span>
+			<span th:text="${keyword}" style="display: block; padding-left: 30px;"></span>
 			<span
-				style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); font-weight: bold; color: #888;">[[${iterStat.index
+				style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-weight: bold; color: #888;">[[${iterStat.index
 				+ 1}]]</span>
+
 		</li>
 	</ul>
+
+	<div style="position: absolute; top: 20px; right: 40px; height: 100%; display: flex; align-items: center;">
+		<p style="margin: 0; font-size: 90px;"><span th:text="${averageScore}"></span></p>
+	</div>
+
 </div>
+
 
 
 
@@ -104,8 +123,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="feedback : ${doctorFeedbackList}">
-				<td th:text="${feedback.id}"></td>
+			<tr th:each="feedback, iterStat : ${doctorFeedbackList}">
+				<td th:text="${iterStat.index + 1}"></td>
 				<td th:text="${feedback.description}"></td>
 				<td th:text="${feedback.feedback_type}"></td>
 				<td th:if="${session.designation == 'manager'}" th:text="${feedback.appointments.staffs.id}"></td>
@@ -115,26 +134,26 @@
 	</table>
 
 
-<div class="button-container">
-        <button id="backButton" class="back-button">Back</button>
-    </div>
-    <script>
-        var currentUrl = window.location.href;
-        var backButton = document.getElementById('backButton');
-        if (currentUrl.includes('/Manager')) {
-            backButton.onclick = function() {
-                window.location.href = '/Manager';
-            };
-        }
-        else if (currentUrl.includes('/Doctor/FeedbackDetails')) {
-            backButton.onclick = function() {
-                window.location.href = '/Doctor';
-            };
-        }
-        else {
-            backButton.disabled = true;
-        }
-    </script>
+	<div class="button-container">
+		<button id="backButton" class="back-button">Back To Homepage</button>
+	</div>
+	<script>
+		var currentUrl = window.location.href;
+		var backButton = document.getElementById('backButton');
+		if (currentUrl.includes('/Manager')) {
+			backButton.onclick = function () {
+				window.location.href = '/Manager';
+			};
+		}
+		else if (currentUrl.includes('/Doctor/FeedbackDetails')) {
+			backButton.onclick = function () {
+				window.location.href = '/Doctor';
+			};
+		}
+		else {
+			backButton.disabled = true;
+		}
+	</script>
 </body>
 
 </html>

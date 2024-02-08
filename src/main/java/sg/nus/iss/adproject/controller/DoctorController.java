@@ -1,7 +1,9 @@
 package sg.nus.iss.adproject.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -79,11 +81,13 @@ public class DoctorController {
 
 		int staffId = doctor.getId();
 		String staffName = doctor.getName();
-		Department department= doctor.getDepartment();
+		Department department = doctor.getDepartment();
 
 		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(staffId);
+		//add this
+		double averageScore = calculateAverageFeedbackScore(doctorFeedbackList);
 
-		// add this
+		// add this for average score
 		String allFeedbackComments = feedbackService.getAllFeedbackDescriptionsByStaffId(staffId);
 
 		model.addAttribute("staffName", staffName);
@@ -91,6 +95,7 @@ public class DoctorController {
 		model.addAttribute("department", department);
 		// add this
 		model.addAttribute("allFeedbackComments", allFeedbackComments);
+		model.addAttribute("averageScore", averageScore);
 
 		// this is link the api
 		StringBuilder jsonString = new StringBuilder();
@@ -131,5 +136,12 @@ public class DoctorController {
 			return errorList;
 		}
 	}
+	// add this for average score
+    public double calculateAverageFeedbackScore(List<Feedback> feedbacks) {
+        OptionalDouble average = feedbacks.stream().mapToDouble(Feedback::getScore).average();
+        double avg = average.isPresent() ? average.getAsDouble() : 0.0;
+        DecimalFormat df = new DecimalFormat("#.#");
+        return Double.parseDouble(df.format(avg));
+    }
 
 }

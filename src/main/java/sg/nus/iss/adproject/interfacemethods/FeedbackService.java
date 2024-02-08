@@ -17,5 +17,7 @@ public interface FeedbackService {
 	List<Feedback> findTop15Feedbacks(int id);
 
 	String getAllFeedbackDescriptionsByStaffId(int id);
+
+	void deleteFeedbackById(int feedbackId);
 }
  

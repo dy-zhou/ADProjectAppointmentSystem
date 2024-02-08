@@ -1,7 +1,9 @@
 package sg.nus.iss.adproject.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -63,10 +66,18 @@ public class ManagerController {
 		model.addAttribute("feedbackList", feedbackList);
 		return "allFeedbackList";
 	}
+	
+	@PostMapping("/deleteFeedback")
+	public String deleteFeedback(@RequestParam("feedbackId") int feedbackId) {
+	    feedbackService.deleteFeedbackById(feedbackId);
+	    // Redirect to the page where feedbacks are displayed
+	    return "redirect:/Manager/allFeedbacks";
+	}
+
 
 //	@GetMapping("/doctorFeedbacks/{id}")
 //	public String showDoctorFeedbacks(@PathVariable("id") int staffId, Model model) {
-	@GetMapping("/doctorFeedbacks") 
+	@GetMapping("/doctorFeedbacks")
 	public String showDoctorFeedbacks(@RequestParam("id") int staffId, Model model) {
 		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(staffId);
 
@@ -80,6 +91,7 @@ public class ManagerController {
 
 		// add this
 		String allFeedbackComments = feedbackService.getAllFeedbackDescriptionsByStaffId(staffId);
+		double averageScore = calculateAverageFeedbackScore(doctorFeedbackList);
 
 		model.addAttribute("doctorFeedbackList", doctorFeedbackList);
 		// show which doctor's feedback
@@ -88,6 +100,7 @@ public class ManagerController {
 		// add this
 		model.addAttribute("allFeedbackComments", allFeedbackComments);
 		model.addAttribute("department", department);
+		model.addAttribute("averageScore", averageScore);
 
 		// this is link the api
 		StringBuilder jsonString = new StringBuilder();
@@ -109,7 +122,7 @@ public class ManagerController {
 
 		return "doctorFeedbackList";
 	}
-	
+
 	//// Method to Parse api JSON response to get prediction in string format
 	private List<String> extractKeywordsFromApiResponse(String apiResponse) {
 		try {
@@ -128,7 +141,13 @@ public class ManagerController {
 			return errorList;
 		}
 	}
-	
+
+	public double calculateAverageFeedbackScore(List<Feedback> feedbacks) {
+		OptionalDouble average = feedbacks.stream().mapToDouble(Feedback::getScore).average();
+		double avg = average.isPresent() ? average.getAsDouble() : 0.0;
+		DecimalFormat df = new DecimalFormat("#.#");
+		return Double.parseDouble(df.format(avg));
+	}
 
 //	@GetMapping("feedbackDetails/{id}")
 //	public String showFeedbackDetails(@PathVariable("id") int feedbackId, Model model) {

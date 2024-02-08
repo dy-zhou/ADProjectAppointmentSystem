@@ -21,10 +21,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 	public List<Feedback> findAllFeedbacks() {
 		return feedbackRepository.findAll();
 	}
-	
+
 	@Override
-	public List<Feedback> findAllFeedbacksAndDoctorName()
-	{
+	public List<Feedback> findAllFeedbacksAndDoctorName() {
 		return feedbackRepository.findAllFeedbacksAndDoctorName();
 	}
 
@@ -35,31 +34,31 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 	@Override
 	public Feedback getFeedbackDetail(int id) {
-	    return feedbackRepository.getFeedbackDetail(id);
+		return feedbackRepository.getFeedbackDetail(id);
 	}
 
 	@Override
 	public List<Feedback> findTop15Feedbacks(int id) {
 		return feedbackRepository.findTop15Feedbacks(id);
 	}
-	
-	
+
 	@Override
-	public String getAllFeedbackDescriptionsByStaffId(int id)
-	{
+	public String getAllFeedbackDescriptionsByStaffId(int id) {
 		List<Feedback> feedbackList = feedbackRepository.findFeedbacksByStaffId(id);
-		
-		
-        StringBuilder allDescriptions = new StringBuilder();
 
-        
-        for (Feedback feedback : feedbackList) {
-            allDescriptions.append(feedback.getDescription()).append(" ");
-        }
+		StringBuilder allDescriptions = new StringBuilder();
 
-        return allDescriptions.toString();
-    }
+		for (Feedback feedback : feedbackList) {
+			allDescriptions.append(feedback.getDescription()).append(" ");
+		}
+
+		return allDescriptions.toString();
+	}
+
+	@Override
+	@Transactional
+	public void deleteFeedbackById(int feedbackId) {
+		feedbackRepository.deleteById(feedbackId);
+	}
 
 }
-
-
