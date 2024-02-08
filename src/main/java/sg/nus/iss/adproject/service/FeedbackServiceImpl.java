@@ -1,5 +1,6 @@
 package sg.nus.iss.adproject.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,13 @@ public class FeedbackServiceImpl implements FeedbackService {
 	}
 
 	@Override
-	public List<Feedback> findTop15Feedbacks(int id) {
-		return feedbackRepository.findTop15Feedbacks(id);
+	public List<Feedback> reverseFeedbacks(int id) {
+		List<Feedback>feedbackList=feedbackRepository.findFeedbackByAppointmentStaffId(id);
+		// TODO Auto-generated method stub
+		Collections.reverse(feedbackList);
+		return feedbackList;
 	}
+
 	
 	
 

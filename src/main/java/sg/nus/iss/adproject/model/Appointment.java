@@ -1,9 +1,12 @@
 package sg.nus.iss.adproject.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,18 +14,19 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class Appointment {
+public class Appointment implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private LocalDate date;
 	private LocalTime time;
-	private String queue_number;
-	// private String medical_condition;
+	private int queue_number;
+	private String medical_condition;
+	@Enumerated(EnumType.STRING)
 	private AppointmentStatusEnum status;
 
 	@OneToOne(mappedBy = "appointment")
-	private Feedback feedbacks;
+	private Feedback feedback;
 
 	@ManyToOne
 	private Patient patient;
@@ -31,16 +35,20 @@ public class Appointment {
 	private Staff staff;
 	
 	@ManyToOne
+
 	private Department department;
+
+	private User user;
+
 
 	public Appointment() {
 	}
 
-	public Appointment(LocalDate date, LocalTime time, String queue_number, AppointmentStatusEnum status) {
+	public Appointment(LocalDate date, LocalTime time, int queue_number, AppointmentStatusEnum status) {
 		this.date = date;
 		this.time = time;
 		this.queue_number = queue_number;
-		// this.medical_condition = medical_condition;
+		this.medical_condition = medical_condition;
 		this.status = status;
 	}
 
@@ -60,21 +68,21 @@ public class Appointment {
 		this.time = time;
 	}
 
-	public String getQueue_number() {
+	public int getQueue_number() {
 		return queue_number;
 	}
 
-	public void setQueue_number(String queue_number) {
+	public void setQueue_number(int queue_number) {
 		this.queue_number = queue_number;
 	}
 // connected with patient
-//	public String getMedical_condition() {
-//		return medical_condition;
-//	}
-//
-//	public void setMedical_condition(String medical_condition) {
-//		this.medical_condition = medical_condition;
-//	}
+	public String getMedical_condition() {
+		return medical_condition;
+	}
+
+	public void setMedical_condition(String medical_condition) {
+		this.medical_condition = medical_condition;
+	}
 
 	public int getId() {
 		return id;
@@ -103,12 +111,28 @@ public class Appointment {
 		return patient;
 	}
 
+
 	public Department getDepartment() {
 		return department;
 	}
 
 	public void setDepartment(Department departmentId) {
-		this.department = departmentId;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
+
 	}
 
 }

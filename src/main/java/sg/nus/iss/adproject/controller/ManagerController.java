@@ -71,6 +71,7 @@ public class ManagerController {
 		Feedback feedbackDetails = feedbackService.getFeedbackDetail(feedbackId);
 		model.addAttribute("feedbackDetails", feedbackDetails);
 		return "feedbackDetail";
+		
 	}
 
 }
