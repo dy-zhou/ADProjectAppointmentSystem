@@ -71,21 +71,6 @@ public class DoctorController {
 	}
 
 	@GetMapping("")
-
-	public String showDashboard(Model model, HttpSession sessionObj) {
-		Staff doctor = (Staff) sessionObj.getAttribute("staffObj");
-		List<Appointment> appointments = doctor.getAppointments();
-		List<Feedback> feedbacks = new ArrayList<>();
-		List<Appointment> filteredAppointments = new ArrayList<>();
-		AppointmentStatusEnum status = AppointmentStatusEnum.Proceeding;
-		for (Appointment appointment : appointments) {
-			if (feedbacks.size() <= 6)
-				feedbacks.add(appointment.getFeedback());
-
-			if (appointment.getStatus().compareTo(status) == 0)
-				filteredAppointments.add(appointment);
-
-
 	public String showDashboard( Model model,HttpSession sessionObj) {
 		Staff doctor=(Staff) sessionObj.getAttribute("staffObj");
 		List<Appointment>appointments=doctor.getAppointments();
@@ -179,6 +164,9 @@ public class DoctorController {
 		List<String> keyWords = extractKeywordsFromApiResponse(apiResponse);
 		// Bind api response
 		model.addAttribute("keywords", keyWords);
+		
+		return "doctorFeedbackList";
+	}
 
 
 	
@@ -249,6 +237,6 @@ public class DoctorController {
 
 }
 
-	
-}
+
+
 

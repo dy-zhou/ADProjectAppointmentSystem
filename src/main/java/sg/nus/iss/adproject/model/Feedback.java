@@ -13,8 +13,6 @@ public class Feedback {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String Description;
-
-	private String feedback_type;
 	private double score;
 
 	@ManyToOne
@@ -54,13 +52,10 @@ public class Feedback {
 		this.id = id;
 	}
 	
-	public int getId()
-	{
-		return id;
-	}
 
 	public double getScore() {
 		return score;
 	}
+
 
 }
