@@ -14,6 +14,14 @@ public interface FeedbackService {
 
 	Feedback getFeedbackDetail(int id);
 	
+
+	List<Feedback> findTop15Feedbacks(int id);
+
+	String getAllFeedbackDescriptionsByStaffId(int id);
+
+	void deleteFeedbackById(int feedbackId);
+
 	List<Feedback> reverseFeedbacks(int id);
+
 }
  

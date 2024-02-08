@@ -123,7 +123,6 @@ public class NurseController {
 			model.addAttribute("patient", patient);
 			session.setAttribute("patient", patient);
 			session.setAttribute("patientId", id);
-			System.out.println("Patient ID: " + patient.getName());
 			return "patientDetail";
 		} else
 			return "addNewPatient";
@@ -179,9 +178,6 @@ public class NurseController {
 		
 		//Add symptoms string to model
 		model.addAttribute("patientSymptoms", symptomString);
-		System.out.println("Patient ID: " + patient.getName());
-		System.out.println("Appointment ID: " + appointmentId);
-		
 		//Call external api with selected symptoms
 		ResponseEntity<String> responseEntity = predictApi.sendSymptomsForPrediction(selectedSymptoms.getSymptoms());
 		
@@ -221,62 +217,52 @@ public class NurseController {
 		
 		//Get doctor list from department id
 		List<Staff> departmentStaff = staffService.findStaffByDepartmentId(diseseDepartment.getId());
-		System.out.println("Department staff: " + departmentStaff);
 		
 		//List to hold staffAvailable
 		List<Staff> staffAvailable = new ArrayList<>();
-		
+		List<Staff> staffUnAvailable = new ArrayList<>();
+		staffAvailable.addAll(departmentStaff);
 		//Get schedule from doctor list
 		List<Schedule> staffSchedule = new ArrayList<>();
-		
+		System.out.println("Staff available before loop: " + staffAvailable);
 		//Check if staff have schedule, if no schedule add to available doctors
 		for(Staff staff:departmentStaff) {
-			List<Schedule> schedule = scheduleService.findSchedulesByStaff(staff.getId());//TODO:Not finding the staff
+			List<Schedule> schedule = scheduleService.findSchedulesByStaff(staff.getId());
 			if(schedule.isEmpty()) {
-				System.out.println("Schedule in loop: " + scheduleService.findSchedulesByStaff(staff.getId()));
-				staffAvailable.add(staff);
+				model.addAttribute("departmentStaff", staffAvailable);
 			}else {
-				staffSchedule.addAll(schedule);//TODO: add staff who have no schedule
-			}
-		}
-		System.out.println("Available staff after check schedules: " + staffAvailable);
-		//For doctors with schedules
-		//Check if schedule clash with appointment
-		//if staffSchdeule isEmpty, staff is free, can add staff
-		if(staffSchedule.isEmpty()) {
-			model.addAttribute("departmentStaff", departmentStaff);
-		}
-		else {
-			//Get appointmentDate and appointmentTime for checking
-			//AppointmentEndTime is 30mins after appointmentStartTime
-			LocalDate appointmentDate = patientAppointment.getDate();
-			LocalTime appointmentStartTime = patientAppointment.getTime();
-			LocalTime appointmentEndTime = appointmentStartTime.plusMinutes(30);
-			
-			
-			//Check date then time
-			//If appointmentDate same as appointmentDate then check if time clash
-			for(Schedule schedule : staffSchedule) {
-				if(schedule.getDate() == appointmentDate) {
-					//Get scheduleStartTime and scheduleStartTime for checking
-					LocalTime scheduleStartTime = schedule.getTime_start();
-					LocalTime scheduleEndTime = schedule.getTime_end();
-					//If appointEndTime is before scheduleStartTime or
-					//appointmentStartTime is after scheduleEndTime, no clash
-					//then add staff to staffAvailable
-					if(appointmentEndTime.isBefore(scheduleStartTime) 
-							|| appointmentStartTime.isAfter(scheduleEndTime)) {
-						staffAvailable.add(schedule.getStaff());
+				staffSchedule.addAll(schedule);
+				//DELETE BELOW IF NOT WORKING
+				//Get appointmentDate and appointmentTime for checking
+				//AppointmentEndTime is 30mins after appointmentStartTime
+				LocalDate appointmentDate = patientAppointment.getDate();
+				LocalTime appointmentStartTime = patientAppointment.getTime();
+				LocalTime appointmentEndTime = appointmentStartTime.plusMinutes(30);
+				
+				for(Schedule sched : staffSchedule) {
+
+					if(sched.getDate().isEqual(appointmentDate)) {
+						//Get scheduleStartTime and scheduleStartTime for checking
+						LocalTime scheduleStartTime = sched.getTime_start();
+						LocalTime scheduleEndTime = sched.getTime_end();
+						//If appointEndTime is before scheduleStartTime or
+						//appointmentStartTime is after scheduleEndTime, no clash
+						//then add staff to staffAvailable
+						if(appointmentEndTime.isAfter(scheduleStartTime) && appointmentEndTime.isBefore(scheduleEndTime)
+								|| appointmentStartTime.isBefore(scheduleEndTime)&& appointmentEndTime.isAfter(scheduleEndTime)
+								|| appointmentStartTime.isBefore(scheduleStartTime) && appointmentEndTime.isAfter(scheduleEndTime)) {
+							staffUnAvailable.add(sched.getStaff());
+						}
+						
 					}
-				}else {
-					staffAvailable.add(schedule.getStaff());
-				};
+					
+				}
 				
 			}
 			
-			model.addAttribute("departmentStaff", staffAvailable);
 		}
-		System.out.println("Staff Schedule: " + staffSchedule);
+		staffAvailable.removeAll(staffUnAvailable);
+		model.addAttribute("departmentStaff", staffAvailable);
 		return "predictedDisease";
 	}
 	
@@ -297,13 +283,26 @@ public class NurseController {
 			@ModelAttribute Appointment patientAppointment,
 			HttpSession session){
 		int patientId = (Integer)session.getAttribute("patientId");
-		
+		int appointmentId = (Integer)session.getAttribute("appointmentId");
+		//Get patient Appointment
+		Appointment patientAppointmentUpdate = appointmentService.getAppointmentDetail(appointmentId);
+		Patient patient = patientService.getPatientById(patientId);
+		session.setAttribute("patient", patient);
 		//Get staff from 
-		Staff selctedStaff = patientAppointment.getStaff();
-		patientAppointment.setStaff(selctedStaff);
-		appointmentService.updateAppointment(patientAppointment);
+		Staff selectedStaff = patientAppointment.getStaff();
+		patientAppointmentUpdate.setStaff(selectedStaff);
+		appointmentService.updateAppointment(patientAppointmentUpdate);
+		
+		//Update Schedule
+		Schedule newSchedule = new Schedule();
+		newSchedule.setDate(patientAppointmentUpdate.getDate());
+		newSchedule.setTime_start(patientAppointmentUpdate.getTime());
+		newSchedule.setTime_end(patientAppointmentUpdate.getTime().plusMinutes(30));
+		newSchedule.setStaff(selectedStaff);
+		scheduleService.createShedule(newSchedule);
+		
 		//TODO:Alert window when updateAppointment is successful
-		return "redirect:patient/" + patientId;// TODO:to redirect back to patient appointments detail
+		return "redirect:patient/" + patientId;
 		
 	}
 	
