@@ -10,9 +10,10 @@
 	<h2>Possible Disease</h2>
 	<p>Patient may have <b><span th:text="${prediction}"></span></b></p>
 	<p>Patient have these symptoms: <b><span th:text="${patientSymptoms}"></span></b></p>
-	<a th:href="@{/Nurse/patient/{id}(id=${patientId})}" class="goback-button">Go Back</a>
+	<span th:unless="${departmentStaff.size() > 0}">No Doctor Available!</span>
+	<p></p><a th:href="@{/Nurse/patient/{id}(id=${patientId})}" class="goback-button">Go Back</a></p>
 	
-	<div th:if="${departmentStaff != null}">
+	<div th:if="${departmentStaff.size() > 0}">
 		<h2>Select Doctor</h2>
 		<form th:action="@{/Nurse/selectDoctors}" th:object="${patientAppointment}" method="POST">
 			<select th:field="*{staff}">
@@ -25,6 +26,6 @@
 			<button type="submit">Submit</button>
 		</form>
 	</div>
-	<span th:unless="${departmentStaff != null}">No Doctor Available!</span>
+	
 </body>
 </html>
