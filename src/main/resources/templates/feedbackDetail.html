@@ -46,6 +46,29 @@
 		a:hover {
 			background-color: #0056b3;
 		}
+
+		.back-button {
+			padding: 10px 20px;
+			background-color: #007bff;
+			color: #fff;
+			text-decoration: none;
+			border-radius: 5px;
+			margin: 0 10px;
+			cursor: pointer;
+			border: none;
+			outline: none;
+			transition: background-color 0.3s ease;
+		}
+
+		.back-button:hover {
+			background-color: #0056b3;
+		}
+
+		.button-container {
+			display: flex;
+			justify-content: center;
+			margin-top: 20px;
+		}
 	</style>
 </head>
 
@@ -62,14 +85,18 @@
 				th:text="${feedbackDetails.appointments.patients.medical_condition}"></span></p>
 		<p><strong>Appointment Status:</strong> <span th:text="${feedbackDetails.appointments.status}"></span></p>
 
-		<p th:if="${designation == 'manager'}"><strong>Doctor ID:</strong> <span
+		<p th:if="${session.designation == 'manager'}"><strong>Doctor ID:</strong> <span
 				th:text="${feedbackDetails.appointments.staffs.id}"></span></p>
-		<p th:if="${designation == 'manager'}"><strong>Doctor Name:</strong> <span
+		<p th:if="${session.designation == 'manager'}"><strong>Doctor Name:</strong> <span
 				th:text="${feedbackDetails.appointments.staffs.name}"></span></p>
 	</div>
 
-	<a th:href="@{/Manager/homePage_Manager}" th:if="${designation == 'manager'}">Back To Manager Home Page</a>
-    <a th:href="@{Doctor/homePage_Doctor}" th:if="${designation == 'doctor'}">Back To Doctor Home Page</a>
+	<div class="button-container">
+		<button class="back-button" th:if="${session.designation == 'doctor'}"
+			onclick="window.location.href='/Doctor'">Back To Doctor Home Page</button>
+		<button class="back-button" th:if="${session.designation == 'manager'}"
+			onclick="window.location.href='/Manager'">Back To Manager Home Page</button>
+	</div>
 </body>
 
 </html>

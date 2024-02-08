@@ -1,13 +1,19 @@
- package sg.nus.iss.adproject.controller;
+package sg.nus.iss.adproject.controller;
+
+
+import java.text.DecimalFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.OptionalDouble;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +23,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import jakarta.servlet.http.HttpSession;
 import sg.nus.iss.adproject.interfacemethods.AppointmentService;
 import sg.nus.iss.adproject.interfacemethods.FeedbackService;
 import sg.nus.iss.adproject.interfacemethods.PatientService;
 import sg.nus.iss.adproject.interfacemethods.StaffService;
+import sg.nus.iss.adproject.interfacemethods.keyWordsApiService;
 import sg.nus.iss.adproject.model.Appointment;
 import sg.nus.iss.adproject.model.AppointmentStatusEnum;
+import sg.nus.iss.adproject.model.Department;
 import sg.nus.iss.adproject.model.Feedback;
 import sg.nus.iss.adproject.model.Patient;
 import sg.nus.iss.adproject.model.Staff;
@@ -47,6 +58,9 @@ public class DoctorController {
 	private StaffService staffService;
 	@Autowired
 	private PatientService patientService;
+
+	@Autowired
+	private keyWordsApiService keywordsApi;
 
 	public void setService(FeedbackServiceImpl feedbackService, AppointmentServiceImpl appointmentService,
 			StaffServiceImpl staffService,PatientServiceImpl patientService) {
@@ -91,7 +105,7 @@ public class DoctorController {
 				}
 			}
 			
-			
+
 		}
 		Collections.sort(filteredAppointments, Comparator.comparing(a ->a.getQueue_number()));
 		
@@ -109,7 +123,7 @@ public class DoctorController {
 		return "homePage_Doctor";
 	}
 
-
+	
 	
 	@GetMapping("/AppointmentDetails")
 	public String showAppointmentDetails(Model model) {
@@ -148,5 +162,36 @@ public class DoctorController {
 		appointmentService.updateAppointmentDetails(id,appointment.getMedical_condition());
 		return "redirect:/Doctor/EditAppointmentDetails/"+id;
 	}
-	
+
+
+	// Method to Parse api JSON response to get prediction in string format
+	private List<String> extractKeywordsFromApiResponse(String apiResponse) {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			JsonNode jsonNode = objectMapper.readTree(apiResponse);
+			JsonNode keywordsNode = jsonNode.get("Top 10 Keywords");
+			List<String> keywordsList = new ArrayList<>();
+			for (JsonNode keyword : keywordsNode) {
+				String keywords = keyword.asText();
+				keywordsList.add(keywords);
+			}
+			return keywordsList;
+		} catch (Exception e) {
+			List<String> errorList = new ArrayList<>();
+			errorList.add("Error parsing API response");
+			return errorList;
+		}
+	}
+	// add this for average score
+    public double calculateAverageFeedbackScore(List<Feedback> feedbacks) {
+        OptionalDouble average = feedbacks.stream().mapToDouble(Feedback::getScore).average();
+        double avg = average.isPresent() ? average.getAsDouble() : 0.0;
+        DecimalFormat df = new DecimalFormat("#.#");
+        return Double.parseDouble(df.format(avg));
+    }
+
 }
+
+	
+
+
