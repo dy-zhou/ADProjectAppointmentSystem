@@ -17,7 +17,7 @@ public interface AppointmentService {
 	void removeAppointment(Appointment appointment);
 
 	Appointment updateAppointment(Appointment appointment);
-=======
+
 	List<Appointment> findAppointmentByDate(LocalDate date);
 	void updateAppointmentDetails(int id, String medical_condition);
 
