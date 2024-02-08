@@ -14,8 +14,8 @@
 	<p></p><a th:href="@{/Nurse/patient/{id}(id=${patientId})}" class="goback-button">Go Back</a></p>
 	
 	<div th:if="${departmentStaff.size() > 0}">
-		<h2>Select Doctor</h2>
-		<form th:action="@{/Nurse/selectDoctors}" th:object="${patientAppointment}" method="POST">
+		<h2>Make Appointment</h2>
+		<form th:action="@{/Nurse/selectDoctors}" th:object="${newAppointment}" method="POST">
 			<select th:field="*{staff}">
 				<option value="">---Select Appointment Doctor</option>
 				<option th:each="staff : ${departmentStaff}"
@@ -23,9 +23,19 @@
 						th:text="${staff.name}">
 				</option>
 			</select>
+			<label for="selectedDate">Select Date: </label>
+			<input type="date" id="selectedDate" th:field="*{date}"/>
+			<select th:field="*{time}">
+				<option value="">---Select Morning or Night---</option>
+				<option th:value="'08:00:00'">Morning</option>
+				<option th:value="'14:00:00'">Night</option>
+			</select>
 			<button type="submit">Submit</button>
 		</form>
 	</div>
+<!--
+	To add choose datae, choose morning or afternoon
+-->
 	
 </body>
 </html>

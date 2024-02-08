@@ -63,6 +63,7 @@
 				<th>ID</th>
 				<th>Name</th>
 				<th>Address</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -73,10 +74,11 @@
 					 th:text="${patient.name}"></a>
 				</td>
 				<td th:text="${patient.address}"></td>
+				<td><a th:href="@{patient/disease/{patientId}(patientId =${patient.id})}">Make Appointment</a></td>
 			</tr>
 		</tbody>
 	</table>
 	<button href="/patients/create">Create New Patient</button>
 </body>
-
+<!--To add button to direct to predict disease-->
 </html>

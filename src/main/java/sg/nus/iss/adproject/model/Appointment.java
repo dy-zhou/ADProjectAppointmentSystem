@@ -35,9 +35,9 @@ public class Appointment implements Serializable {
 	private Staff staff;
 	
 	@ManyToOne
-
 	private Department department;
-
+	
+	@ManyToOne	
 	private User user;
 
 
@@ -110,13 +110,19 @@ public class Appointment implements Serializable {
 	public Patient getPatient() {
 		return patient;
 	}
+	
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
 
 
 	public Department getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(Department departmentId) {
+	public void setDepartment(Department departmentId) { 
+		this.department = departmentId;
+	}
 
 	public User getUser() {
 		return user;
