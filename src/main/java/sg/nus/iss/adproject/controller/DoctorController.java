@@ -22,6 +22,7 @@ import sg.nus.iss.adproject.interfacemethods.StaffService;
 import sg.nus.iss.adproject.interfacemethods.keyWordsApiService;
 import sg.nus.iss.adproject.model.Appointment;
 import sg.nus.iss.adproject.model.AppointmentStatusEnum;
+import sg.nus.iss.adproject.model.Department;
 import sg.nus.iss.adproject.model.Feedback;
 import sg.nus.iss.adproject.model.Staff;
 import sg.nus.iss.adproject.service.AppointmentServiceImpl;
@@ -78,6 +79,7 @@ public class DoctorController {
 
 		int staffId = doctor.getId();
 		String staffName = doctor.getName();
+		Department department= doctor.getDepartment();
 
 		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(staffId);
 
@@ -86,6 +88,7 @@ public class DoctorController {
 
 		model.addAttribute("staffName", staffName);
 		model.addAttribute("doctorFeedbackList", doctorFeedbackList);
+		model.addAttribute("department", department);
 		// add this
 		model.addAttribute("allFeedbackComments", allFeedbackComments);
 

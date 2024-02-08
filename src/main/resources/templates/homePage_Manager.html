@@ -1,28 +1,34 @@
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Home Page</title>
-	</head>
-	<header>
-		<img class="logo-image" src="/images/laps1.svg" alt="Company logo">
-		<input type="text" placeholder="Search">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home Page</title>
+</head>
+<header>
+	<img class="logo-image" src="/images/laps1.svg" alt="Company logo">
+	<input type="text" placeholder="Search">
+	<div>
+		<img class="user-image" src="" alt="user imgae">
+		<a href="/login">Logout</a>
+	</div>
+	<form action="/Manager/doctorFeedbacks" method="get">
+		<input type="text" name="id" placeholder="Search by ID">
+		<button type="submit">Search</button>
+	</form>
+</header>
+
+<body>
+	<div>
+		<h5>Appointment</h5>
 		<div>
-			<img class="user-image" src="" alt="user imgae">
-			<a href="/login">Logout</a>
+			<table>
+				<th></th>
+			</table>
 		</div>
-	</header>
-	<body>
-		<div>
-			<h5>Appointment</h5>
-			<div>
-				<table>
-					<th></th>
-				</table>
-			</div>
-		</div>
-	</body>
-	
-	<a href="/Manager/allFeedbackList">Feedback List</a>
-	<a href="/Manager/doctorFeedbackList/1">Doctor feddbacks</a>
+	</div>
+</body>
+
+<a href="/Manager/allFeedbacks">Feedback List</a>
+
 </html>

@@ -91,6 +91,7 @@
 
 
 <body>
+	<h2><span th:text="${department.name}"></span></h2>
 	<h2>Feedbacks For <span th:text="${staffName}"></span></h2>
 	<table>
 		<thead>
@@ -114,15 +115,26 @@
 	</table>
 
 
-
-	<div class="button-container">
-		<button class="back-button" th:if="${session.designation == 'doctor'}"
-			onclick="window.location.href='/Doctor'">Back To Doctor Home Page</button>
-		<button class="back-button" th:if="${session.designation == 'manager'}"
-			onclick="window.location.href='/Manager'">Back To Manager Home Page</button>
-	</div>
-
-
+<div class="button-container">
+        <button id="backButton" class="back-button">Back</button>
+    </div>
+    <script>
+        var currentUrl = window.location.href;
+        var backButton = document.getElementById('backButton');
+        if (currentUrl.includes('/Manager')) {
+            backButton.onclick = function() {
+                window.location.href = '/Manager';
+            };
+        }
+        else if (currentUrl.includes('/Doctor/FeedbackDetails')) {
+            backButton.onclick = function() {
+                window.location.href = '/Doctor';
+            };
+        }
+        else {
+            backButton.disabled = true;
+        }
+    </script>
 </body>
 
 </html>

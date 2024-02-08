@@ -1,4 +1,3 @@
-//This is for manager to see all the feedback and the doctor id and doctor name
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,18 +61,20 @@
                 <th>Feedback Type</th>
                 <th>Doctor Id</th>
                 <th>Doctor Name</th>
+                <th>Department Name</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="feedback : ${feedbacks}">
+            <tr th:each="feedback : ${feedbackList}">
                 <td th:text="${feedback.id}"></td>
                 <td th:text="${feedback.description}"></td>
                 <td th:text="${feedback.feedback_type}"></td>
-                <td th:text="${feedback.appointments.staffs.id}"></td>
-                <td th:text="${feedback.appointments.staffs.name}"></td>
+                <td th:text="${feedback.appointment.staff.id}"></td>
+                <td th:text="${feedback.appointment.staff.name}"></td>
+                <td th:text="${feedback.appointment.staff.department.name}"></td>
             </tr>
         </tbody>
     </table>
-    <a href="/Manager/homePage_Manager">Back To Home Page</a>
+    <a href="/Manager">Back To Home Page</a>
 </body>
 </html>
