@@ -86,6 +86,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 		// TODO Auto-generated method stub
 		return appointmentRepository.getAppointmentDetail(id);
 	}
+	
+	@Override
+	@Transactional
+	public Appointment updateAppointment(Appointment appointment) {
+		return appointmentRepository.save(appointment);
+	}
 
 	@Override
 	public List<Appointment> findAppointmentByDate(LocalDate date) {

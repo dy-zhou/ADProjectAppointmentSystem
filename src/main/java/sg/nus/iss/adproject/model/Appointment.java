@@ -35,7 +35,11 @@ public class Appointment implements Serializable {
 	private Staff staff;
 	
 	@ManyToOne
+
+	private Department department;
+
 	private User user;
+
 
 	public Appointment() {
 	}
@@ -99,10 +103,20 @@ public class Appointment implements Serializable {
 	public Staff getStaff() {
 		return staff;
 	}
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
 
 	public Patient getPatient() {
 		return patient;
 	}
+
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department departmentId) {
 
 	public User getUser() {
 		return user;
@@ -118,6 +132,7 @@ public class Appointment implements Serializable {
 
 	public void setFeedback(Feedback feedback) {
 		this.feedback = feedback;
+
 	}
 
 }

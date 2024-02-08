@@ -59,6 +59,7 @@ public class PatientServiceImpl implements PatientService {
 		patientRepository.deleteById(id);
 	}
 
+
 //	@Override
 //	public Patient addNewPatient(Patient patient) {
 //		// TODO Auto-generated method stub
@@ -76,5 +77,6 @@ public class PatientServiceImpl implements PatientService {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
+	
 
 }

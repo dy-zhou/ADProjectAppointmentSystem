@@ -32,6 +32,12 @@
         strong {
             font-weight: bold;
         }
+        td{
+			margin-left: 10px;
+			border-spacing: 10px;
+			border: 1px solid #000;
+			padding:10px;
+		}
     </style>
 </head>
 
@@ -45,10 +51,10 @@
         <p><strong>Allergy:</strong> <span th:text="${patient.allergy}"></span></p>
         <p><strong>Medical Condition:</strong> <span th:text="${patient.medical_condition}"></span></p>
         <p><strong>Additional Information:</strong> <span th:text="${patient.additional_info}"></span></p>
+		<a th:href="@{/Nurse/patientList}" class="goback-button">Go Back</a>
     </div>
 	
-	
-//Appointments details
+	<h2>Appointments details</h2>
 	<div th:if="${patient.appointments != null and not #lists.isEmpty(patient.appointments)}">
 		<h3>Appointments:</h3>
 		<table>
@@ -61,7 +67,13 @@
 						<th>Time</th>
 					</p>
 					<p>
-						<th>Description</th>
+						<th>Medical Condition</th>
+					</p>
+					<p>
+						<th>Department</th>
+					</p>
+					<p>
+						<th>Doctor</th>
 					</p>
 				</tr>
 			</thead>
@@ -69,10 +81,19 @@
 				<tr th:each="appointment : ${patient.appointments}">
 					<td th:text="${appointment.date}"></td>
 					<td th:text="${appointment.time}"></td>
-					<td th:text="${appointment.description}"></td>
+					<td th:text="${appointment.patient.medical_condition}"></td>
+					<td>
+					    <span th:if="${appointment.department != null}" th:text="${appointment.department.name}"></span>
+    					<a th:unless="${appointment.department != null}" th:href="@{disease/{appointmentId}(appointmentId=${appointment.id})}">Assign Department</a>
+					</td>
+					<td>
+						<span th:if="${appointment.staff?.name != null}" th:text="${appointment.staff.name}"></span>
+    					<a th:unless="${appointment.staff?.name != null}" th:href="@{disease/{appointmentId}(appointmentId=${appointment.id})}">Assign Doctor</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
+		
 	</div>
 </body>
 
