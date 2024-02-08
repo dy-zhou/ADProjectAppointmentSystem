@@ -9,7 +9,7 @@
 <body>
 	<h2>Select Symptoms</h2>
 
-    <form th:action="@{/symptoms/submitSelectedSymptoms}" th:object="${selectedSymptoms}"method="POST">
+    <form th:action="@{/Nurse/submitSelectedSymptoms}" th:object="${selectedSymptoms}"method="POST">
         <fieldset>
             <legend>Symptoms for <span th:text="${selectedSymptomGroup.symptomGroup}"></span> </legend>
             <div>
@@ -23,7 +23,7 @@
     	<button type="submit" id="submitButton">Submit</button>
     	
 	</form>
-	 <a th:href="@{/symptoms/disease}" class="goback-button">Go Back</a>
+	 <a th:href="@{/Nurse/disease}" class="goback-button">Go Back</a>
 
 </body>
 

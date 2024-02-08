@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,7 +21,8 @@ public class Appointment implements Serializable {
 	private LocalDate date;
 	private LocalTime time;
 	private int queue_number;
-	// private String medical_condition;
+	private String medical_condition;
+	@Enumerated(EnumType.STRING)
 	private AppointmentStatusEnum status;
 
 	@OneToOne(mappedBy = "appointment")
@@ -32,7 +35,11 @@ public class Appointment implements Serializable {
 	private Staff staff;
 	
 	@ManyToOne
+
+	private Department department;
+
 	private User user;
+
 
 	public Appointment() {
 	}
@@ -41,7 +48,7 @@ public class Appointment implements Serializable {
 		this.date = date;
 		this.time = time;
 		this.queue_number = queue_number;
-		// this.medical_condition = medical_condition;
+		this.medical_condition = medical_condition;
 		this.status = status;
 	}
 
@@ -69,13 +76,13 @@ public class Appointment implements Serializable {
 		this.queue_number = queue_number;
 	}
 // connected with patient
-//	public String getMedical_condition() {
-//		return medical_condition;
-//	}
-//
-//	public void setMedical_condition(String medical_condition) {
-//		this.medical_condition = medical_condition;
-//	}
+	public String getMedical_condition() {
+		return medical_condition;
+	}
+
+	public void setMedical_condition(String medical_condition) {
+		this.medical_condition = medical_condition;
+	}
 
 	public int getId() {
 		return id;
@@ -96,10 +103,20 @@ public class Appointment implements Serializable {
 	public Staff getStaff() {
 		return staff;
 	}
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
 
 	public Patient getPatient() {
 		return patient;
 	}
+
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department departmentId) {
 
 	public User getUser() {
 		return user;
@@ -115,6 +132,7 @@ public class Appointment implements Serializable {
 
 	public void setFeedback(Feedback feedback) {
 		this.feedback = feedback;
+
 	}
 
 }

@@ -3,12 +3,29 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Possible Disease</title>
+	<title>Possible Disease And Select Doctor</title>
 </head>
 
 <body>
 	<h2>Possible Disease</h2>
 	<p>Patient may have <b><span th:text="${prediction}"></span></b></p>
-	<a th:href="@{/symptoms/disease}" class="goback-button">Go Back</a>
+	<p>Patient have these symptoms: <b><span th:text="${patientSymptoms}"></span></b></p>
+	<span th:unless="${departmentStaff.size() > 0}">No Doctor Available!</span>
+	<p></p><a th:href="@{/Nurse/patient/{id}(id=${patientId})}" class="goback-button">Go Back</a></p>
+	
+	<div th:if="${departmentStaff.size() > 0}">
+		<h2>Select Doctor</h2>
+		<form th:action="@{/Nurse/selectDoctors}" th:object="${patientAppointment}" method="POST">
+			<select th:field="*{staff}">
+				<option value="">---Select Appointment Doctor</option>
+				<option th:each="staff : ${departmentStaff}"
+						th:value="${staff.id}"
+						th:text="${staff.name}">
+				</option>
+			</select>
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+	
 </body>
 </html>

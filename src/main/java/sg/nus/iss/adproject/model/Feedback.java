@@ -13,6 +13,7 @@ public class Feedback {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String Description;
+
 	private String feedback_type;
 	private double score;
 
@@ -27,7 +28,7 @@ public class Feedback {
 
 	public Feedback(String Description, String feedback_type) {
 		this.Description = Description;
-		this.feedback_type = feedback_type;
+		
 	}
 
 	public String getDescription() {
@@ -38,16 +39,19 @@ public class Feedback {
 		Description = description;
 	}
 
-	public String getFeedback_type() {
-		return feedback_type;
-	}
 
-	public void setFeedback_type(String feedback_type) {
-		this.feedback_type = feedback_type;
-	}
+	
 
 	public Appointment getAppointment() {
 		return appointment;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public int getId()
