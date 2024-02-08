@@ -44,19 +44,18 @@ public class LoginController {
 		}
 		Staff rlstaff = staffService.Authentication(staff.getName(), staff.getPassword());
 		if(rlstaff != null) {
-			sessionobj.setAttribute("staffid", rlstaff.getId());
-			sessionobj.setAttribute("username", rlstaff.getName());
+			sessionobj.setAttribute("staffObj", rlstaff);
 			sessionobj.setAttribute("staffDesignation", rlstaff.getDesignation());
 			String designation=(String)sessionobj.getAttribute("staffDesignation");
 			
 			if(designation.compareToIgnoreCase("nurse")==0) {
-				return "homePage_Nurse";
+				return "redirect:/Nurse";
 			}
 			else if(designation.compareToIgnoreCase("doctor")==0) {
-				return "homePage_Doctor";
+				return "redirect:/Doctor";
 			}
 			else{
-				return "homePage_Manager";
+				return "redirect:/Manager";
 			}
 		}
 		 else
