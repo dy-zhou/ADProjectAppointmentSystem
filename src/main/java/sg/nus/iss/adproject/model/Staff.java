@@ -14,25 +14,25 @@ import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class Staff implements Serializable{
+public class Staff implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@NotBlank(message="Username is required")
+
+	@NotBlank(message = "Username is required")
 	private String name;
-	
-	@NotBlank(message="password is required")
+
+	@NotBlank(message = "password is required")
 	private String password;
 	private String designation;
 
-	@OneToMany(mappedBy = "staff",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "staff", fetch = FetchType.EAGER)
 	private List<Appointment> appointments;
 
 	@OneToMany(mappedBy = "staff")
 	private List<Schedule> schedules;
 
-	@OneToOne(mappedBy="staff")
+	@OneToOne(mappedBy = "staff")
 	private Room room;
 
 	@ManyToOne
@@ -98,6 +98,7 @@ public class Staff implements Serializable{
 	public Department getDepartment() {
 		return department;
 	}
+
 
 	public void setDepartment(Department department) {
 		this.department = department;
