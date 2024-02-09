@@ -103,5 +103,10 @@ public class Staff implements Serializable {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+	
+	public Room getRoom()
+	{
+		return room;
+	}
 
 }

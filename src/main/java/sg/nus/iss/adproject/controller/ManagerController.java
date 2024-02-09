@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import sg.nus.iss.adproject.interfacemethods.DepartmentService;
 import sg.nus.iss.adproject.interfacemethods.FeedbackService;
 import sg.nus.iss.adproject.interfacemethods.StaffService;
 import sg.nus.iss.adproject.interfacemethods.keyWordsApiService;
@@ -25,6 +26,7 @@ import sg.nus.iss.adproject.model.Appointment;
 import sg.nus.iss.adproject.model.Department;
 import sg.nus.iss.adproject.model.Feedback;
 import sg.nus.iss.adproject.model.Staff;
+import sg.nus.iss.adproject.service.DepartmentServiceImpl;
 import sg.nus.iss.adproject.service.FeedbackServiceImpl;
 import sg.nus.iss.adproject.service.StaffServiceImpl;
 
@@ -41,15 +43,29 @@ public class ManagerController {
 	@Autowired
 	private keyWordsApiService keywordsApi;
 
-	public void setFeedbackService(FeedbackServiceImpl feedbackService, StaffServiceImpl staffService) {
+	@Autowired
+	private DepartmentService departmentService;
+
+	public void setFeedbackService(FeedbackServiceImpl feedbackService, StaffServiceImpl staffService,
+			DepartmentServiceImpl departmentService) {
 		this.feedbackService = feedbackService;
 		this.staffService = staffService;
+		this.departmentService = departmentService;
 	}
 
-	@GetMapping
+	@GetMapping("")
 	public String showDashboard(Model model) {
 		List<Feedback> feedbackList = feedbackService.findAllFeedbacks();
 		model.addAttribute("feedbackList", feedbackList);
+
+		// add this to get all department
+		List<Department> departments = departmentService.findAllDepartments();
+		model.addAttribute("departments", departments);
+
+		// add this for doctor list
+		List<Staff> doctors = staffService.findAllDoctors();
+		model.addAttribute("doctors", doctors);
+
 		return "homePage_Manager";
 	}
 //	
@@ -66,14 +82,13 @@ public class ManagerController {
 		model.addAttribute("feedbackList", feedbackList);
 		return "allFeedbackList";
 	}
-	
+
 	@PostMapping("/deleteFeedback")
 	public String deleteFeedback(@RequestParam("feedbackId") int feedbackId) {
-	    feedbackService.deleteFeedbackById(feedbackId);
-	    // Redirect to the page where feedbacks are displayed
-	    return "redirect:/Manager/allFeedbacks";
+		feedbackService.deleteFeedbackById(feedbackId);
+		// Redirect to the page where feedbacks are displayed
+		return "redirect:/Manager/allFeedbacks";
 	}
-
 
 //	@GetMapping("/doctorFeedbacks/{id}")
 //	public String showDoctorFeedbacks(@PathVariable("id") int staffId, Model model) {

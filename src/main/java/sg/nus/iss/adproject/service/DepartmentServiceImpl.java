@@ -20,6 +20,12 @@ public class DepartmentServiceImpl implements DepartmentService{
 		// TODO Auto-generated method stub
 		return departmentRepository.findDepartmentByDiseaseId(id) ;
 	}
+
+	@Override
+	public List<Department> findAllDepartments() {
+		// TODO Auto-generated method stub
+		return departmentRepository.findAll();
+	}
 	
 
 }
