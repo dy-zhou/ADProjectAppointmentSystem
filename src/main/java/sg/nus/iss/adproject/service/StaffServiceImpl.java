@@ -62,4 +62,11 @@ public class StaffServiceImpl implements StaffService{
 	}
 
 
+	@Override
+	public List<Staff> findAllDoctors() {
+		
+		return staffRepository.findStaffByDesignation("doctor");
+	}
+
+
 }
