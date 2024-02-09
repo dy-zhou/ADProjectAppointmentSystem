@@ -14,5 +14,6 @@ Schedule editSchedule(Schedule schedule);
 List<Schedule> findAllSchedules();
 List<Schedule> findSchedulesByStaff(int id);
 void deleteSchedule(int id);
-Integer findMaxPatientSlotByTimeStart(@Param("timeStart") LocalTime timeStart, int staffId);
+Integer findMaxPatientSlotByTimeStart(@Param("timeStart") LocalTime timeStart, 
+		int staffId, LocalDate date);
 }

@@ -66,8 +66,9 @@ public class ScheduleServiceImpl implements ScheduleService{
 	}
 
 	@Override
-	public Integer findMaxPatientSlotByTimeStart(LocalTime timeStart, int staffId) {
-		return scheduleRepository.findMaxPatientSlotByTimeStart(timeStart, staffId);
+	public Integer findMaxPatientSlotByTimeStart(LocalTime timeStart, int staffId,
+			LocalDate date) {
+		return scheduleRepository.findMaxPatientSlotByTimeStart(timeStart, staffId, date);
 	}
 
 }

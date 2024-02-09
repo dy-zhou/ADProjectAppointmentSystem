@@ -37,6 +37,25 @@
 			border-spacing: 10px;
 			border: 1px solid #000;
 			padding:10px;
+			text-align: center;
+		}
+		 input[type="date"] {
+            padding: 6px;
+            padding-left: 10px;
+        }
+        label, input[type="date"] {
+            margin-left: 10px;
+        }
+         #noRecordsMessage {
+            display: none;
+            margin-top: 10px;
+            color: red;
+        }
+        #clear{
+			padding: 5px;
+			padding-left: 10px;
+			padding-right: 10px;
+            text-align: center;
 		}
     </style>
 </head>
@@ -53,13 +72,19 @@
         <p><strong>Additional Information:</strong> <span th:text="${patient.additional_info}"></span></p>
 		<a th:href="@{/Nurse/patientList}" class="goback-button">Go Back</a>
     </div>
-	
 	<h2>Appointments details</h2>
+	<label for="dateFilter">Filter by Date:</label>
+    <input type="date" id="dateFilter" onchange="filterTableByDate()">
+    <button onclick="clearDateFilter()" id="clear">Clear</button>
 	<div th:if="${patient.appointments != null and not #lists.isEmpty(patient.appointments)}">
+		<a th:href="@{/Nurse/patientList}" class="goback-button">Go Back</a>
 		<h3>Appointments:</h3>
 		<table>
 			<thead>
 				<tr>
+					<p>
+						<th>Queue Number</th>
+					</p>
 					<p>
 						<th>Date</th>
 					</p>
@@ -79,6 +104,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="appointment : ${patient.appointments}">
+					<td th:text="${appointment.queue_number}"></td>
 					<td th:text="${appointment.date}"></td>
 					<td th:text="${appointment.time}"></td>
 					<td th:text="${appointment.patient.medical_condition}"></td>
@@ -86,9 +112,50 @@
 					<td th:text="${appointment.staff.name}"></td>
 				</tr>
 			</tbody>
+		<div id="noRecordsMessage">No records found.</div>
 		</table>
-		
 	</div>
+	
+	<script>
+        function filterTableByDate() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("dateFilter");
+            filter = input.value;
+            table = document.querySelector("table");
+            tr = table.querySelectorAll("tbody tr");
+			var noRecordsMessage = document.getElementById("noRecordsMessage");
+			
+			var recordsFound = false;
+			
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1]; //date is in the second column
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                        recordsFound = true;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+            table.style.display = recordsFound ? "table" : "none";
+            noRecordsMessage.style.display = recordsFound ? "none" : "block";
+        }
+        
+         function clearDateFilter() {
+            document.getElementById("dateFilter").value = "";
+            var table = document.querySelector("table");
+            var tr = table.querySelectorAll("tbody tr");
+
+            for (var i = 0; i < tr.length; i++) {
+                tr[i].style.display = ""; // Reset display for all rows
+            }
+            table.style.display = "table";
+            noRecordsMessage.style.display = "none";
+        }
+    </script>
+	
 </body>
 
 </html>

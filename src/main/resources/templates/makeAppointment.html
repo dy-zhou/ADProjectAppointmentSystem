@@ -15,8 +15,8 @@
 	
 	<div th:if="${departmentStaff.size() > 0}">
 		<h2>Make Appointment</h2>
-		<form th:action="@{/Nurse/selectDoctors}" th:object="${newAppointment}" method="POST">
-			<select th:field="*{staff}">
+		<form th:action="@{/Nurse/selectDoctors}" th:object="${newAppointment}" method="POST" id="form">
+			<select th:field="*{staff}" id="staff">
 				<option value="">---Select Appointment Doctor</option>
 				<option th:each="staff : ${departmentStaff}"
 						th:value="${staff.id}"
@@ -25,17 +25,36 @@
 			</select>
 			<label for="selectedDate">Select Date: </label>
 			<input type="date" id="selectedDate" th:field="*{date}"/>
-			<select th:field="*{time}">
+			<select th:field="*{time}" id="time">
 				<option value="">---Select Morning or Night---</option>
 				<option th:value="'08:00:00'">Morning</option>
 				<option th:value="'14:00:00'">Night</option>
 			</select>
-			<button type="submit">Submit</button>
+			<button type="submit" id="submitButton">Submit</button>
 		</form>
 	</div>
-<!--
-	To add choose datae, choose morning or afternoon
--->
+	
+	<script th:inline="javascript">
+        
+        /*<![CDATA[*/
+        // Check if the alert message is present in the model
+        var alertMessage = /*[[${alertMessage}]]*/ null;
+
+        if (alertMessage) {
+            alert(alertMessage);
+        }
+        /*]]>*/    
+        
+        /*<![CDATA[*/
+        // Check if the success message is present in the model
+        var successMessage = /*[[${successMessage}]]*/ null;
+
+        if (successMessage) {
+            alert(successMessage);
+        }
+        /*]]>*/    
+            
+    </script>
 	
 </body>
 </html>

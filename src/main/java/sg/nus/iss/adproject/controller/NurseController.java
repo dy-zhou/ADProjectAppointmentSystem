@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import sg.nus.iss.adproject.interfacemethods.AppointmentService;
 import sg.nus.iss.adproject.interfacemethods.DepartmentService;
@@ -189,6 +190,7 @@ public class NurseController {
 		List<String> symptomsList = selectedSymptoms.getSymptoms();
 		String symptomString = symptomsList.stream()
 	            .collect(Collectors.joining(", "));
+		session.setAttribute("symptomString", symptomString);
 		
 		//Add symptoms string to model
 		model.addAttribute("patientSymptoms", symptomString);
@@ -206,10 +208,11 @@ public class NurseController {
 		String medicalCondition = "Disease: " + prediction + "; Symptoms: " + symptomString;
 		model.addAttribute("medicalCondition", medicalCondition);
 		session.setAttribute("medicalCondition", medicalCondition);
+		System.out.println("Medical Condition: " + medicalCondition);
 		
 		//Bind api response
 		model.addAttribute("prediction", prediction);
-//		model.addAttribute("statusCode", statusCode);
+		session.setAttribute("prediction", prediction);
 		
 		//Set appointment department
 		//Get disease id from prediction
@@ -238,11 +241,11 @@ public class NurseController {
         }
     }
 	
-	//Assign Doctor TODO: to update Slot number. To
 	@PostMapping("selectDoctors")
 	private String assignDoctor(Model model,
-			@ModelAttribute Appointment newAppointment, 
-			HttpSession session){
+			@ModelAttribute Appointment newAppointment,
+			HttpSession session,
+			HttpServletResponse response){
 		//Get patient Id
 		int patientId = (Integer)session.getAttribute("patientId");
 		
@@ -278,9 +281,6 @@ public class NurseController {
 		int morningSlots = 0;
 		int afternoonSlots = 0;
 		
-//		List<Staff> morningStaff = new ArrayList<>();
-//		List<Staff> afternoonStaff = new ArrayList<>();
-//		
 		//Check if date available, if not available check slots
 		List<Schedule> selectedStaffSchedule = scheduleService.findSchedulesByStaff(staffId);
 		
@@ -324,15 +324,16 @@ public class NurseController {
 			
 		}else if(!dateAvailable) {
 			boolean staffAvailable = false;
+			System.out.println("selectedDate: " + selectedDate);
 			
 			if(selectedTime.equals(morning)) {
-				morningSlots = scheduleService.findMaxPatientSlotByTimeStart(morning, staffId);
+				morningSlots = scheduleService.findMaxPatientSlotByTimeStart(morning, staffId, selectedDate);
 				if(morningSlots < 20 ) {
 					staffAvailable = true;
 				}
 				
 			} else if(selectedTime.equals(afternoon)) {
-				afternoonSlots = scheduleService.findMaxPatientSlotByTimeStart(afternoon, staffId);
+				afternoonSlots = scheduleService.findMaxPatientSlotByTimeStart(afternoon, staffId, selectedDate);
 				if(afternoonSlots < 20 ) {
 					staffAvailable = true;
 				}
@@ -373,25 +374,27 @@ public class NurseController {
 				newSchedule.setStaff(selectedStaff);
 				newSchedule.setPatient_slot(slot);
 				scheduleService.createShedule(newSchedule);
+				
+				//Send Server response
+				response.setStatus(HttpServletResponse.SC_CREATED);
+				model.addAttribute("successMessage", "Appointment Succesful!"); 
 			}else if(!staffAvailable) {
 				//TODO:redirect back to makeAppointment
-				
+				response.setStatus(HttpServletResponse.SC_CONFLICT);
+				List<Staff> availableStaff = staffService.findStaffByDepartmentId(department.getId());
+				model.addAttribute("departmentStaff",availableStaff);
+				model.addAttribute("newAppointment", new Appointment());
+				model.addAttribute("prediction", session.getAttribute("prediction"));
+				model.addAttribute("patientSymptoms", session.getAttribute("symptomString"));
+				System.out.println("DepartmentStaff:" + availableStaff);
+				model.addAttribute("alertMessage", "No staff available! Please choose another time slot or staff"); 
+				return "makeAppointment";
 			}
 		}
 		
-		//Update Schedule
-//		Schedule newSchedule = new Schedule();
-//		newSchedule.setDate(patientAppointmentUpdate.getDate());
-//		newSchedule.setTime_start(patientAppointmentUpdate.getTime());
-//		newSchedule.setTime_end(patientAppointmentUpdate.getTime().plusMinutes(30));
-//		newSchedule.setStaff(selectedStaff);
-//		scheduleService.createShedule(newSchedule);
-		
 		//TODO:Alert window when updateAppointment is successful
-		// Set attribute to indicate success
-	    model.addAttribute("updateSuccess", true);
-	    
 		return "redirect:patient/" + patientId;
+		
 		
 	}
 	
