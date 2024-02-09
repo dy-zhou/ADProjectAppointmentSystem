@@ -11,6 +11,8 @@ public interface StaffService {
 	List<Staff> findStaffByDepartmentId(int id);
 	void deleteStaff(int id);
 	Staff Authentication(String username,String password);
+	//add this
+	List<Staff> findAllDoctors();
 
 
 }

@@ -398,31 +398,7 @@ public class NurseController {
 		
 	}
 	
-	//Add new patient
-	@PostMapping("/patient/{id}")
-	public String updatePatient(@PathVariable int id, @ModelAttribute Patient patient) {
-		patientService.updatePatient(id, patient);
-		patientService.deletePatientById(id);
-		return "redirect:/patientList";
-	}
-	//Create Appointment => check symptoms
-	@GetMapping("/createAppiontment/step1")
-	public String checkSymptoms() {
 
-		return "checkSymptoms";
-	}
-	//Create Appointment => 
-	@PostMapping("/createAppiontment/step1")
-	public String addSymptoms(@RequestParam("syptomId") int[] symptomIds, HttpSession sessionObj, Model model) {
-		sessionObj.setAttribute("symptomsIds", symptomIds);
-		return "pickDoctors";
-	}
-
-	
-	@GetMapping("/createAppointment/step2")
-	public String pickDoctorsForm(Model model, int id) {
-		return "pickDoctors";
-	}
 	
 	
 

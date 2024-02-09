@@ -123,7 +123,53 @@ public class DoctorController {
 		return "homePage_Doctor";
 	}
 
-	
+
+	// after login ,get this doctor's feedback
+	@GetMapping("/FeedbackDetails")
+	public String showDoctorFeedbacks(Model model, HttpSession sessionObj) {
+
+		Staff doctor = (Staff) sessionObj.getAttribute("staffObj");
+
+		int staffId = doctor.getId();
+		String staffName = doctor.getName();
+		Department department = doctor.getDepartment();
+
+		List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(staffId);
+		//add this
+		double averageScore = calculateAverageFeedbackScore(doctorFeedbackList);
+
+		// add this for average score
+		String allFeedbackComments = feedbackService.getAllFeedbackDescriptionsByStaffId(staffId);
+
+		model.addAttribute("staffName", staffName);
+		model.addAttribute("doctorFeedbackList", doctorFeedbackList);
+		model.addAttribute("department", department);
+		// add this
+		model.addAttribute("allFeedbackComments", allFeedbackComments);
+		model.addAttribute("averageScore", averageScore);
+
+		// this is link the api
+		StringBuilder jsonString = new StringBuilder();
+		jsonString.append("{");
+		jsonString.append("\"text\": \"").append(allFeedbackComments).append("\"");
+		jsonString.append("}");
+		String jsonStringSend = jsonString.toString();
+		System.out.println(jsonStringSend);
+		System.out.println(jsonString);
+		System.out.println(allFeedbackComments);
+
+		ResponseEntity<String> responseEntity = keywordsApi.sendComments(jsonStringSend);
+		// Extract information from response
+		String apiResponse = responseEntity.getBody();
+		// Parse JSON response
+		List<String> keyWords = extractKeywordsFromApiResponse(apiResponse);
+		// Bind api response
+		model.addAttribute("keywords", keyWords);
+		
+		return "doctorFeedbackList";
+	}
+
+
 	
 	@GetMapping("/AppointmentDetails")
 	public String showAppointmentDetails(Model model) {
@@ -192,6 +238,5 @@ public class DoctorController {
 
 }
 
-	
 
 

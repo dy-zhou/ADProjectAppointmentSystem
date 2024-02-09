@@ -62,7 +62,6 @@
 			<tr>
 				<th>ID</th>
 				<th>Description</th>
-				<th>Feedback Type</th>
 				<th>Doctor Id</th>
 				<th>Doctor Name</th>
 				<th>Department Name</th>
@@ -72,7 +71,6 @@
 			<tr th:each="feedback,iterStat : ${feedbackList}">
 				<td th:text="${iterStat.index + 1}"></td>
 				<td th:text="${feedback.description}"></td>
-				<td th:text="${feedback.feedback_type}"></td>
 				<td th:text="${feedback.appointment.staff.id}"></td>
 				<td th:text="${feedback.appointment.staff.name}"></td>
 				<td th:text="${feedback.appointment.staff.department.name}"></td>

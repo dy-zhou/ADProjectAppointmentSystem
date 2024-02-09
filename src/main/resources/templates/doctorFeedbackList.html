@@ -117,7 +117,6 @@
 			<tr>
 				<th>ID</th>
 				<th>Description</th>
-				<th>Feedback Type</th>
 				<th th:if="${session.designation == 'manager'}">Doctor Id</th>
 				<th th:if="${session.designation == 'manager'}">Doctor Name</th>
 			</tr>
@@ -126,7 +125,6 @@
 			<tr th:each="feedback, iterStat : ${doctorFeedbackList}">
 				<td th:text="${iterStat.index + 1}"></td>
 				<td th:text="${feedback.description}"></td>
-				<td th:text="${feedback.feedback_type}"></td>
 				<td th:if="${session.designation == 'manager'}" th:text="${feedback.appointments.staffs.id}"></td>
 				<td th:if="${session.designation == 'manager'}" th:text="${feedback.appointments.staffs.name}"></td>
 			</tr>

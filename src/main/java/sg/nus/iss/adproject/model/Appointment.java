@@ -36,21 +36,16 @@ public class Appointment implements Serializable {
 	
 	@ManyToOne
 	private Department department;
-	
-	@ManyToOne	
+
+
+	@ManyToOne
 	private User user;
 
 
 	public Appointment() {
 	}
 
-	public Appointment(LocalDate date, LocalTime time, int queue_number, AppointmentStatusEnum status) {
-		this.date = date;
-		this.time = time;
-		this.queue_number = queue_number;
-		this.medical_condition = medical_condition;
-		this.status = status;
-	}
+
 
 	public LocalDate getDate() {
 		return date;
@@ -119,6 +114,7 @@ public class Appointment implements Serializable {
 	public Department getDepartment() {
 		return department;
 	}
+
 
 	public void setDepartment(Department departmentId) { 
 		this.department = departmentId;
