@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import sg.nus.iss.adproject.interfacemethods.AppointmentService;
 import sg.nus.iss.adproject.interfacemethods.DepartmentService;
@@ -31,6 +33,7 @@ import sg.nus.iss.adproject.interfacemethods.PatientService;
 import sg.nus.iss.adproject.interfacemethods.ScheduleService;
 import sg.nus.iss.adproject.interfacemethods.StaffService;
 import sg.nus.iss.adproject.model.Appointment;
+import sg.nus.iss.adproject.model.AppointmentStatusEnum;
 import sg.nus.iss.adproject.model.Department;
 import sg.nus.iss.adproject.model.Disease;
 import sg.nus.iss.adproject.model.Feedback;
@@ -117,23 +120,26 @@ public class NurseController {
 	@GetMapping("patient/{id}")
 	public String patientDetail(@PathVariable("id") int id, 
 			Model model, HttpSession session) {
-
 		Patient patient = patientService.getPatientById(id);
+		System.out.println("Patient appointment: " + patient.getAppointments());
 		if (patient != null) {
 			model.addAttribute("patient", patient);
-			session.setAttribute("patient", patient);
-			session.setAttribute("patientId", id);
+//			session.setAttribute("patient", patient);
+//			session.setAttribute("patientId", id);
 			return "patientDetail";
 		} else
 			return "addNewPatient";
 	}
 	
 	//Disease Prediction
-	@GetMapping("patient/disease/{appointmentId}")
+//	@GetMapping("patient/disease/{appointmentId}")
+	@GetMapping("patient/disease/{patientId}")
 	public String selectDisease(Model model,
-			@PathVariable("appointmentId")int appointmentId,
+			@PathVariable("patientId") int patientId,
+//			@PathVariable("appointmentId")int appointmentId,
 			HttpSession session) {
-		session.setAttribute("appointmentId", appointmentId);
+//		session.setAttribute("appointmentId", appointmentId);
+		session.setAttribute("patientId", patientId);
 
 		//Add Symptom Groups
 		model.addAttribute("symptomGroup", symptoms.getSymptomsGroup());
@@ -145,7 +151,16 @@ public class NurseController {
 	//Get Symptoms from Symptoms group
 	@PostMapping("selectSymptoms")
 	public String fetchSymptoms(@ModelAttribute SympGroup selectedSymptomGroup,
-			 Model model) {
+			 Model model, HttpSession session) {
+		
+		//Get patiendId from session
+		int idPatient = (Integer)session.getAttribute("patientId");
+		model.addAttribute("patientId",idPatient);
+		
+		//Get patient from patientId
+		Patient patient = patientService.getPatientById(idPatient);
+		session.setAttribute("patient", patient);
+		
 		//Bind selected symptom group to model
 		model.addAttribute("selectedSymptomGroup", selectedSymptomGroup);
 		//Get related symptoms from symptom group
@@ -160,13 +175,13 @@ public class NurseController {
 	}
 	
 	//Submit selected symptoms for disease prediction
-	@PostMapping("submitSelectedSymptoms")
+	@PostMapping("makeAppointment")
 	public String submitSymptoms( @ModelAttribute SymptomsSelected selectedSymptoms,
 			Model model,
 			HttpSession session) {
-		//Add Patient, appointmentId to session
+		//Add Patient, //appointmentId to session
 		Patient patient = (Patient) session.getAttribute("patient");
-		int appointmentId = (Integer)session.getAttribute("appointmentId");
+//		int appointmentId = (Integer)session.getAttribute("appointmentId");
 		
 		//Add patientId for goback button
 		model.addAttribute("patientId", (Integer)session.getAttribute("patientId"));
@@ -175,6 +190,7 @@ public class NurseController {
 		List<String> symptomsList = selectedSymptoms.getSymptoms();
 		String symptomString = symptomsList.stream()
 	            .collect(Collectors.joining(", "));
+		session.setAttribute("symptomString", symptomString);
 		
 		//Add symptoms string to model
 		model.addAttribute("patientSymptoms", symptomString);
@@ -188,82 +204,30 @@ public class NurseController {
 		String prediction = extractPredictionFromApiResponse(apiResponse);
 		HttpStatusCode statusCode = responseEntity.getStatusCode();
 		
-		//Update Patient medical condition
-		String medicalCondition = "Disease: " + prediction + "; Symptoms: " + symptomString; 
-		patient.setMedical_condition(medicalCondition);
-		patientService.updatePatient((Integer)session.getAttribute("patientId"), patient);
+		//Add Patient medical condition
+		String medicalCondition = "Disease: " + prediction + "; Symptoms: " + symptomString;
+		model.addAttribute("medicalCondition", medicalCondition);
+		session.setAttribute("medicalCondition", medicalCondition);
+		System.out.println("Medical Condition: " + medicalCondition);
 		
 		//Bind api response
 		model.addAttribute("prediction", prediction);
-		model.addAttribute("statusCode", statusCode);
+		session.setAttribute("prediction", prediction);
 		
 		//Set appointment department
 		//Get disease id from prediction
 		Department diseseDepartment = diseaseService.findDepartmentByDiseaseName(prediction).getDepartment();
-		
-		//Get appointment by appointment id
-		Appointment patientAppointment = appointmentService.getAppointmentDetail(appointmentId);
-		
-		//Set appointment department id 
-		patientAppointment.setDepartment(diseseDepartment);
-		appointmentService.updateAppointment(patientAppointment);
-		
-		//Bind patient appointment
-		model.addAttribute("patientAppointment", patientAppointment);
-		
-		/*
-		 * Select available doctors for appointment
-		 */
+		session.setAttribute("department", diseseDepartment);
+		//Make new appointment
+		Appointment newAppointment = new Appointment();
+		newAppointment.setDepartment(diseseDepartment);
+		model.addAttribute("newAppointment", newAppointment);
 		
 		//Get doctor list from department id
-		List<Staff> departmentStaff = staffService.findStaffByDepartmentId(diseseDepartment.getId());
+		List<Staff> availableStaff = staffService.findStaffByDepartmentId(diseseDepartment.getId());
 		
-		//List to hold staffAvailable
-		List<Staff> staffAvailable = new ArrayList<>();
-		List<Staff> staffUnAvailable = new ArrayList<>();
-		staffAvailable.addAll(departmentStaff);
-		//Get schedule from doctor list
-		List<Schedule> staffSchedule = new ArrayList<>();
-		System.out.println("Staff available before loop: " + staffAvailable);
-		//Check if staff have schedule, if no schedule add to available doctors
-		for(Staff staff:departmentStaff) {
-			List<Schedule> schedule = scheduleService.findSchedulesByStaff(staff.getId());
-			if(schedule.isEmpty()) {
-				model.addAttribute("departmentStaff", staffAvailable);
-			}else {
-				staffSchedule.addAll(schedule);
-				//DELETE BELOW IF NOT WORKING
-				//Get appointmentDate and appointmentTime for checking
-				//AppointmentEndTime is 30mins after appointmentStartTime
-				LocalDate appointmentDate = patientAppointment.getDate();
-				LocalTime appointmentStartTime = patientAppointment.getTime();
-				LocalTime appointmentEndTime = appointmentStartTime.plusMinutes(30);
-				
-				for(Schedule sched : staffSchedule) {
-
-					if(sched.getDate().isEqual(appointmentDate)) {
-						//Get scheduleStartTime and scheduleStartTime for checking
-						LocalTime scheduleStartTime = sched.getTime_start();
-						LocalTime scheduleEndTime = sched.getTime_end();
-						//If appointEndTime is before scheduleStartTime or
-						//appointmentStartTime is after scheduleEndTime, no clash
-						//then add staff to staffAvailable
-						if(appointmentEndTime.isAfter(scheduleStartTime) && appointmentEndTime.isBefore(scheduleEndTime)
-								|| appointmentStartTime.isBefore(scheduleEndTime)&& appointmentEndTime.isAfter(scheduleEndTime)
-								|| appointmentStartTime.isBefore(scheduleStartTime) && appointmentEndTime.isAfter(scheduleEndTime)) {
-							staffUnAvailable.add(sched.getStaff());
-						}
-						
-					}
-					
-				}
-				
-			}
-			
-		}
-		staffAvailable.removeAll(staffUnAvailable);
-		model.addAttribute("departmentStaff", staffAvailable);
-		return "predictedDisease";
+		model.addAttribute("departmentStaff", availableStaff);
+		return "makeAppointment";
 	}
 	
 	//Parse api JSON response to get prediction in string format
@@ -277,32 +241,160 @@ public class NurseController {
         }
     }
 	
-	//Assign Doctor
 	@PostMapping("selectDoctors")
 	private String assignDoctor(Model model,
-			@ModelAttribute Appointment patientAppointment,
-			HttpSession session){
+			@ModelAttribute Appointment newAppointment,
+			HttpSession session,
+			HttpServletResponse response){
+		//Get patient Id
 		int patientId = (Integer)session.getAttribute("patientId");
-		int appointmentId = (Integer)session.getAttribute("appointmentId");
-		//Get patient Appointment
-		Appointment patientAppointmentUpdate = appointmentService.getAppointmentDetail(appointmentId);
-		Patient patient = patientService.getPatientById(patientId);
-		session.setAttribute("patient", patient);
-		//Get staff from 
-		Staff selectedStaff = patientAppointment.getStaff();
-		patientAppointmentUpdate.setStaff(selectedStaff);
-		appointmentService.updateAppointment(patientAppointmentUpdate);
 		
-		//Update Schedule
-		Schedule newSchedule = new Schedule();
-		newSchedule.setDate(patientAppointmentUpdate.getDate());
-		newSchedule.setTime_start(patientAppointmentUpdate.getTime());
-		newSchedule.setTime_end(patientAppointmentUpdate.getTime().plusMinutes(30));
-		newSchedule.setStaff(selectedStaff);
-		scheduleService.createShedule(newSchedule);
+		//Get patient medical condition
+		String medCondition = (String)session.getAttribute("medicalCondition");
+		
+		//Get department
+		Department department = (Department)session.getAttribute("department");
+		
+		//Get patient Appointment
+		Appointment patientAppointmentUpdate = newAppointment;
+		Patient patient = (Patient) session.getAttribute("patient");
+		
+		//Get staff from 
+		Staff selectedStaff = newAppointment.getStaff();
+		int staffId = selectedStaff.getId();
+		System.out.println("Selected Staff Id: " + staffId);
+		
+		//Get selected time
+		LocalTime selectedTime = newAppointment.getTime();
+		System.out.println("Selected Time: " + selectedTime);
+		
+		//Get selected date
+		LocalDate selectedDate = newAppointment.getDate();
+		
+		//Check doctor availability 
+		//Check Slot number by staff and by morning or afternoon
+		LocalTime morning = LocalTime.of(8, 0);
+		LocalTime afternoon = LocalTime.of(14, 0);
+		System.out.println("Morning Time: " + morning);
+		System.out.println("Afternoon Time: " + afternoon);
+		
+		int morningSlots = 0;
+		int afternoonSlots = 0;
+		
+		//Check if date available, if not available check slots
+		List<Schedule> selectedStaffSchedule = scheduleService.findSchedulesByStaff(staffId);
+		
+		boolean dateAvailable = false;
+		
+		for(Schedule sched : selectedStaffSchedule) {
+			LocalDate scheduleDate = sched.getDate();
+			if(!scheduleDate.equals(selectedDate)) {
+				dateAvailable = true;
+			}else if(scheduleDate.equals(selectedDate)) {
+				dateAvailable = false;
+			}
+		}
+		
+		if(dateAvailable) {
+			System.out.println("Date Available: " + dateAvailable);
+			//addAppointment			
+			patientAppointmentUpdate.setDate(selectedDate);
+			patientAppointmentUpdate.setTime(selectedTime);
+			patientAppointmentUpdate.setQueue_number(afternoonSlots);
+			patientAppointmentUpdate.setStatus(AppointmentStatusEnum.Proceeding);
+			patientAppointmentUpdate.setStaff(selectedStaff);
+			patientAppointmentUpdate.setPatient(patient);
+			patientAppointmentUpdate.setDepartment(department);
+			patientAppointmentUpdate.setQueue_number(1 + staffId);
+			//Save appointment
+			appointmentService.createAppointment(patientAppointmentUpdate);
+			
+			//Update patient medical condition
+			patient.setMedical_condition(medCondition);
+			patientService.updatePatient((Integer)session.getAttribute("patientId"), patient);
+			
+			//update schedule
+			Schedule newSchedule = new Schedule();
+			newSchedule.setDate(selectedDate);
+			newSchedule.setTime_start(patientAppointmentUpdate.getTime());
+			newSchedule.setTime_end(patientAppointmentUpdate.getTime().plusMinutes(210));
+			newSchedule.setStaff(selectedStaff);
+			newSchedule.setPatient_slot(1);
+			scheduleService.createShedule(newSchedule);
+			
+		}else if(!dateAvailable) {
+			boolean staffAvailable = false;
+			System.out.println("selectedDate: " + selectedDate);
+			
+			if(selectedTime.equals(morning)) {
+				morningSlots = scheduleService.findMaxPatientSlotByTimeStart(morning, staffId, selectedDate);
+				if(morningSlots < 20 ) {
+					staffAvailable = true;
+				}
+				
+			} else if(selectedTime.equals(afternoon)) {
+				afternoonSlots = scheduleService.findMaxPatientSlotByTimeStart(afternoon, staffId, selectedDate);
+				if(afternoonSlots < 20 ) {
+					staffAvailable = true;
+				}
+			}
+			
+			System.out.println("staffAvailable? " + staffAvailable);
+			System.out.println("morningSlots: " + morningSlots);
+			System.out.println("afternoonSlots: " + afternoonSlots);
+			if(staffAvailable) {
+				//Get slot max
+				int slot = 0;
+				if(selectedTime.equals(morning)) {
+					slot = morningSlots + 1;
+				}else if(selectedTime.equals(afternoon)) {
+					slot = afternoonSlots + 1;
+				}
+				//Add appointment
+				patientAppointmentUpdate.setDate(selectedDate);
+				patientAppointmentUpdate.setTime(selectedTime);
+				patientAppointmentUpdate.setQueue_number(afternoonSlots);
+				patientAppointmentUpdate.setStatus(AppointmentStatusEnum.Proceeding);
+				patientAppointmentUpdate.setStaff(selectedStaff);
+				patientAppointmentUpdate.setPatient(patient);
+				patientAppointmentUpdate.setDepartment(department);
+				patientAppointmentUpdate.setQueue_number(slot + staffId);
+				//Save appointment
+				appointmentService.createAppointment(patientAppointmentUpdate);
+				
+				//Update patient medical condition
+				patient.setMedical_condition(medCondition);
+				patientService.updatePatient((Integer)session.getAttribute("patientId"), patient);
+				
+				//update schedule
+				Schedule newSchedule = new Schedule();
+				newSchedule.setDate(selectedDate);
+				newSchedule.setTime_start(patientAppointmentUpdate.getTime());
+				newSchedule.setTime_end(patientAppointmentUpdate.getTime().plusMinutes(210));
+				newSchedule.setStaff(selectedStaff);
+				newSchedule.setPatient_slot(slot);
+				scheduleService.createShedule(newSchedule);
+				
+				//Send Server response
+				response.setStatus(HttpServletResponse.SC_CREATED);
+				model.addAttribute("successMessage", "Appointment Succesful!"); 
+			}else if(!staffAvailable) {
+				//TODO:redirect back to makeAppointment
+				response.setStatus(HttpServletResponse.SC_CONFLICT);
+				List<Staff> availableStaff = staffService.findStaffByDepartmentId(department.getId());
+				model.addAttribute("departmentStaff",availableStaff);
+				model.addAttribute("newAppointment", new Appointment());
+				model.addAttribute("prediction", session.getAttribute("prediction"));
+				model.addAttribute("patientSymptoms", session.getAttribute("symptomString"));
+				System.out.println("DepartmentStaff:" + availableStaff);
+				model.addAttribute("alertMessage", "No staff available! Please choose another time slot or staff"); 
+				return "makeAppointment";
+			}
+		}
 		
 		//TODO:Alert window when updateAppointment is successful
 		return "redirect:patient/" + patientId;
+		
 		
 	}
 	

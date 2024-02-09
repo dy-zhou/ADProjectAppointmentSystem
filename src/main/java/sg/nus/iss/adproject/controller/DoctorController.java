@@ -123,6 +123,7 @@ public class DoctorController {
 		return "homePage_Doctor";
 	}
 
+
 	// after login ,get this doctor's feedback
 	@GetMapping("/FeedbackDetails")
 	public String showDoctorFeedbacks(Model model, HttpSession sessionObj) {
@@ -236,7 +237,6 @@ public class DoctorController {
     }
 
 }
-
 
 
 

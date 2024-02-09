@@ -1,5 +1,7 @@
 package sg.nus.iss.adproject.service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +63,12 @@ public class ScheduleServiceImpl implements ScheduleService{
 	public void deleteSchedule(int id) {
 		// TODO Auto-generated method stub
 		scheduleRepository.deleteById(id);
+	}
+
+	@Override
+	public Integer findMaxPatientSlotByTimeStart(LocalTime timeStart, int staffId,
+			LocalDate date) {
+		return scheduleRepository.findMaxPatientSlotByTimeStart(timeStart, staffId, date);
 	}
 
 }
