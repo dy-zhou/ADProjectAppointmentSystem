@@ -2,7 +2,9 @@ package sg.nus.iss.adproject.controller;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.OptionalDouble;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +67,16 @@ public class ManagerController {
 		// add this for doctor list
 		List<Staff> doctors = staffService.findAllDoctors();
 		model.addAttribute("doctors", doctors);
+		
+		//this to show average score
+		Map<Integer, Double> doctorAverageScores = new HashMap<>();
+		for (Staff doctor : doctors) {
+		    List<Feedback> doctorFeedbackList = feedbackService.findFeedbacksByStaffId(doctor.getId());
+		    double averageScore = calculateAverageFeedbackScore(doctorFeedbackList);
+		    doctorAverageScores.put(doctor.getId(), averageScore);
+		}
+		model.addAttribute("doctorAverageScores", doctorAverageScores);
+		
 
 		return "homePage_Manager";
 	}
