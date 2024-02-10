@@ -32,6 +32,7 @@
 
 		th {
 			background-color: #f2f2f2;
+			text-align: center; 
 		}
 
 		tr:nth-child(even) {
@@ -52,25 +53,42 @@
 		a:hover {
 			background-color: #0056b3;
 		}
+
+		th:not(:nth-child(2)),
+		td:not(:nth-child(2)) {
+			text-align: center;
+			vertical-align: middle;
+		}
 	</style>
 </head>
 
 <body>
 	<h2>All Feedbacks</h2>
-	<table>
+	<table id="feedbackTable">
 		<thead>
 			<tr>
 				<th>ID</th>
 				<th>Description</th>
+				<th>
+					<div style="display: flex; align-items: center;">
+						Score&nbsp;
+						<select id="scoreDropdown">
+							<option value="highToLow">High to Low</option>
+							<option value="lowToHigh">Low to High</option>
+						</select>
+					</div>
+				</th>
 				<th>Doctor Id</th>
 				<th>Doctor Name</th>
 				<th>Department Name</th>
+				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="feedback,iterStat : ${feedbackList}">
 				<td th:text="${iterStat.index + 1}"></td>
 				<td th:text="${feedback.description}"></td>
+				<td th:text="${feedback.score}"></td>
 				<td th:text="${feedback.appointment.staff.id}"></td>
 				<td th:text="${feedback.appointment.staff.name}"></td>
 				<td th:text="${feedback.appointment.staff.department.name}"></td>
@@ -83,6 +101,26 @@
 			</tr>
 		</tbody>
 	</table>
+	<script>
+		var feedbackTable = document.getElementById('feedbackTable');
+		var rows = Array.from(feedbackTable.querySelectorAll('tbody tr'));
+		var scoreDropdown = document.getElementById('scoreDropdown');
+
+		scoreDropdown.addEventListener('change', function () {
+			var sortOrder = scoreDropdown.value === 'lowToHigh' ? 'asc' : 'desc';
+
+			rows.sort(function (rowA, rowB) {
+				var scoreA = parseFloat(rowA.cells[2].textContent);
+				var scoreB = parseFloat(rowB.cells[2].textContent);
+				return sortOrder === 'asc' ? scoreA - scoreB : scoreB - scoreA;
+			});
+
+			rows.forEach(function (row, index) {
+				row.cells[0].textContent = index + 1;
+				feedbackTable.querySelector('tbody').appendChild(row);
+			});
+		});
+	</script>
 	<a href="/Manager">Back To Home Page</a>
 </body>
 

@@ -123,6 +123,8 @@ public class ManagerController {
 		model.addAttribute("doctorFeedbackList", doctorFeedbackList);
 		// show which doctor's feedback
 		model.addAttribute("staffName", staffName);
+		model.addAttribute("staffId", staffId);
+
 
 		// add this
 		model.addAttribute("allFeedbackComments", allFeedbackComments);
