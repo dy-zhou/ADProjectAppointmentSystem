@@ -73,9 +73,49 @@
 		}
 
 		.card p span.average-score {
-			font-size: 20px;
+			font-size: 50px;
 			float: right;
-			margin-top: 10px;
+			margin-top: -55px;
+			margin-right: 35px;
+		}
+
+		.search-container {
+			position: relative;
+			text-align: right;
+			margin-top: 30px;
+			margin-right: 20px;
+			margin-left: -6cm;
+			color: #333;
+		}
+
+		.search-container a {
+			color: #007bff;
+		}
+
+		.search-container a:hover {
+			color: #0056b3;
+		}
+
+		.feedback-button {
+			padding: 10px 20px;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			text-decoration: none;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			vertical-align: top;
+		}
+
+		.feedback-button:hover {
+			background-color: #0056b3;
+		}
+
+		.right-offset {
+			position: relative;
+			right: 4cm;
+			padding: 20px;
 		}
 	</style>
 </head>
@@ -88,23 +128,22 @@
 			<img class="user-image" src="" alt="user imgae">
 			<a href="/login">Logout</a>
 		</div>
-		<form action="/Manager/doctorFeedbacks" method="get">
-			<input type="text" name="id" placeholder="Search by ID">
-			<button type="submit">Search By Doctor Id</button>
-		</form>
 	</header>
-
 	<div>
-		<h5>Appointment</h5>
-		<div>
-			<table>
-				<th></th>
-			</table>
+		<h2 style="margin-top: 0;">List of Doctors</h2>
+		<div class="right-offset" style="margin-top: -10px;">
+			<div class="search-container" style="margin-top: -10px;">
+				<form action="/Manager/doctorFeedbacks" method="get">
+					<input type="text" name="id" placeholder="Search by Doctor ID">
+					<button type="submit">Search</button>
+				</form>
+				<br>
+				<a href="/Manager/allFeedbacks">Manage Feedbacks</a>
+			</div>
 		</div>
-	</div>
-
-	<div>
-		<h2>List of Doctors</h2>
+		<div>
+			<br>
+		</div>
 		<div class="department-container">
 			<div class="department" th:each="department : ${departments}">
 				<h4 th:text="${department.name}"></h4>
@@ -117,9 +156,8 @@
 								Doctor ID: <span th:text="${doctor.id}"></span><br>
 								Room: <span
 									th:text="${doctor.room != null ? doctor.room.name : 'No room assigned'}"></span><br>
-
-								</span>
-								<a th:href="@{/Manager/doctorFeedbacks(id=${doctor.id})}" th:text="Details"></a>
+								<span class="average-score" th:text="${doctorAverageScores[doctor.id]}"></span><br>
+								<a th:href="@{/Manager/doctorFeedbacks(id=*{doctor.id})}" th:text="Details"></a>
 							</p>
 						</div>
 					</div>
@@ -128,9 +166,6 @@
 		</div>
 	</div>
 
-	<a href="/Manager/allFeedbacks">Feedback List</a>
-
-	<h1>Home Page Manager</h1>
 
 </body>
 

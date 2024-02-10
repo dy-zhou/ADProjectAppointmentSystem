@@ -141,6 +141,7 @@ public class DoctorController {
 		// add this for average score
 		String allFeedbackComments = feedbackService.getAllFeedbackDescriptionsByStaffId(staffId);
 
+		model.addAttribute("staffId",staffId);
 		model.addAttribute("staffName", staffName);
 		model.addAttribute("doctorFeedbackList", doctorFeedbackList);
 		model.addAttribute("department", department);
