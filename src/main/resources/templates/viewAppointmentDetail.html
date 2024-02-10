@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient List</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
@@ -96,31 +97,33 @@
 			<a href="/login">Logout</a></div>
         <div>Patient information | Home | My profile</div>
     </header>
-<form th:action="@{/Doctor/AppointmentDetails}" method="post">
+    <div>
+<form th:action="@{/Doctor/AppointmentDetails}" method="post" style="padding: 20px;">
         <label for="datepicker">Choose a date:</label>
         <input type="date" id="datepicker" name="datepicker">
-        <input type="submit" value="Submit" >
+        <input 	type="submit" value="Submit" >
     </form>
+    </div>
     <h2 class="patient-list-title">Appointment List</h2>
     <p> appointments</p>
 
     <div class="patient-card" th:each="appointment:${AppointmentList}">
-        <img src="path-to-tom-image.jpg" alt="Tom" width="50" height="50">
+        <img src="path-to-tom-image.jpg" alt="Tom" width="80" height="50">
         <div>
-            <p th:text="${appointment.patient.name}"><strong>Patient Name:</strong></p>
-             <p th:text="${appointment.patient.id}"><strong>Patient ID:</strong></p>
-            <p>Appointment Time:<label th:text="${appointment.time}"></label></p>
-            <p>Address:<label th:text="${appointment.patient.address}"></label></p>
-            <p>Gender:<label th:text="${appointment.patient.sex}"></label></p>
-            <p>Allergy:<label th:text="${appointment.patient.allergy}"></label></p>
-            <p>Medical Condition:<label th:text="${appointment.patient. medical_condition}"></label></p>
-             <p>Addtional info: <label th:text="${appointment.patient.additional_info}"></label></p>
+            <p style="font-weight: bolder;">Patient Name:	<label style="font-weight: normal;"  th:text="${appointment.patient.name}"></label></p>
+             <p style="font-weight: bolder;">Patient ID:	<label style="font-weight: normal;"   th:text="${appointment.patient.id}"></label></p>
+            <p style="font-weight: bolder;">Appointment Time:	<label style="font-weight: normal;" th:text="${appointment.time}"></label></p>
+            <p style="font-weight: bolder;">Address:	<label style="font-weight: normal;" th:text="${appointment.patient.address}"></label></pstyle="font-weight: bolder;">
+            <p style="font-weight: bolder;">Gender:	<label style="font-weight: normal;" th:text="${appointment.patient.sex}"></label></p>
+            <p style="font-weight: bolder;">Allergy:	<label style="font-weight: normal;" th:text="${appointment.patient.allergy}"></label></p>
+            <p style="font-weight: bolder;">Medical Condition:	<label style="font-weight: normal;" th:text="${appointment.patient. medical_condition}"></label></p>
+             <p style="font-weight: bolder;">Addtional info:	<label style="font-weight: normal;" th:text="${appointment.patient.additional_info}"></label></p>
              <a type="button"  class="btn btn-outline-secondary" th:href="@{/Doctor/EditAppointmentDetails/}+${appointment.id}">Detail</a>
         </div>
     </div>
 
     
 
-    <aside class="queue">
+    <!----><aside class="queue">
        
 

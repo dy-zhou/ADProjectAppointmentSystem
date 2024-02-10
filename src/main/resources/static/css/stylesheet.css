@@ -1,0 +1,1072 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* 确保导航条占据整个容器宽度 */
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2); /* 添加水平和垂直偏移的阴影，以及模糊距离和颜色 */
+  padding-bottom:25px;
+  padding-top: 15px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+.logo img{
+	max-width: 100%;
+	height: auto;
+}
+.slogan{
+	flex:1;
+	text-align: center;
+}
+.user-info{
+	flex:1;
+	text-align: right;
+}
+
+
+
+.log-card{
+  width:100px;
+  height:30px;
+  border-radius: 8px;
+  background-color: #4CAF50;
+  border: 1px solid #ccc; /* 浅灰色边框 */
+  padding:5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right:20px; 
+}
+
+
+.link-container{
+	display:inline-block;
+}
+
+
+
+.hospital-photo{
+  width: 30px; /* 图片宽度 */
+  height: 30px; /* 图片高度 */
+  border-radius: 50%; /* 圆形图片 */
+  margin-right: auto; /* 将头像推到左边 */
+
+
+}
+.user-photo{
+  width: 30px; /* 图片宽度 */
+  height: 30px; /* 图片高度 */
+  border-radius: 50%; /* 圆形图片 */
+  margin-right: 10px; /* 图片与文本之间的距离 */
+  margin-left:240px;
+margin-right: 30px;
+}
+
+
+
+
+/* 导航栏样式 */
+.navbar a {
+  float: left;
+  display: block;
+  color: rgb(19, 18, 18);
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+/* 右侧链接*/
+.navbar a.right {
+  float: right;
+}
+
+/* 鼠标移动到链接的颜色 */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 4px #fff(0, 0, 0, 0.1);
+  justify-content:center;
+  margin-top:20px;
+}
+.header.h1{
+ color: #fff;
+}
+
+
+.patient-card-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.patient-card {
+  background: #b2ebf2;
+  border-radius: 8px;
+  width: 600px; /* Adjust the width as needed */
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.patient-card h2, .patient-card p {
+  font-size: 24px; /* Larger font size for better visibility */
+  color: #00796b;
+  margin: 5px 0;
+}
+
+.patient-card img {
+  max-width: 100%;
+  border-radius: 50%;
+}
+
+.patient-card p {
+  display: block;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background: #fff;
+  padding: 20px 0;
+  position: relative;
+  margin: 20px 0;
+  font-size: 0; /* 移除内联块元素间的空隙 */
+  white-space: nowrap; /* 防止因换行而产生的空隙 */
+}
+
+.step {
+  background: #ffffff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  border: 5px solid #bee5d6; /* 浅灰色边框 */
+}
+.step p{
+  color:#666;
+  font-weight: bold;
+  font-size: large;
+}
+.step11 p{
+  color:#fff;
+  font-weight: bold;
+  font-size: large;
+}
+.step1 p{
+  color:#fff;
+  font-weight: bold;
+  font-size: large;
+}
+.step1 {
+  background: #3ca983;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  border: 5px solid #bee5d6; /* 浅灰色边框 */
+}
+.step11 {
+  background: #3ca983;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  margin-left: 50px;
+  border: 5px solid #bee5d6; /* 浅灰色边框 */
+}
+.step1 {
+  background: #3ca983;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  border: 5px solid #bee5d6; /* 浅灰色边框 */
+}.step22 {
+  background: #fff;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  margin-right: 50px;
+  border: 5px solid #bee5d6; /* 浅灰色边框 */
+}
+.step22 p{
+  color:#666;
+  font-weight: bold;
+  font-size: large;
+}
+
+.connector1 {
+  background: #3ca983; /* Connectors are white by default */
+  height: 20px; /* Thickness of the connector */
+  flex-grow: 1;
+  position: relative;
+  margin:0;
+  z-index: 0;
+  border: 5px solid #bee5d6; /* 浅灰色边框 */
+}
+
+.connector {
+  background: #bee5d6; /* Connectors are white by default */
+  height: 20px; /* Thickness of the connector */
+  flex-grow: 1;
+  position: relative;
+  z-index: 0;
+  border: 5px solid #bee5d6; /* 浅灰色边框 */
+}
+.step, .step1, .step11, .step22 {
+  position: relative; /* z-index要生效，需要设置定位属性 */
+  z-index: 2; /* 设置步骤元素位于连接器的上层 */
+  /* 其他样式保持不变 */
+}
+
+.connector, .connector1 {
+  position: relative; /* 如果还没有定位属性，需要添加 */
+  z-index: 1; /* 确保连接器位于步骤元素的下层 */
+  margin-left: -10px; /* 负值margin使步骤元素覆盖连接器的左侧部分 */
+  margin-right: -10px; /* 负值margin使步骤元素覆盖连接器的右侧部分 */
+  /* 其他样式保持不变 */
+}
+
+
+.choose-button {
+  display: block;
+  width: 40%; /* Adjust width as needed */
+  padding: 10px; /* Adjust padding to fit design */
+  background-color: #4CAF50; /* Bootstrap primary button color for example */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Additional styling if needed */
+/* 只对 class="custom-style" 内的元素应用 */
+.custom-style input[type=text],
+.custom-style select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.custom-style div {
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 20px;
+}
+.feedback-card{
+  background-color: #99d0c5; /* 灰色背景 */
+  border: 5px solid #ccc; /* 浅灰色边框 */
+  padding: 0px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 1600px; /* 卡片宽度 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  display: flex; /* 使用 Flex 布局 */
+  align-items: center; /* 垂直居中 */
+}
+.card1{
+  background-color: #ccc;
+  border: 5px solid #71c580; /* 浅灰色边框 */
+  width:300px;
+  height:150px;
+
+  border-radius: 8px; /* 圆角边框 */
+}
+.card2{
+  background-color: #a1dccb;
+  border: 5px solid #71c580; /* 浅灰色边框 */
+  width:1300px;
+  height:200px;
+  margin-left: 100px;
+  border-radius: 8px; /* 圆角边框 */
+  position: relative; 
+}
+
+.step2 {
+  background: #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute; /* 绝对定位 */
+  top: 5px; /* 距离父容器顶部的距离 */
+  margin-left:770px
+}
+.step3{
+  background: #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute; /* 绝对定位 */
+  top: 5px; /* 距离父容器顶部的距离 */
+  margin-left:820px
+}
+.step4 {
+  background: #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute; /* 绝对定位 */
+  top: 5px; /* 距离父容器顶部的距离 */
+  margin-left:870px
+}
+.step5 {
+  background: #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute; /* 绝对定位 */
+  top: 55px; /* 距离父容器顶部的距离 */
+  margin-left:770px
+}
+.step6{
+  background: #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute; /* 绝对定位 */
+  top: 55px; /* 距离父容器顶部的距离 */
+  margin-left:820px
+}
+.step7 {
+  background: #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute; /* 绝对定位 */
+  top: 105px; /* 距离父容器顶部的距离 */
+  margin-left:770px
+}
+.feedback-card2{
+  background-color: #99d0c5; /* 灰色背景 */
+  border: 5px solid #ccc; /* 浅灰色边框 */
+  padding: 0px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 1600px; /* 卡片宽度 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  align-items: center; /* 垂直居中 */
+  display: block; /* 或者其他显示属性，如 flex 或 inline-block */
+  min-height: 100px; /* 给一个最小高度 */
+  background-color: #f2f2f2; /* 添加一个背景颜色，以便在没有内容时也可见 */
+  margin-top: 40px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+  margin-bottom: 100px;
+}
+
+.feedback, .todo {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.feedback h2, .todo h2 {
+  margin-top: 0;
+}
+
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #e9e9e9;
+}
+body, h1, p {
+  margin: 0;
+  padding: 0;
+}
+.list-card{
+  background-color: #a2f1d1; /* 灰色背景 */
+  border: 1px solid #ccc; /* 浅灰色边框 */
+  padding: 3px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 500px; /* 卡片宽度 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  display: flex; /* 使用 Flex 布局 */
+  align-items: center; /* 垂直居中 */
+  margin:3px 3px;
+  cursor: move; /* 表示该元素是可以移动的 */
+
+}
+
+.vertical-menu {
+  width: 700px;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.vertical-menu a {
+  background-color: #eee;
+  color: black;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc;
+}
+
+.vertical-menu a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.patient-list, .filter-section {
+  width: 48%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.patient-list h2, .filter-section h2 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.patient {
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.filter {
+  margin-bottom: 20px;
+}
+
+.filter h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.filter label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.filter input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.button {
+  width: 100%;
+  padding: 10px 20px;
+  background: #ddd;
+  color: #333;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background: #ccc;
+}
+.title-card{
+  background-color: #99d0c5; /* 灰色背景 */
+  border: 5px solid #ccc; /* 浅灰色边框 */
+  padding: 0px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 600px; /* 卡片宽度 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  display: flex; /* 使用 Flex 布局 */
+  align-items: center; /* 垂直居中 */
+
+}
+.appointment-card {
+background-color: #f0f0f0; /* 灰色背景 */
+border: 1px solid #ccc; /* 浅灰色边框 */
+padding: 30px; /* 内边距 */
+border-radius: 8px; /* 圆角边框 */
+width: 700px; /* 卡片宽度 */
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+display: flex; /* 使用 Flex 布局 */
+align-items: center; /* 垂直居中 */
+margin:20px 30px
+}
+.DoctorList {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  height: 100vh; /* 容器高度设置为视窗的100%，这样子项可以垂直居中 */
+  text-align: center; /* 确保文本自身也居中，如果有多行文本的话 */
+}
+
+.DoctorList h1 {
+  text-align: center; /* 文本水平居中 */
+  margin: 0; /* 移除默认外边距 */
+  padding: 20px 0; /* 如果需要，添加一些内边距 */
+}
+.addnewpatient-patient-card{
+  background-color: #fff; /* 灰色背景 */
+  border: 1px solid #ccc; /* 浅灰色边框 */
+  padding: 30px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 70%; /* 卡片宽度 */
+  box-shadow: 0 2px 4px #fff(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  display: flex; /* 使用 Flex 布局 */
+  align-items: center; /* 垂直居中 */
+  height: 600px;
+  flex-direction: column;
+  text-align: center;
+  margin-left:220px;
+  margin-top:20px;
+}
+.main-content{
+  text-align: center;
+  align-items: center; /* 垂直居中 */
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.addnewpatient-patient-card img {
+  max-width: 100%;
+  height: auto;
+}
+.addnewpatient-patient-card h3,
+.addnewpatient-patient-card p {
+  margin: 10px 0; /* Adjust spacing as needed */
+}
+.buttons-container {
+  display: flex;
+  justify-content: space-between; /* This will put one button on each side */
+  width: 90%; /* Ensure the buttons container stretches to the width of the card */
+  margin-top: 50px;
+}
+.choose-button {
+  display: block;
+  width: 25%; /* Adjust width as needed */
+  padding: 10px; /* Adjust padding to fit design */
+  background-color: #4CAF50; /* Bootstrap primary button color for example */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left:100px;
+  margin-right:100px;
+}
+
+.choose-button:hover {
+  background-color: #4CAF50; /* Darker shade on hover for example */
+}
+.form-row {
+  display: flex;
+  align-items: center; /* This will vertically center align items */
+  margin-bottom: 10px; /* Add some space between the rows */
+  margin-right: 30px;
+  width:1000px;
+  background-color: #fff;
+  border: 1px solid #ccc; /* 浅灰色边框 */
+  height:30px;
+  justify-content: center; /* 水平居中 */
+  white-space: nowrap; /* 防止文本换行 *//
+}
+
+.form-row label {
+  flex: 0 0 100px; /* Adjust the width as needed */
+  margin-left: 20px; /* Add some space between the label and the input */
+  font-size: large;
+  width:300px; /* 或者根据需要调整，为标签设置固定宽度 */
+  margin-right: 10px; /* 在标签和输入框之间添加一些空间 */
+  text-align: left; /* 文字靠右，确保首字母对齐 */
+}
+
+input[type="text"],
+select {
+  flex: 1; /* This will allow the input to fill up the remaining space */
+  padding: 5px;
+  margin-right: 10px; /* If you want some space to the right of the inputs */
+  flex-grow: 1; /* 输入框和下拉列表填满剩余空间 */
+}
+.symptom-card{
+  background-color: rgb(247, 244, 244)9e9;
+  border: 5px solid #71c580; /* 浅灰色边框 */
+  width:500px;
+  height:900px;
+  margin-top: 30px;
+  margin-left: 30px;
+  flex-basis: 40%;
+  border-radius: 8px; /* 圆角边框 */
+  display: flex;
+}
+.symptom-flex{
+  display: flex;
+  justify-content: space-between; /* This will put one button on each side */
+  width: 100%; /* Ensure the buttons container stretches to the width of the card */
+  margin-top: 20px;
+}
+#drop-zone {
+  border: 2px dashed #ccc; /* 可以拖放区域的样式 */
+  min-height: 100px; /* 或者任何合适的高度 */
+}
+.buttons-container1 {
+  position: fixed; /* 或者 absolute，取决于外部容器的定位 */
+  left: 0;
+  right: 0;
+  bottom: 0; /* 定位到底部 */
+  display: flex;
+  justify-content: space-around; /* 按钮间距平均分布 */
+}
+.main-content1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-left: 0;
+  display: flex;
+  justify-content: center; /* 水平居中 */
+
+
+.title-card1{
+  background-color: #99d0c5; /* 灰色背景 */
+  border: 1px solid #ccc; /* 浅灰色边框 */
+  padding: 10px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 400px; /* 卡片宽度 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  align-items: center; /* 垂直居中 */
+  height: 50px;
+
+}
+
+.title1-card1{
+  background-color: #c2d7f5; /* 灰色背景 */
+  border: 1px solid #ccc; /* 浅灰色边框 */
+  padding: 10px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 400px; /* 卡片宽度 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  align-items: center; /* 垂直居中 */
+  height: 30px;
+
+
+}
+
+
+.appointment-section1{
+  flex: 3;
+  background-color: #fff;
+  padding: 20px;
+  margin-right: 20px;
+  border-radius: 8px;
+}
+
+.appointment-card1 {
+  background-color: #f0f0f0; /* 灰色背景 */
+  border: 1px solid #ccc; /* 浅灰色边框 */
+  padding: 30px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 700px; /* 卡片宽度 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  display: flex; /* 使用 Flex 布局 */
+  align-items: center; /* 垂直居中 */
+  margin:20px 30px
+}
+
+.patient-photo1 {
+  width: 50px; /* 图片宽度 */
+  height: 50px; /* 图片高度 */
+  border-radius: 50%; /* 圆形图片 */
+  margin-right: 10px; /* 图片与文本之间的距离 */
+}
+
+.appointment-info1 h2 {
+  margin: 0 0 5px 0; /* 为标题添加下边距 */
+  color: #333; /* 标题文字颜色 */
+}
+
+.appointment-info1 p {
+  margin: 0; /* 段落没有外边距 */
+  color: #666; /* 段落文字颜色 */
+}
+
+
+.patient-photo1 img {
+  width: 50px; /* 或者任何你想要的宽度 */
+  height: auto; /* 保持图片的宽高比 */
+  border-radius: 50%; /* 可选的，如果你想要圆形图片 */
+}
+
+.appointment-button1 {
+  background-color: #4CAF50; /* 绿色背景 */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px; /* 与卡片之间的距离 */
+}
+
+.appointment-button1:hover {
+  background-color: #45a049; /* Hover 时的背景颜色 */
+}
+
+/* 其他样式保持不变 */
+
+
+.appointment-count1 {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+  margin-bottom: 100px;
+}
+
+.feedback, .todo {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.feedback h2, .todo h2 {
+  margin-top: 0;
+}
+
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #e9e9e9;
+}
+body, h1, p {
+  margin: 0;
+  padding: 0;
+}
+.list-card1{
+  background-color: #a2f1d1; /* 灰色背景 */
+  border: 1px solid #ccc; /* 浅灰色边框 */
+  padding: 3px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 700px; /* 卡片宽度 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  display: flex; /* 使用 Flex 布局 */
+  align-items: center; /* 垂直居中 */
+  margin:3px 3px
+
+}
+/* 创建三个不相等的列 */
+.column {
+  float: left;
+  width: calc(33.33% - 40px); /* 减去外边距的宽度 */
+}
+.row {
+  display: flex;
+  justify-content: space-around; /* 在卡片之间提供均等空间 */
+}
+/* 列后面清除浮动 */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* 响应式布局 - 宽度小于600px时设置上下布局 */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+.appointment-card {
+  background-color: #f0f0f0; /* 灰色背景 */
+  border: 1px solid #ccc; /* 浅灰色边框 */
+  padding: 30px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 400px; /* 卡片宽度 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  align-items: center; /* 垂直居中 */
+  margin:10px;
+  display: flex;
+  height: 200px;
+}
+.appointment-info h2 {
+  margin: 0 0 5px 0; /* 为标题添加下边距 */
+  color: #333; /* 标题文字颜色 */
+}
+
+.appointment-info p {
+  margin: 0; /* 段落没有外边距 */
+  color: #666; /* 段落文字颜色 */
+}
+.patient-photo {
+  width: 50px; /* 图片宽度 */
+  height: 50px; /* 图片高度 */
+  border-radius: 50%; /* 圆形图片 */
+  margin-right: 10px; /* 图片与文本之间的距离 */
+}
+.patient-photo img {
+  width: 30px; /* 或者任何你想要的宽度 */
+  height: auto; /* 保持图片的宽高比 */
+  border-radius: 50%; /* 可选的，如果你想要圆形图片 */
+}
+
+.appointment-button {
+  background-color: #4CAF50; /* 绿色背景 */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px; /* 与卡片之间的距离 */
+}
+
+.appointment-button:hover {
+  background-color: #45a049; /* Hover 时的背景颜色 */
+}
+.Doctor-flex {
+  display: flex; /* 设置flex布局使元素水平排列 */
+  overflow-x: auto; /* 设置水平滚动条 */
+  white-space: nowrap; /* 防止元素换行 */
+  max-width: 100%; /* 最大宽度，根据需要调整 */
+  height:800px;
+  margin-left: 100px;
+
+}
+.appointment-card2 {
+  flex: 0 0 auto; /* 防止卡片伸缩，保持原始宽度 */
+  margin-right: 20px; /* 右侧间隔，根据需要调整 */
+  /* 根据需要添加其他样式，如边框、阴影等 */
+  background-color: #f0f0f0; /* 灰色背景 */
+  border: 1px solid #ccc; /* 浅灰色边框 */
+  padding: 30px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 400px; /* 卡片宽度 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 轻微的阴影效果 */
+  align-items: center; /* 垂直居中 */
+  margin:10px;
+  display: flex;
+  height: 500px;
+  margin-bottom: 100px;
+  margin-right: 20px;
+}
+
+
+#skill { 
+	list-style: none;
+	font: 12px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	width: 700px;
+	margin: 5px auto 0;
+	position: relative;
+	line-height: 2em;
+	padding: 30px 0;
+}
+
+#skill li { 
+	margin-bottom:10px; 
+	background:#e9e5e2;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#e1ddd9), to(#e9e5e2));
+	background-image: -webkit-linear-gradient(top, #e1ddd9, #e9e5e2);
+	background-image: -moz-linear-gradient(top, #e1ddd9, #e9e5e2);
+	background-image: -ms-linear-gradient(top, #e1ddd9, #e9e5e2);
+	background-image: -o-linear-gradient(top, #e1ddd9, #e9e5e2);
+	background-image: linear-gradient(top, #e1ddd9, #e9e5e2);  
+	height:20px; 
+	border-radius:10px; 
+	-moz-box-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;	 
+	-webkit-box-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;	 
+	box-shadow: 0 1px 0px #bebbb9 inset, 0 1px 0 #fcfcfc;	  
+}
+
+#skill li h3 { 
+	position:relative; 
+	top:-25px;
+}
+
+.bar { 
+	height:15px; 
+	margin:1px 2px;  
+	position:absolute;
+	border-radius:10px;
+	-moz-box-shadow: 0 1px 0px #fcfcfc inset, 0 1px 0 #bebbb9;
+	-webkit-box-shadow: 0 1px 0px #fcfcfc inset, 0 1px 0 #bebbb9;	 
+	box-shadow: 0 1px 0px #fcfcfc inset, 0 1px 0 #bebbb9;		
+}
+
+.graphic-design {
+	width:100%; 
+	-moz-animation:graphic-design 2s ease-out;
+	-webkit-animation:graphic-design 2s ease-out;
+	background-color: #f674a4;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f674a4), to(#e06995));
+	background-image: -webkit-linear-gradient(top, #f674a4, #e06995);
+	background-image: -moz-linear-gradient(top, #f674a4, #e06995);
+	background-image: -ms-linear-gradient(top, #f674a4, #e06995);
+	background-image: -o-linear-gradient(top, #f674a4, #e06995);
+	background-image: linear-gradient(top, #f674a4, #e06995);
+}
+
+.html-css {
+	width:90%;
+	-moz-animation:html-css 2s ease-out;
+	-webkit-animation:html-css 2s ease-out;
+	background-color: #f0bb4b;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f0bb4b), to(#d9aa44));
+	background-image: -webkit-linear-gradient(top, #f0bb4b, #d9aa44);
+	background-image: -moz-linear-gradient(top, #f0bb4b, #d9aa44);
+	background-image: -ms-linear-gradient(top, #f0bb4b, #d9aa44);
+	background-image: -o-linear-gradient(top, #f0bb4b, #d9aa44);
+	background-image: linear-gradient(top, #f0bb4b, #d9aa44);
+}
+
+.jquery {
+	width:65%;
+	-moz-animation:jquery 2s ease-out;
+	-webkit-animation:jquery 2s ease-out;
+	background-color: #a1ce5b;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#a1ce5b), to(#91ba52));
+	background-image: -webkit-linear-gradient(top, #a1ce5b, #91ba52);
+	background-image: -moz-linear-gradient(top, #a1ce5b, #91ba52);
+	background-image: -ms-linear-gradient(top, #a1ce5b, #91ba52);
+	background-image: -o-linear-gradient(top, #a1ce5b, #91ba52);
+	background-image: linear-gradient(top, #a1ce5b, #91ba52);
+}
+
+.wordpress {
+	width:80%;
+	-moz-animation:wordpress 2s ease-out;
+	-webkit-animation:wordpress 2s ease-out;
+	background-color: #66b3cc;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#66b3cc), to(#5da3ba));
+	background-image: -webkit-linear-gradient(top, #66b3cc, #5da3ba);
+	background-image: -moz-linear-gradient(top, #66b3cc, #5da3ba);
+	background-image: -ms-linear-gradient(top, #66b3cc, #5da3ba);
+	background-image: -o-linear-gradient(top, #66b3cc, #5da3ba);
+	background-image: linear-gradient(top, #66b3cc, #5da3ba)	
+}
+
+@-moz-keyframes graphic-design {0%  { width:0px;} 100%{ width:100%;}  }
+@-moz-keyframes html-css        { 0%  { width:0px;} 100%{ width:90%;}  }
+@-moz-keyframes jquery      { 0%  { width:0px;} 100%{ width:65%;}  }
+@-moz-keyframes wordpress   { 0%  { width:0px;} 100%{ width:80%;}  }
+
+@-webkit-keyframes graphic-design       { 0%  { width:0px;} 100%{ width:100%;}  }
+@-webkit-keyframes html-css        { 0%  { width:0px;} 100%{ width:90%;}  }
+@-webkit-keyframes jquery      { 0%  { width:0px;} 100%{ width:65%;}  }
+@-webkit-keyframes wordpress   { 0%  { width:0px;} 100%{ width:80%;}  }
+
+/* 弹出窗口的样式 */
+.modal {
+  display: none; /* 默认隐藏 */
+  position: fixed; /* 固定定位 */
+  z-index: 1; /* 置于顶层 */
+  left: 0;
+  top: 0;
+  width: 100%; /* 全屏宽 */
+  height: 100%; /* 全屏高 */
+  overflow: auto; /* 超出部分滚动 */
+  background-color: rgb(0,0,0); /* 背景颜色 */
+  background-color: rgba(0,0,0,0.4); /* 背景颜色，略透明 */
+}
+
+/* 弹出内容的样式 */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 位于屏幕中央 */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* 宽度 */
+}
+
+/* 关闭按钮的样式 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.alphabet-list {
+  padding-left: 20px; /* 或根据需要调整 */
+  display: flex;
+  flex-direction: column; /* 垂直排列字母 */
+  justify-content: center; /* 居中对齐 */
+  height: 100%; /* 与症状列表相同的高度 */
+  margin-left: 20px;
+}
+
+.alphabet-list ul {
+  list-style: none; /* 移除默认的列表样式 */
+  padding: 0;
+}
+
+.alphabet-list li {
+  padding: 5px; /* 字母之间的间距，根据需要调整 */
+  cursor: pointer; /* 鼠标悬停时显示指针 */
+  cursor: pointer; /* 添加鼠标指针效果 */
+  margin: 2px 0; /* 添加一些垂直间距 */
+}
+.symptom-list {
+  /* 现有的样式保持不变，确保这个容器不会被flexbox拉伸或压缩 */
+  flex-grow: 1;
+}
+}

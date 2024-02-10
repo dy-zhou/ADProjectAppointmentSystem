@@ -84,7 +84,7 @@ public class NurseController {
 	}
 //make/view/ appointment
 
-	@GetMapping
+	@GetMapping("")
 	public String showDashboard(Model model) {
 		List<Appointment> appointmentList = appointmentService.findAllAppointments();
 		List<Feedback> feedbackList = feedbackService.findAllFeedbacks();
