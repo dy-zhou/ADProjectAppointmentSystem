@@ -123,6 +123,7 @@ public class DoctorController {
 		return "homePage_Doctor";
 	}
 
+
 	// after login ,get this doctor's feedback
 	@GetMapping("/FeedbackDetails")
 	public String showDoctorFeedbacks(Model model, HttpSession sessionObj) {
@@ -140,6 +141,7 @@ public class DoctorController {
 		// add this for average score
 		String allFeedbackComments = feedbackService.getAllFeedbackDescriptionsByStaffId(staffId);
 
+		model.addAttribute("staffId",staffId);
 		model.addAttribute("staffName", staffName);
 		model.addAttribute("doctorFeedbackList", doctorFeedbackList);
 		model.addAttribute("department", department);
@@ -236,7 +238,6 @@ public class DoctorController {
     }
 
 }
-
 
 
 

@@ -12,18 +12,18 @@
 			background-color: #f4f4f4;
 		}
 
-		h2 {
+		h1 {
 			color: #333;
 			text-align: center;
 			margin-top: 20px;
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 		}
 
 		h3 {
 			color: #333;
 			text-align: center;
-			margin-top: 20px;
-			margin-bottom: 20px;
+			margin-top: -10px;
+			margin-bottom: 0px;
 		}
 
 		table {
@@ -41,10 +41,18 @@
 
 		th {
 			background-color: #f2f2f2;
+			text-align: center;
 		}
+
 
 		tr:nth-child(even) {
 			background-color: #f9f9f9;
+		}
+
+		th:not(:nth-child(2)),
+		td:not(:nth-child(2)) {
+			text-align: center;
+			vertical-align: middle;
 		}
 
 		a {
@@ -82,41 +90,91 @@
 		.back-button:hover {
 			background-color: #0056b3;
 		}
+
+		.card {
+			background-color: white;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			margin: 10px auto;
+			padding: 20px;
+			border-radius: 8px;
+			width: 70%;
+			text-align: left;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.card-left,
+		.card-right {
+			width: 48%;
+		}
+
+		.card p {
+			color: #666;
+			margin-bottom: 4px;
+		}
+
+		.keywords-container {
+			justify-content: flex-start;
+			align-items: flex-start;
+			margin-left: 10px;
+		}
 	</style>
 </head>
-<div
-	style="position: relative; width: 60%; margin: 0 auto; padding: 20px; background-color: #bfefff; border: 1px solid #5b9bd5; border-radius: 10px;">
-	<h3>Keywords:</h3>
-	<ul style="list-style-type: none; padding: 0;">
-		<li th:each="keyword, iterStat : ${keywords}"
-			style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 14px; color: #333; position: relative;">
-			<span th:text="${keyword}" style="display: block; padding-left: 30px;"></span>
-			<span
-				style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-weight: bold; color: #888;">[[${iterStat.index
-				+ 1}]]</span>
-
-		</li>
-	</ul>
-
-	<div style="position: absolute; top: 20px; right: 40px; height: 100%; display: flex; align-items: center;">
-		<p style="margin: 0; font-size: 90px;"><span th:text="${averageScore}"></span></p>
-	</div>
-
-</div>
-
-
-
-
-
 
 <body>
-	<h2><span th:text="${department.name}"></span></h2>
-	<h2>Feedbacks For <span th:text="${staffName}"></span></h2>
-	<table>
+
+	<h1><span th:text="${staffName}"></span></h1>
+
+	<div style="display: flex;">
+		<div class="card"
+			style="width: 150px; height: 150px; display: flex; justify-content: center; align-items: center;">
+			<div style="text-align: center;margin-top: -10px;">
+				<p>Average Score</p>
+				<p><span th:text="${averageScore}" style="display: inline-block;font-size: 80px;"></span></p>
+			</div>
+		</div>
+		<div class="card">
+    <div class="card" style="width: auto; height: 100px; display: flex; justify-content: center; align-items: center; padding: 10px;">
+        <div style="text-align: center;">
+            <p>Doctor ID:<span th:text="${staffId}"></span></p>
+            <p><span th:text="${department.name}"></span></p>
+        </div>
+    </div>
+    <div class="card-left keywords-container" style="height:150px; width: calc(100% - 250px);"> 
+    <h3>Keywords:</h3>
+    <div style="display: flex; justify-content: space-between;">
+        <ul style="list-style-type: none; padding: 0; margin-right: 100px;"> 
+            <li th:each="keyword, iterStat : ${keywords.subList(0, 5)}" style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 14px; color: #333; position: relative;">
+                <span th:text="${iterStat.index + 1}"></span>. <span th:text="${keyword}"></span>
+            </li>
+        </ul>
+        <ul style="list-style-type: none; padding: 0;margin-left: -100px;">
+            <li th:each="keyword, iterStat : ${keywords.subList(5, keywords.size())}" style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 14px; color: #333; position: relative;">
+                <span th:text="${iterStat.index + 6}"></span>. <span th:text="${keyword}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+
+	</div>
+	</div>
+
+	<table id="feedbackTable">
 		<thead>
 			<tr>
 				<th>ID</th>
 				<th>Description</th>
+				<th>
+					<div style="display: flex; align-items: center;">
+						Score&nbsp;
+						<select id="scoreDropdown">
+							<option value="highToLow">High to Low</option>
+							<option value="lowToHigh">Low to High</option>
+						</select>
+					</div>
+				</th>
 				<th th:if="${session.designation == 'manager'}">Doctor Id</th>
 				<th th:if="${session.designation == 'manager'}">Doctor Name</th>
 			</tr>
@@ -125,12 +183,33 @@
 			<tr th:each="feedback, iterStat : ${doctorFeedbackList}">
 				<td th:text="${iterStat.index + 1}"></td>
 				<td th:text="${feedback.description}"></td>
+				<td th:text="${feedback.score}"></td>
 				<td th:if="${session.designation == 'manager'}" th:text="${feedback.appointments.staffs.id}"></td>
 				<td th:if="${session.designation == 'manager'}" th:text="${feedback.appointments.staffs.name}"></td>
 			</tr>
 		</tbody>
 	</table>
 
+	<script>
+		var feedbackTable = document.getElementById('feedbackTable');
+		var rows = Array.from(feedbackTable.querySelectorAll('tbody tr'));
+		var scoreDropdown = document.getElementById('scoreDropdown');
+
+		scoreDropdown.addEventListener('change', function () {
+			var sortOrder = scoreDropdown.value === 'highToLow' ? 'desc' : 'asc';
+
+			rows.sort(function (rowA, rowB) {
+				var scoreA = parseFloat(rowA.cells[2].textContent);
+				var scoreB = parseFloat(rowB.cells[2].textContent);
+				return sortOrder === 'asc' ? scoreA - scoreB : scoreB - scoreA;
+			});
+
+			rows.forEach(function (row, index) {
+				row.cells[0].textContent = index + 1;
+				feedbackTable.querySelector('tbody').appendChild(row);
+			});
+		});
+	</script>
 
 	<div class="button-container">
 		<button id="backButton" class="back-button">Back To Homepage</button>
@@ -142,16 +221,15 @@
 			backButton.onclick = function () {
 				window.location.href = '/Manager';
 			};
-		}
-		else if (currentUrl.includes('/Doctor/FeedbackDetails')) {
+		} else if (currentUrl.includes('/Doctor/FeedbackDetails')) {
 			backButton.onclick = function () {
 				window.location.href = '/Doctor';
 			};
-		}
-		else {
+		} else {
 			backButton.disabled = true;
 		}
 	</script>
+
 </body>
 
 </html>

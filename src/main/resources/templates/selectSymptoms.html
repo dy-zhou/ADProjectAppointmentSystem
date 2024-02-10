@@ -4,15 +4,159 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Symptoms Selction</title>
+	<style>
+		label {
+		  color: #4bb543;
+		  font-size: 0.8rem;
+		}
+		fieldset {
+		  margin-top: 0.5rem;
+		  margin-bottom: 0.5rem;
+		  height: fit-content;
+		  width:fit-content;
+		  border: none;
+		  box-shadow: 0px 0px 2px rgba(0,0,0,1);
+		  background-color: rgb(240,240,240);
+		}
+		legend {
+		  background-color:#4bb543;
+		  padding: 0.55rem;
+		  font-size: 1.0rem;
+		  color: rgb(238, 238, 238);
+		  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+		  transform: translateX(-1.1rem);
+		  box-shadow: -1px 1px 1px rgba(0,0,0,0.8);
+		}
+		legend:after {
+		  content: "";
+		  height: 0;
+		  width:0;
+		  background-color: transparent;
+		  border-top: 0.0rem solid transparent;
+		  border-right:  0.35rem solid black;
+		  border-bottom: 0.45rem solid transparent;
+		  border-left: 0.0rem solid transparent;
+		  position:absolute;
+		  left:-0.075rem;
+		  bottom: -0.45rem;
+		}
+		.sympCheck{
+			width: fit-content;
+		}
+		
+		.stepper-wrapper {
+		  margin-top: auto;
+		  display: flex;
+		  justify-content: space-between;
+		  margin-bottom: 20px;
+		}
+		.stepper-item {
+		  position: relative;
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  flex: 1;
+		}
+		
+		.stepper-item::before {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 2px solid #ccc;
+		  width: 100%;
+		  top: 20px;
+		  left: -50%;
+		  z-index: 2;
+		}
+		
+		.stepper-item::after {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 2px solid #ccc;
+		  width: 100%;
+		  top: 20px;
+		  left: 50%;
+		  z-index: 2;
+		}
+		
+		.stepper-item .step-counter {
+		  position: relative;
+		  z-index: 5;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  width: 40px;
+		  height: 40px;
+		  border-radius: 50%;
+		  background: #ccc;
+		  margin-bottom: 6px;
+		}
+		
+		.stepper-item.active {
+		  font-weight: bold;
+		}
+		
+		.stepper-item.completed .step-counter {
+		  background-color: #4bb543;
+		}
+		
+		.stepper-item.completed::after {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 2px solid #4bb543;
+		  width: 100%;
+		  top: 20px;
+		  left: 50%;
+		  z-index: 3;
+		}
+		
+		.stepper-item:first-child::before {
+		  content: none;
+		}
+		.stepper-item:last-child::after {
+		  content: none;
+		}
+		
+		#submitButton{
+			margin-top: 10px;
+			margin-left: 2px;
+			padding: 5px;
+			width: 70px;
+			height: 30px;
+			border-radius: 5px;
+			border: 1px solid #999;
+			box-shadow: 0 3px 5px 0 rgba(0,0,0,.2);
+		}
+	</style>
 </head>
 
 <body>
+	
+	<div class="stepper-wrapper">
+	  <div class="stepper-item completed">
+        <div class="step-counter">0</div>
+        <div class="step-name"><a th:href="@{/Nurse/patientList}">Patient List</a></div>
+      </div>	
+      <div class="stepper-item completed">
+        <div class="step-counter">1</div>
+        <div class="step-name">
+			<a th:href="@{/Nurse/patient/disease/{patientId}(patientId=${patientId})}">Select Disease</a></div>
+      </div>
+      <div class="stepper-item active">
+        <div class="step-counter">2</div>
+        <div class="step-name">Select Symptoms</div>
+      </div>
+      <div class="stepper-item">
+        <div class="step-counter">3</div>
+        <div class="step-name">Select Doctor and Time Slot</div>
+      </div>
+    </div>
+    
 	<h2>Select Symptoms</h2>
 
-    <form th:action="@{/Nurse/submitSelectedSymptoms}" th:object="${selectedSymptoms}"method="POST">
+    <form th:action="@{/Nurse/makeAppointment}" th:object="${selectedSymptoms}"method="POST">
         <fieldset>
             <legend>Symptoms for <span th:text="${selectedSymptomGroup.symptomGroup}"></span> </legend>
-            <div>
+            <div class="sympCheck">
 				<input type="checkbox" th:each="symptom : ${relatedSymptoms}"
 						th:value="${symptom}"
 						th:text="${symptom}"
@@ -21,10 +165,7 @@
 			</div>			 
         </fieldset>
     	<button type="submit" id="submitButton">Submit</button>
-    	
 	</form>
-	 <a th:href="@{/Nurse/disease}" class="goback-button">Go Back</a>
-
 </body>
 
 </html>

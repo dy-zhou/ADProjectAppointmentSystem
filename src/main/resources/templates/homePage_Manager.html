@@ -1,35 +1,172 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home Page</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+		}
+
+		.department-container {
+			margin-top: 20px;
+		}
+
+		.department {
+			margin-bottom: 20px;
+		}
+
+		.department h4 {
+			margin-bottom: 10px;
+			text-align: center;
+		}
+
+		.doctor-list {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.card {
+			background-color: white;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			margin: 10px;
+			padding: 20px;
+			border-radius: 8px;
+			width: 300px;
+			text-align: left;
+			flex-basis: calc(40% - 20px);
+		}
+
+		.card p {
+			color: #666;
+			margin-bottom: 4px;
+			margin-left: 40px;
+		}
+
+		.card p span.name {
+			font-size: 30px;
+			font-weight: bold;
+			margin-bottom: 10px;
+			margin-top: -20px;
+			display: block;
+			position: relative;
+			top: 10px;
+		}
+
+		.card p span {
+			font-size: 16px;
+			margin-bottom: 10px;
+			margin-left: 0;
+		}
+
+		.text-container {
+			margin-left: 200px;
+		}
+
+		h2 {
+			text-align: center;
+		}
+
+		.card p span.average-score {
+			font-size: 50px;
+			float: right;
+			margin-top: -55px;
+			margin-right: 35px;
+		}
+
+		.search-container {
+			position: relative;
+			text-align: right;
+			margin-top: 30px;
+			margin-right: 20px;
+			margin-left: -6cm;
+			color: #333;
+		}
+
+		.search-container a {
+			color: #007bff;
+		}
+
+		.search-container a:hover {
+			color: #0056b3;
+		}
+
+		.feedback-button {
+			padding: 10px 20px;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			text-decoration: none;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			vertical-align: top;
+		}
+
+		.feedback-button:hover {
+			background-color: #0056b3;
+		}
+
+		.right-offset {
+			position: relative;
+			right: 4cm;
+			padding: 20px;
+		}
+	</style>
 </head>
-<header>
-	<img class="logo-image" src="/images/laps1.svg" alt="Company logo">
-	<input type="text" placeholder="Search">
-	<div>
-		<img class="user-image" src="" alt="user imgae">
-		<a href="/login">Logout</a>
-	</div>
-	<form action="/Manager/doctorFeedbacks" method="get">
-		<input type="text" name="id" placeholder="Search by ID">
-		<button type="submit">Search By Doctor Id</button>
-	</form>
-</header>
 
 <body>
-	<div>
-		<h5>Appointment</h5>
+	<header>
+		<img class="logo-image" src="/images/laps1.svg" alt="Company logo">
+		<input type="text" placeholder="Search">
 		<div>
-			<table>
-				<th></th>
-			</table>
+			<img class="user-image" src="" alt="user imgae">
+			<a href="/login">Logout</a>
+		</div>
+	</header>
+	<div>
+		<h2 style="margin-top: 0;">List of Doctors</h2>
+		<div class="right-offset" style="margin-top: -10px;">
+			<div class="search-container" style="margin-top: -10px;">
+				<form action="/Manager/doctorFeedbacks" method="get">
+					<input type="text" name="id" placeholder="Search by Doctor ID">
+					<button type="submit">Search</button>
+				</form>
+				<br>
+				<a href="/Manager/allFeedbacks">Manage Feedbacks</a>
+			</div>
+		</div>
+		<div>
+			<br>
+		</div>
+		<div class="department-container">
+			<div class="department" th:each="department : ${departments}">
+				<h4 th:text="${department.name}"></h4>
+				<div class="text-container">
+					<div class="doctor-list">
+						<div class="card" th:each="doctor : ${doctors}"
+							th:if="${doctor.department.name == department.name and doctor.designation == 'doctor'}">
+							<p>
+								<span class="name" th:text="${doctor.name}"></span><br>
+								Doctor ID: <span th:text="${doctor.id}"></span><br>
+								Room: <span
+									th:text="${doctor.room != null ? doctor.room.name : 'No room assigned'}"></span><br>
+								<span class="average-score" th:text="${doctorAverageScores[doctor.id]}"></span><br>
+								<a th:href="@{/Manager/doctorFeedbacks(id=*{doctor.id})}" th:text="Details"></a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+
+
 </body>
-
-<a href="/Manager/allFeedbacks">Feedback List</a>
-
-	<h1>Home Page Manager</h1>
 
 </html>
