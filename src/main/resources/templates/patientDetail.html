@@ -108,7 +108,8 @@
 					<td th:text="${appointment.date}"></td>
 					<td th:text="${appointment.time}"></td>
 					<td th:text="${appointment.patient.medical_condition}"></td>
-					<td th:text="${appointment.department.name}"></td>
+					<!--<td th:text="${appointment.department.name}"></td>-->
+					<td th:text="${appointment.staff.department.name}"></td>
 					<td th:text="${appointment.staff.name}"></td>
 				</tr>
 			</tbody>

@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -220,7 +221,7 @@ public class NurseController {
 		session.setAttribute("department", diseseDepartment);
 		//Make new appointment
 		Appointment newAppointment = new Appointment();
-		newAppointment.setDepartment(diseseDepartment);
+//		newAppointment.setDepartment(diseseDepartment);
 		model.addAttribute("newAppointment", newAppointment);
 		
 		//Get doctor list from department id
@@ -270,6 +271,7 @@ public class NurseController {
 		
 		//Get selected date
 		LocalDate selectedDate = newAppointment.getDate();
+		System.out.println("SelectedDate: " + selectedDate);
 		
 		//Check doctor availability 
 		//Check Slot number by staff and by morning or afternoon
@@ -304,7 +306,7 @@ public class NurseController {
 			patientAppointmentUpdate.setStatus(AppointmentStatusEnum.Proceeding);
 			patientAppointmentUpdate.setStaff(selectedStaff);
 			patientAppointmentUpdate.setPatient(patient);
-			patientAppointmentUpdate.setDepartment(department);
+//			patientAppointmentUpdate.setDepartment(department);
 			patientAppointmentUpdate.setQueue_number(1 + staffId);
 			//Save appointment
 			appointmentService.createAppointment(patientAppointmentUpdate);
@@ -357,7 +359,7 @@ public class NurseController {
 				patientAppointmentUpdate.setStatus(AppointmentStatusEnum.Proceeding);
 				patientAppointmentUpdate.setStaff(selectedStaff);
 				patientAppointmentUpdate.setPatient(patient);
-				patientAppointmentUpdate.setDepartment(department);
+//				patientAppointmentUpdate.setDepartment(department);
 				patientAppointmentUpdate.setQueue_number(slot + staffId);
 				//Save appointment
 				appointmentService.createAppointment(patientAppointmentUpdate);
