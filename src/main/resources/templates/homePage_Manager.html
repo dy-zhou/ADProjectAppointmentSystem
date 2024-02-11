@@ -10,7 +10,7 @@
 			font-family: Arial, sans-serif;
 			margin: 0;
 			padding: 0;
-			background-color: #f4f4f4;
+			background-color: #ffffff;
 		}
 
 		.department-container {
@@ -21,7 +21,7 @@
 			margin-bottom: 20px;
 		}
 
-		.department h4 {
+		.department h2 {
 			margin-bottom: 10px;
 			text-align: center;
 		}
@@ -59,24 +59,38 @@
 		}
 
 		.card p span {
-			font-size: 16px;
+			font-size: 20px;
 			margin-bottom: 10px;
 			margin-left: 0;
+		}
+
+		.card p span.label {
+			font-size: 20px;
+		}
+
+		.card p span.details-link a {
+			font-size: 20px;
 		}
 
 		.text-container {
 			margin-left: 200px;
 		}
 
-		h2 {
+		h1 {
 			text-align: center;
 		}
 
 		.card p span.average-score {
 			font-size: 50px;
 			float: right;
-			margin-top: -55px;
-			margin-right: 35px;
+			margin-top: -4%;
+			margin-right: 10%;
+		}
+
+		@media (max-width:1000px) {
+			.card p span.average-score {
+				font-size: 25px;
+			}
 		}
 
 		.search-container {
@@ -129,16 +143,23 @@
 			<a href="/login">Logout</a>
 		</div>
 	</header>
+
+	
 	<div>
-		<h2 style="margin-top: 0;">List of Doctors</h2>
+		
+		<h1 style="margin-top: 0;">List of Doctors</h1>
 		<div class="right-offset" style="margin-top: -10px;">
 			<div class="search-container" style="margin-top: -10px;">
 				<form action="/Manager/doctorFeedbacks" method="get">
-					<input type="text" name="id" placeholder="Search by Doctor ID">
-					<button type="submit">Search</button>
+					 <input type="text" name="id" placeholder="Search by Doctor ID" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;background-color: #F5F7FB;">
+    <button type="submit" style="background-color: #4CAF50; color: white; font-weight: bold; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Search</button>
+</form>
 				</form>
 				<br>
-				<a href="/Manager/allFeedbacks">Manage Feedbacks</a>
+
+				<button onclick="window.location.href='/Manager/allFeedbacks'"
+					style="background-color: #4CAF50; color: white; border: none; padding: 10px 68px; border-radius: 5px; cursor: pointer;">Manage
+					Feedbacks</button>
 			</div>
 		</div>
 		<div>
@@ -146,18 +167,20 @@
 		</div>
 		<div class="department-container">
 			<div class="department" th:each="department : ${departments}">
-				<h4 th:text="${department.name}"></h4>
+				<h2 th:text="${department.name}"></h2>
 				<div class="text-container">
 					<div class="doctor-list">
 						<div class="card" th:each="doctor : ${doctors}"
 							th:if="${doctor.department.name == department.name and doctor.designation == 'doctor'}">
 							<p>
 								<span class="name" th:text="${doctor.name}"></span><br>
-								Doctor ID: <span th:text="${doctor.id}"></span><br>
-								Room: <span
+								<span class="label" th:text="${'Doctor ID: '}"></span> <span
+									th:text="${doctor.id}"></span><br>
+								<span class="label" th:text="${'Room: '}"></span><span
 									th:text="${doctor.room != null ? doctor.room.name : 'No room assigned'}"></span><br>
 								<span class="average-score" th:text="${doctorAverageScores[doctor.id]}"></span><br>
-								<a th:href="@{/Manager/doctorFeedbacks(id=*{doctor.id})}" th:text="Details"></a>
+								<span class="details-link"><a th:href="@{/Manager/doctorFeedbacks(id=*{doctor.id})}"
+										th:text="Details"></a></span>
 							</p>
 						</div>
 					</div>
@@ -165,7 +188,6 @@
 			</div>
 		</div>
 	</div>
-
 
 </body>
 
