@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="/css/newstylesheet.css">
 
 <head>
 	<meta charset="UTF-8">
-	<title>Feedbacks For <span th:text="${staffName}"></span></title>
+	<title>Doctor Feedbacks</title>
 	<style>
 		body {
 			font-family: Arial, sans-serif;
@@ -135,28 +136,31 @@
 			</div>
 		</div>
 		<div class="card">
-    <div class="card" style="width: auto; height: 100px; display: flex; justify-content: center; align-items: center; padding: 10px;">
-        <div style="text-align: center;">
-            <p>Doctor ID:<span th:text="${staffId}"></span></p>
-            <p><span th:text="${department.name}"></span></p>
-        </div>
-    </div>
-    <div class="card-left keywords-container" style="height:150px; width: calc(100% - 250px);"> 
-    <h3>Keywords:</h3>
-    <div style="display: flex; justify-content: space-between;">
-        <ul style="list-style-type: none; padding: 0; margin-right: 100px;"> 
-            <li th:each="keyword, iterStat : ${keywords.subList(0, 5)}" style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 14px; color: #333; position: relative;">
-                <span th:text="${iterStat.index + 1}"></span>. <span th:text="${keyword}"></span>
-            </li>
-        </ul>
-        <ul style="list-style-type: none; padding: 0;margin-left: -100px;">
-            <li th:each="keyword, iterStat : ${keywords.subList(5, keywords.size())}" style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 14px; color: #333; position: relative;">
-                <span th:text="${iterStat.index + 6}"></span>. <span th:text="${keyword}"></span>
-            </li>
-        </ul>
-    </div>
-</div>
-</div>
+			<div class="card"
+				style="width: auto; height: 100px; display: flex; justify-content: center; align-items: center; padding: 10px;">
+				<div style="text-align: center;">
+					<p>Doctor ID:<span th:text="${staffId}"></span></p>
+					<p><span th:text="${department.name}"></span></p>
+				</div>
+			</div>
+			<div class="card-left keywords-container" style="height:150px; width: calc(100% - 250px);">
+				<h3>Keywords:</h3>
+				<div style="display: flex; justify-content: space-between;">
+					<ul style="list-style-type: none; padding: 0; margin-right: 100px;">
+						<li th:each="keyword, iterStat : ${keywords.subList(0, 5)}"
+							style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 14px; color: #333; position: relative;">
+							<span th:text="${iterStat.index + 1}"></span>. <span th:text="${keyword}"></span>
+						</li>
+					</ul>
+					<ul style="list-style-type: none; padding: 0;margin-left: -100px;">
+						<li th:each="keyword, iterStat : ${keywords.subList(5, keywords.size())}"
+							style="margin-bottom: 5px; font-family: Arial, sans-serif; font-size: 14px; color: #333; position: relative;">
+							<span th:text="${iterStat.index + 6}"></span>. <span th:text="${keyword}"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
 	</div>
 	</div>
@@ -212,11 +216,12 @@
 	</script>
 
 	<div class="button-container">
-		<button id="backButton" class="back-button">Back To Homepage</button>
+		<button id="chooseButton" class="choose-button" style="display: inline-block;margin-right: 1%;">Back To
+			Homepage</button>
 	</div>
 	<script>
 		var currentUrl = window.location.href;
-		var backButton = document.getElementById('backButton');
+		var backButton = document.getElementById('chooseButton');
 		if (currentUrl.includes('/Manager')) {
 			backButton.onclick = function () {
 				window.location.href = '/Manager';

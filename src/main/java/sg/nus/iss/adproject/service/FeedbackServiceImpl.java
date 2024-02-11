@@ -40,12 +40,11 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 	@Override
 	public List<Feedback> reverseFeedbacks(int id) {
-		List<Feedback>feedbackList=feedbackRepository.findFeedbackByAppointmentStaffId(id);
+		List<Feedback> feedbackList = feedbackRepository.findFeedbackByAppointmentStaffId(id);
 		// TODO Auto-generated method stub
 		Collections.reverse(feedbackList);
 		return feedbackList;
 	}
-
 
 	@Override
 	public String getAllFeedbackDescriptionsByStaffId(int id) {
@@ -64,12 +63,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Transactional
 	public void deleteFeedbackById(int feedbackId) {
 		feedbackRepository.deleteById(feedbackId);
-	}
-
-	@Override
-	public List<Feedback> findTop15Feedbacks(int id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
