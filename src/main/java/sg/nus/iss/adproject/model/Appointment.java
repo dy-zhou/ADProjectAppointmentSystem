@@ -34,8 +34,8 @@ public class Appointment implements Serializable {
 	@ManyToOne
 	private Staff staff;
 	
-	@ManyToOne
-	private Department department;
+//	@ManyToOne
+//	private Department department;
 	
 	@ManyToOne	
 	private User user;
@@ -116,13 +116,13 @@ public class Appointment implements Serializable {
 	}
 
 
-	public Department getDepartment() {
-		return department;
-	}
+//	public Department getDepartment() {
+//		return department;
+//	}
 
-	public void setDepartment(Department departmentId) { 
-		this.department = departmentId;
-	}
+//	public void setDepartment(Department departmentId) { 
+//		this.department = departmentId;
+//	}
 
 	public User getUser() {
 		return user;
