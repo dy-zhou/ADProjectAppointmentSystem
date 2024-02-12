@@ -125,7 +125,7 @@ margin-right: 4%;
   background-color: rgb(255, 255, 255);
   width: 95%;
   padding: 2%;
-  justify-content: left;
+  justify-content: center;
   white-space: nowrap;
   text-align: start;
 }
@@ -142,8 +142,10 @@ margin-right: 4%;
 }
 .button-container{
 	display: flex;
-	justify-content:space-evenly;
-	width:95%
+	align-items: center;
+	justify-content:space-between;
+	width:95%;
+	
 	
 	
 }

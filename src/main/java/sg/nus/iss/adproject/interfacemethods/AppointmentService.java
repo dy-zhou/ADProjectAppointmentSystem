@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import sg.nus.iss.adproject.model.Appointment;
+import sg.nus.iss.adproject.model.AppointmentStatusEnum;
 
 public interface AppointmentService {
 	List<Appointment> findAllAppointments();
@@ -12,7 +13,7 @@ public interface AppointmentService {
 	Appointment getAppointmentDetail(int id);
 	Appointment findAppointmentById(int id);
 	List<Appointment> findAppointmentByPatientId(int id);
-	List<Appointment> findAppointmentStatus(String status);
+	List<Appointment> findAppointmentStatus(AppointmentStatusEnum status);
 	List<Appointment> findAppointmentByStaffId(int id); 
 	void removeAppointment(Appointment appointment);
 

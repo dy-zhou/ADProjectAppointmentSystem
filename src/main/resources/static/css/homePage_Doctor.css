@@ -1,0 +1,162 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.navbar h3{
+  font-weight: normal;
+}
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* 确保导航条占据整个容器宽度 */
+  box-shadow: 0 2px 4px 0 rgba(6, 0, 0, 0.2); /* 添加水平和垂直偏移的阴影，以及模糊距离和颜色 */
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width:100%
+
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3%;
+  background-color: #fff;
+}
+
+.log-card{
+  width:10vw;
+  height:3vw;
+  border-radius: 8px;
+  background-color: #4CAF50;
+  border: 0.3% solid #ccc; /* 浅灰色边框 */
+  display: flex;
+  margin-left:6vw;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}
+
+.log-card a{
+    color:#fff;
+    font-size: 1vw;
+}
+.main-content1 {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-left: 0;
+  display: flex;
+  width:90%;
+}
+
+.hospital-photo{
+
+  width: 5vw; /* 图片高度 */
+  object-fit: cover; /* 可选，保持图片的纵横比 */
+  margin-bottom:10px;
+  margin-left:2vw;
+
+}
+
+.user-photo{
+  width: 50px; /* 图片宽度 */
+  height: auto;
+  border-radius: 50%; /* 圆形图片 */
+  margin-left:14vw;
+  margin-right: 2vw;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+  background: #fff;
+  box-shadow: 0 2px 4px #fff(0, 0, 0, 0.1);
+  justify-content:center;
+  margin-top:2%;
+}
+
+.title-card1{
+  padding: 10px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 40%; /* 卡片宽度 */
+  align-items: center; /* 垂直居中 */
+  height: 3vw;
+  margin-left:7vw;
+  margin-bottom: 2vw;
+  margin-top: 4vw;
+
+}
+.title-card1 a{
+  margin-left:31vw;
+}
+.title-card2{
+  padding: 10px; /* 内边距 */
+  border-radius: 8px; /* 圆角边框 */
+  width: 40%; /* 卡片宽度 */
+  align-items: center; /* 垂直居中 */
+  height: 3vw;
+  margin-left:7vw;
+  margin-bottom: 1vw;
+  margin-top: 4vw;
+
+}
+.title-card2 a{
+  margin-left:31vw;
+}
+
+
+
+.appointment-section1{
+  flex: 3;
+  background-color: #fff;
+  padding: 1vw;
+  margin-right: 3vw;
+  border-radius: 1%;
+}
+.appointment-section2{
+  flex: 3;
+  background-color: #fff;
+  padding: 1vw;
+  margin-right: 1vw;
+  border-radius:1%;
+}
+
+.appointment-card1 {
+  background-color: #fff; /* 灰色背景 */
+  padding: 4%; /* 内边距 */
+  border-radius: 2%; /* 圆角边框 */
+  width: 35vw; /* 卡片宽度 */
+  display: flex; /* 使用 Flex 布局 */
+  align-items: center; /* 垂直居中 */
+  margin:2vw 6vw;
+  box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
+  height:8vw;
+}
+.appointment-card2 {
+  background-color: #fff; /* 灰色背景 */
+  padding: 4%; /* 内边距 */
+  border-radius: 2%; /* 圆角边框 */
+  width: 35vw; /* 卡片宽度 */
+  display: flex; /* 使用 Flex 布局 */
+  align-items: center; /* 垂直居中 */
+  margin:2vw 6vw;
+  box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
+  height:8.5vw;
+}
+.patient-photo1 {
+  width: 50px; /* 图片宽度 */
+  height: 50px; /* 图片高度 */
+  border-radius: 50%; /* 圆形图片 */
+  margin-right: 10px; /* 图片与文本之间的距离 */
+}

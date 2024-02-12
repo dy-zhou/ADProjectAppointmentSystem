@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import sg.nus.iss.adproject.model.Appointment;
+import sg.nus.iss.adproject.model.AppointmentStatusEnum;
 
 
 public interface AppointmentRepository extends JpaRepository<Appointment,Integer>{
@@ -24,7 +25,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Integer
 	List<Appointment> findAppointmentByPatientId(@Param("id") int id);
 	
 	@Query("Select a From Appointment a WHERE a.status=:status")
-	List<Appointment> findAppointmentStatus(@Param("status")String status);
+	List<Appointment> findAppointmentStatus(@Param("status")AppointmentStatusEnum status);
 	
 	@Query("Select a From Appointment a WHERE a.staff.id=:id")
 	List<Appointment> findAppointmentByStaffId(@Param("id") int id); 

@@ -89,10 +89,10 @@ public class NurseController {
 
 	@GetMapping("")
 	public String showDashboard(Model model) {
-		List<Appointment> appointmentList = appointmentService.findAllAppointments();
-		List<Feedback> feedbackList = feedbackService.findAllFeedbacks();
-		model.addAttribute("feedbackList", feedbackList);
+		List<Staff> doctorList = staffService.findAllDoctors();
+		List<Appointment> appointmentList =appointmentService.findAppointmentStatus(AppointmentStatusEnum.Proceeding);
 		model.addAttribute("appointmentList", appointmentList);
+		model.addAttribute("doctorList", doctorList);
 		return "homePage_Nurse";
 	}
 	//Show Patient
@@ -111,10 +111,10 @@ public class NurseController {
 	}
 	//Get Patient List
 	@PostMapping("/newPatient")
-	public String submitPatient(@ModelAttribute("patient") Patient patient) {
+	public String submitPatient(@ModelAttribute("patient") Patient patient,Model model) {
 
 		patientService.addPatient(patient);
-		return "redirect:/patientList";
+		return "redirect:/Nurse/patientList";
 	}
 	//Get Patient
 	@GetMapping("patient/{id}")

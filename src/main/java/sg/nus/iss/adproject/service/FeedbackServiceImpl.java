@@ -66,10 +66,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 		feedbackRepository.deleteById(feedbackId);
 	}
 
-	@Override
-	public List<Feedback> findTop15Feedbacks(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
