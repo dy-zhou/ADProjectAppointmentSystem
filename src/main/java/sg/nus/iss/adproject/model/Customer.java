@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class User {
+public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +21,13 @@ public class User {
 	
 	private String password;
 	
-	@ManyToMany(mappedBy = "users")
+	@ManyToMany(mappedBy = "customers")
 	private List<Patient>patients;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="customer")
 	private List<Feedback>feedbacks;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="customer")
 	private List<Appointment>appointments;
 	
 	public String getName() {

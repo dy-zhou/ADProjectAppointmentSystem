@@ -82,7 +82,7 @@ public class DoctorController {
 		LocalDate currentDate=LocalDate.now();
 		LocalTime currentTime=LocalTime.now();
 		LocalTime morningShift=LocalTime.of(12, 0, 0);
-		LocalTime nightShift=LocalTime.of(17, 30, 0);
+		LocalTime nightShift=LocalTime.of(20, 30, 0);
 		for(Appointment appointment:appointments) {
 			if(currentTime.isBefore(morningShift)) 
 			{

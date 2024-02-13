@@ -6,7 +6,6 @@ body {
   padding: 0;
   background-color: #fff;
   box-sizing: border-box;
-  height: 30%;
 }
 
 .navbar{
@@ -14,51 +13,49 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%; /* 确保导航条占据整个容器宽度 */
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2); /* 添加水平和垂直偏移的阴影，以及模糊距离和颜色 */
-  padding-bottom:4%;
-  padding-top: 2%;
+  box-shadow: 0 2px 4px 0 rgba(6,0,0,0.2); /* 添加水平和垂直偏移的阴影，以及模糊距离和颜色 */
+}
+.search-container h3{
+  font-weight: normal;
 }
 
-
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width:100%;
+}
 .header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 2%;
   background-color: #fff;
 }
+
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
 }
-.logo img{
-	max-width: 100%;
-	height: auto;
-}
-.slogan{
-	flex:1;
-	text-align: center;
-}
-.user-info{
-	flex:1;
-	text-align: right;
-}
-
-
 
 .log-card{
-  width:100px;
-  height:30px;
+width:10vw;
+  height:3vw;
   border-radius: 8px;
   background-color: #4CAF50;
-  border: 1px solid #ccc; /* 浅灰色边框 */
-  padding:5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right:20px; 
+  border: 0.3% solid #ccc; /* 浅灰色边框 */
+  display: flex;
+  margin-left:6vw;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}
+
+.log-card a{
+    color:#fff;
+    font-size: 1vw;
 }
 
 
@@ -68,25 +65,33 @@ body {
 
 
 .user-photo{
-  width: 4%; /* 图片宽度 */
-  height: 4%; /* 图片高度 */
+   width: 50px; /* 图片宽度 */
+  height: auto;
   border-radius: 50%; /* 圆形图片 */
-  margin-right: 1%; /* 图片与文本之间的距离 */
-  margin-left:15%;
-margin-right: 4%;
+  margin-left:14vw;
+  margin-right: 2vw;
 }
+.hospital-photo{
 
+  width: 5vw; /* 图片高度 */
+  object-fit: cover; /* 可选，保持图片的纵横比 */
+  margin-bottom:10px;
+  margin-left:2vw;
+
+}
 .header {
-  display: flex;
-  padding: 1%;
+   display: flex;
+  justify-content: space-between;
+padding-bottom: 1%;
+  background: rgb(255, 255, 255);
   justify-content:center;
-  margin-top:1%;
+
 }
 
 .addnewpatient-patient-card{
   background-color: #fff; /* 灰色背景 */
   border: 1px solid #ccc; /* 浅灰色边框 */
-  padding: 20px; /* 内边距 */
+  padding: 15px; /* 内边距 */
   border-radius: 8px; /* 圆角边框 */
   width: 80%; /* 卡片宽度 */
   box-shadow: 0 2px 4px #fff(0, 0, 0, 0.1); /* 轻微的阴影效果 */
@@ -94,6 +99,7 @@ margin-right: 4%;
   align-items: center; /* 垂直居中 */
   justify-content: center;
   text-align: center;
+  margin-bottom: 2%;
   
 }
 
@@ -121,11 +127,11 @@ margin-right: 4%;
 	display: flex;
 	align-items: center;
   border-radius: 5px;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
   background-color: rgb(255, 255, 255);
   width: 95%;
-  padding: 2%;
-  justify-content: left;
+  padding: 1.5%;
+  justify-content: center;
   white-space: nowrap;
   text-align: start;
 }
@@ -142,21 +148,13 @@ margin-right: 4%;
 }
 .button-container{
 	display: flex;
-	justify-content:space-evenly;
-	width:95%
+	align-items: center;
+	justify-content:space-between;
+	width:100%;
+	
 	
 	
 }
-.choose-button {
-  
-  width: 30%; /* Adjust width as needed */
-  padding: 1.5%; /* Adjust padding to fit design */
-  background-color: #4CAF50; /* Bootstrap primary button color for example */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-  
-}
+
+
 

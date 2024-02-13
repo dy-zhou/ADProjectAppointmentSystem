@@ -1,69 +1,104 @@
 <html>
-	<link rel="stylesheet" href="/static/homepage.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
-		<title>Home Page</title>
-		<style>
-			 body {
-         font-family: Arial, sans-serif;
-         margin: 0;
-         padding: 0;
-         background-color: #f4f4f4;
-      }
 
-      .card {
-         background-color: white;
-         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-         margin: 10px;
-         padding: 20px;
-         border-radius: 8px;
-         width: 300px;
-         text-align: left;
-      }
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-      .card apphead {
-         margin-top: 0;
-      }
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      .card p {
-         color: #666;
-         margin-bottom: 4px;
-      }
-		</style>
-	</head>
-	<header>
-		<img class="logo-image" src="/images/laps1.svg" alt="Company logo">
-		<input type="text" placeholder="Search">
-		<div>
-			<img class="user-image" src="" alt="user imgae">
-			<a href="/login">Logout</a>
-		</div>
-	</header>
-	<body>
-		<div>
-			<h5 style="margin: 10px;">Appointment</h5>
-			<a th:href="@{/Doctor/AppointmentDetails}">View Appointments</a>
-			<div class="card" th:each="appointment:${appointmentList}">
-				<p>Appointment ID:<label th:text="${appointment.id}"></label></p>
-				<p>Date:<label  th:text="${appointment.date}"></label></p>
-				<p>Appointment Time:<label  th:text="${appointment.time}"></label></p>
-				<p>Queue Number:<label  th:text="${appointment.queue_number}"></label></p>
-				<p>Patient ID:<label  th:text="${appointment.patient.id}"></label></p>
-				<p>Name:<label  th:text="${appointment.patient.name}"></label></p>
-				
+	<title>Home Page</title>
+	<link rel="stylesheet" href="/css/homePage_Doctor.css">
+</head>
+
+<body>
+
+	<div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.</h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
 			</div>
-			<div>
-				<h5 style="margin: 10px;">Feedback</h5>
-				<a th:href="@{/Doctor/FeedbackDetails}">View Feedbacks</a>
-				<div class="card" th:each="feedback:${feedbackList}">
-				<p>Feedback ID:<label th:text="${feedback.id}"></label></p>
-				<p>Content:<label  th:text="${feedback.description}"></label></p>
+		</header>
+	</div>
+	<div class="header" >
+		<div style="border: 1px;height: 15vw;box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);border-radius: 2vw;width:80%;background-image: url('/css/pictures/image.svg');background-size: cover;background-position: center;">
+			
+		</div>
+	
+	</div>
+	<div class="main-content1">
+		<section class="appointment-section2">
+			<div class="title-card1">
+				<div style="display: flex;justify-content: space-between;">
+				<img src="/css/pictures/appointment.svg" style="width: 2vw;">
+				<h3 style="margin: 10px;margin-right: 10vw;">Appointment</h3>
+				</div>
+				<a th:href="@{/Doctor/AppointmentDetails}">view...</a>
+			</div>
+			<div class="appointment-card1" th:each="appointment:${appointmentList}">
+					
+				<div>		
+				<p>Appointment ID:<label th:text="${appointment.id}"></label></p>
+				<p>Date:<label th:text="${appointment.date}"></label></p>
+				<p>Appointment Time:<label th:text="${appointment.time}"></label></p>
+				</div>
+				<div style="margin-right: 4vw;">
+				<p>Queue Number:<label th:text="${appointment.queue_number}"></label></p>
+				<p>Patient ID:<label th:text="${appointment.patient.id}"></label></p>
+				<p>Name:<label th:text="${appointment.patient.name}"></label></p>
 				</div>
 			</div>
-		</div>
-	</body>
-	
+		</section>
+
+		<section class="appointment-section2">
+			<div class="feedback">
+				<div class="title-card2">
+					<div style="display: flex;justify-content: space-between;">
+					<img src="/css/pictures/feedback.svg" style="width: 2vw;">
+					<h3 style="margin: 10px;margin-right: 10vw;">Feedback</h3>
+					
+					</div>
+					<a th:href="@{/Doctor/FeedbackDetails}">view...</a>
+				</div>
+				<div class="appointment-card2" th:each="feedback:${feedbackList}">
+					<div style="display:flex;justify-content: space-between;">
+						
+						<div style="width: auto;">
+						<p style="font-size: large;font-weight: bold;">Feedback ID:
+							<label style="font-size: large;font-weight: normal;" th:text="${feedback.id}"></label>
+						</p>
+						<p style="font-size: large;font-weight: bold;">Content:
+							<label style="font-size: medium;font-weight: normal;"
+								th:text="${feedback.description}"></label>
+						</p>
+						</div>
+						
+						
+						<div style="width: auto;height:auto;display:flex;justify-content: space-between;margin-left: 15vw;margin-top: 1vw;">
+						<img src="/css/pictures/star.svg" alt="star" style="height: 2vw; width:auto;;margin-right: 1vw;margin-top: 0.4vw;" >
+						<p >
+							<label style="font-size:2vw;font-weight:normal;color: darkgrey;"
+								th:text="${feedback.score}"></label>
+						</p>
+						
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+			</aside>
+	</div>
+</body>
+
 </html>

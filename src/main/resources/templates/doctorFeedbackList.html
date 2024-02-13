@@ -7,10 +7,11 @@
 	<title>Doctor Feedbacks</title>
 	<style>
 		body {
-			font-family: Arial, sans-serif;
+			font-family: 'Arial', sans-serif;
 			margin: 0;
 			padding: 0;
-			background-color: #f4f4f4;
+			background-color: #fff;
+			box-sizing: border-box;
 		}
 
 		h1 {
@@ -56,19 +57,7 @@
 			vertical-align: middle;
 		}
 
-		a {
-			display: inline-block;
-			padding: 10px 20px;
-			background-color: #007bff;
-			color: #fff;
-			text-decoration: none;
-			border-radius: 5px;
-			margin-top: 20px;
-		}
 
-		a:hover {
-			background-color: #0056b3;
-		}
 
 		.button-container {
 			text-align: center;
@@ -120,10 +109,110 @@
 			align-items: flex-start;
 			margin-left: 10px;
 		}
+
+		.navbar h3 {
+			font-weight: normal;
+		}
+
+		.navbar {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+			/* 确保导航条占据整个容器宽度 */
+			box-shadow: 0 2px 4px 0 rgba(6, 0, 0, 0.2);
+			/* 添加水平和垂直偏移的阴影，以及模糊距离和颜色 */
+		}
+
+		.search-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 20px;
+			width: 100%
+		}
+
+		.header-content {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 3%;
+			background-color: #fff;
+		}
+
+		.log-card {
+			width: 10vw;
+			height: 3vw;
+			border-radius: 8px;
+			background-color: #4CAF50;
+			border: 0.3% solid #ccc;
+			/* 浅灰色边框 */
+			display: flex;
+			margin-left: 6vw;
+			justify-content: center;
+			/* 水平居中 */
+			align-items: center;
+			/* 垂直居中 */
+		}
+
+		.log-card a {
+			color: #fff;
+			font-size: 1vw;
+		}
+
+		.hospital-photo {
+
+			width: 5vw;
+			/* 图片高度 */
+			object-fit: cover;
+			/* 可选，保持图片的纵横比 */
+			margin-bottom: 10px;
+			margin-left: 2vw;
+
+		}
+
+		.user-photo {
+			width: 50px;
+			/* 图片宽度 */
+			height: auto;
+			border-radius: 50%;
+			/* 圆形图片 */
+			margin-left: 14vw;
+			margin-right: 2vw;
+		}
+
+
+		.header {
+			display: flex;
+			justify-content: space-between;
+			padding: 2%;
+			background: #fff;
+			box-shadow: 0 2px 4px #fff(0, 0, 0, 0.1);
+			justify-content: center;
+			margin-top: 2%;
+		}
 	</style>
 </head>
 
 <body>
+	<div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.</h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
 
 	<h1><span th:text="${staffName}"></span></h1>
 

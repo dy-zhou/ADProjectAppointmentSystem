@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sg.nus.iss.adproject.interfacemethods.AppointmentService;
 import sg.nus.iss.adproject.model.Appointment;
+import sg.nus.iss.adproject.model.AppointmentStatusEnum;
 import sg.nus.iss.adproject.repository.AppointmentRepository;
 
 
@@ -48,7 +49,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public List<Appointment> findAppointmentStatus(String status) {
+	public List<Appointment> findAppointmentStatus(AppointmentStatusEnum status) {
 		// TODO Auto-generated method stub
 		return appointmentRepository.findAppointmentStatus(status);
 	}
