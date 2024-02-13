@@ -34,7 +34,7 @@ public class Patient {
 	@JoinTable(name = "Patient_User",
 	joinColumns = @JoinColumn(name = "patient_id"),
 	inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private List<User>users;
+	private List<Customer>customers;
 	
 	@OneToMany(mappedBy = "patient")
 	private List<Appointment> appointments;
@@ -84,12 +84,12 @@ public class Patient {
 		this.additional_info = additional_info;
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public List<Customer> getCustomers() {
+		return customers;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUsers(List<Customer> customers) {
+		this.customers = customers;
 	}
 
 	public List<Appointment> getAppointments() {

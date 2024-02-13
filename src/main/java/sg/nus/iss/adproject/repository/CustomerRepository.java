@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import sg.nus.iss.adproject.model.User;
+import sg.nus.iss.adproject.model.Customer;
 
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 	
-	@Query("Select u FROM User u WHERE u.id= :id")
-	List<User> findUserById(@Param("id")int id);
+	@Query("Select c FROM Customer c WHERE c.id= :id")
+	List<Customer> findCustomerById(@Param("id")int id);
 	
 	
 	
