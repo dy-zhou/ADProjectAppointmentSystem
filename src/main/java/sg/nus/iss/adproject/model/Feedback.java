@@ -16,7 +16,7 @@ public class Feedback {
 	private double score;
 
 	@ManyToOne
-	private User user;
+	private Customer customer;
 
 	@OneToOne
 	private Appointment appointment;

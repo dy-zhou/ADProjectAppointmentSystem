@@ -42,7 +42,7 @@ public class Appointment implements Serializable {
 
 
 	@ManyToOne
-	private User user;
+	private Customer customer;
 
 
 	public Appointment() {
@@ -127,12 +127,12 @@ public class Appointment implements Serializable {
 
 
 
-	public User getUser() {
-		return user;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Feedback getFeedback() {
