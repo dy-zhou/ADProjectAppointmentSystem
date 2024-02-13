@@ -29,7 +29,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 3%;
+  padding: 0 2%;
   background-color: #fff;
 }
 
@@ -52,8 +52,7 @@ body {
 .main-content1 {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  margin-left: 0;
+  padding: 5px;
   display: flex;
   width:90%;
 }
@@ -79,40 +78,42 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 2%;
-  background: #fff;
-  box-shadow: 0 2px 4px #fff(0, 0, 0, 0.1);
+  padding: 1%;
   justify-content:center;
-  margin-top:2%;
+ 
+ background-color: rgb(255, 255, 255);
 }
 
 .title-card1{
-  padding: 10px; /* 内边距 */
+  padding: 5px; /* 内边距 */
   border-radius: 8px; /* 圆角边框 */
   width: 40%; /* 卡片宽度 */
   align-items: center; /* 垂直居中 */
   height: 3vw;
-  margin-left:7vw;
-  margin-bottom: 2vw;
+  margin-left:4.5vw;
+  margin-bottom: 1vw;
   margin-top: 4vw;
+
 
 }
 .title-card1 a{
-  margin-left:31vw;
+  margin-left:30vw;
+  font-size: medium;
 }
 .title-card2{
-  padding: 10px; /* 内边距 */
+  padding: 5px; /* 内边距 */
   border-radius: 8px; /* 圆角边框 */
   width: 40%; /* 卡片宽度 */
   align-items: center; /* 垂直居中 */
   height: 3vw;
-  margin-left:7vw;
+  margin-left:5.5vw;
   margin-bottom: 1vw;
   margin-top: 4vw;
 
 }
 .title-card2 a{
   margin-left:31vw;
+  font-size: medium;
 }
 
 
@@ -134,14 +135,15 @@ body {
 
 .appointment-card1 {
   background-color: #fff; /* 灰色背景 */
-  padding: 4%; /* 内边距 */
+  padding: 3% 4% 2% 4%; /* 内边距 */
   border-radius: 2%; /* 圆角边框 */
   width: 35vw; /* 卡片宽度 */
   display: flex; /* 使用 Flex 布局 */
   align-items: center; /* 垂直居中 */
-  margin:2vw 6vw;
+  margin:2vw 5vw;
   box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
-  height:8vw;
+  height:auto;
+  justify-content: space-between;
 }
 .appointment-card2 {
   background-color: #fff; /* 灰色背景 */
@@ -152,7 +154,8 @@ body {
   align-items: center; /* 垂直居中 */
   margin:2vw 6vw;
   box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
-  height:8.5vw;
+  height:auto;
+  
 }
 .patient-photo1 {
   width: 50px; /* 图片宽度 */

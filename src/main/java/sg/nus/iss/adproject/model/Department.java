@@ -24,8 +24,8 @@ public class Department {
 	@OneToMany(mappedBy="department")
 	private List<Disease>diseases;
 	
-	@OneToMany(mappedBy="department")
-	private List<Appointment> appointments;
+//	@OneToMany(mappedBy="department")
+//	private List<Appointment> appointments;
 
 	public Department() {
 
