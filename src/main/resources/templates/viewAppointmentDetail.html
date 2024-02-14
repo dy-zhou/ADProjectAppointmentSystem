@@ -117,7 +117,7 @@
             <p style="font-weight: bolder;">Gender:	<label style="font-weight: normal;" th:text="${appointment.patient.sex}"></label></p>
             <p style="font-weight: bolder;">Allergy:	<label style="font-weight: normal;" th:text="${appointment.patient.allergy}"></label></p>
             <p style="font-weight: bolder;">Medical Condition:	<label style="font-weight: normal;" th:text="${appointment.patient. medical_condition}"></label></p>
-             <p style="font-weight: bolder;">Addtional info:	<label style="font-weight: normal;" th:text="${appointment.patient.additional_info}"></label></p>
+             <p style="font-weight: bolder;">Addtional info:	<label style="font-weight: normal;" th:text="${appointment.patient.additional_information}"></label></p>
              <a type="button"  class="btn btn-outline-secondary" th:href="@{/Doctor/EditAppointmentDetails/}+${appointment.id}">Detail</a>
         </div>
     </div>

@@ -27,7 +27,7 @@ public class Patient {
 	
 	private String medical_condition;
 	
-	private String additional_info;
+	private String additional_information;
 	
 	//mapping
 	@ManyToMany
@@ -77,11 +77,11 @@ public class Patient {
 	public void setMedical_condition(String medical_condition) {
 		this.medical_condition = medical_condition;
 	}
-	public String getAdditional_info() {
-		return additional_info;
+	public String getAdditional_information() {
+		return additional_information;
 	}
-	public void setAdditional_info(String additional_info) {
-		this.additional_info = additional_info;
+	public void setAdditional_info(String additional_information) {
+		this.additional_information = additional_information;
 	}
 
 	public List<Customer> getCustomers() {
