@@ -31,7 +31,7 @@ public class Patient {
 	
 	//mapping
 	@ManyToMany
-	@JoinTable(name = "Patient_Customer",
+	@JoinTable(name = "Customer_Patient",
 	joinColumns = @JoinColumn(name = "patient_id"),
 	inverseJoinColumns = @JoinColumn(name = "customer_id"))
 	private List<Customer>customers;
