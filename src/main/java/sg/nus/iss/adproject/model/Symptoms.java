@@ -49,14 +49,14 @@ private Map<String, List<String>> symptoms;
 				 "rusty sputum"));
 		
 		//Bone Inflammation, Rheumatological Disease
-		symptoms.put("Bone Inflmmation", Arrays.asList( "joint pain", "neck pain", "knee pain", "hip joint pain", "swelling joints", "painful walking",
+		symptoms.put("Bone Inflammation", Arrays.asList( "joint pain", "neck pain", "knee pain", "hip joint pain", "swelling joints", "painful walking",
 				"muscle weakness", "stiff neck", "movement stiffness"));
 		
 		//Urinal Disease, Urological Disease
 		symptoms.put("Urinal Disease", Arrays.asList("burning micturition", "bladder discomfort", "foul smell of urine", "continuous feel of urine"));
 		
 		//Heart, Blood Vessels/ Vascular Disorders
-		symptoms.put("Heart, Blood Vessels", Arrays.asList("headache", "chest pain", "dizziness", "loss of balance", "lack of concentration", "vomiting", 
+		symptoms.put("Heart, Blood, Vessels", Arrays.asList("headache", "chest pain", "dizziness", "loss of balance", "lack of concentration", "vomiting", 
 				"breathlessness", "sweating", "fatigue", "cramps", "bruising", "obesity", "swollen legs", "swollen blood vessels", "prominent veins on calf"));
 		
 	}
