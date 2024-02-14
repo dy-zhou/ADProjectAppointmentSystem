@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <head>
+	<link rel="stylesheet" href="/css/homePage_Doctor.css">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home Page</title>
 	<style>
-		body {
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-			background-color: #ffffff;
-		}
 
 		.department-container {
-			margin-top: 20px;
+			margin-top: 2%;
 		}
 
 		.department {
@@ -34,8 +29,8 @@
 		.card {
 			background-color: white;
 			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			margin: 10px;
-			padding: 20px;
+			margin: 10px 20px 20px 20px;
+			padding: 1% 1%;
 			border-radius: 8px;
 			width: 300px;
 			text-align: left;
@@ -44,7 +39,8 @@
 
 		.card p {
 			color: #666;
-			margin-bottom: 4px;
+			margin-top: 30px;
+			
 			margin-left: 40px;
 		}
 
@@ -52,20 +48,17 @@
 			font-size: 30px;
 			font-weight: bold;
 			margin-bottom: 10px;
-			margin-top: -20px;
-			display: block;
-			position: relative;
-			top: 10px;
+
 		}
 
 		.card p span {
 			font-size: 20px;
 			margin-bottom: 10px;
-			margin-left: 0;
+	
 		}
 
 		.card p span.label {
-			font-size: 20px;
+			font-size: 1px;
 		}
 
 		.card p span.details-link a {
@@ -83,7 +76,7 @@
 		.card p span.average-score {
 			font-size: 50px;
 			float: right;
-			margin-top: -4%;
+			
 			margin-right: 10%;
 		}
 
@@ -93,22 +86,8 @@
 			}
 		}
 
-		.search-container {
-			position: relative;
-			text-align: right;
-			margin-top: 30px;
-			margin-right: 20px;
-			margin-left: -6cm;
-			color: #333;
-		}
 
-		.search-container a {
-			color: #007bff;
-		}
 
-		.search-container a:hover {
-			color: #0056b3;
-		}
 
 		.feedback-button {
 			padding: 10px 20px;
@@ -122,44 +101,54 @@
 			vertical-align: top;
 		}
 
-		.feedback-button:hover {
-			background-color: #0056b3;
-		}
 
-		.right-offset {
-			position: relative;
-			right: 4cm;
-			padding: 20px;
-		}
+
+
 	</style>
 </head>
 
 <body>
-	<header>
-		<img class="logo-image" src="/images/laps1.svg" alt="Company logo">
-		<input type="text" placeholder="Search">
-		<div>
-			<img class="user-image" src="" alt="user imgae">
-			<a href="/login">Logout</a>
-		</div>
-	</header>
-
 	
-	<div>
-		
-		<h1 style="margin-top: 0;">List of Doctors</h1>
-		<div class="right-offset" style="margin-top: -10px;">
-			<div class="search-container" style="margin-top: -10px;">
-				<form action="/Manager/doctorFeedbacks" method="get">
-					 <input type="text" name="id" placeholder="Search by Doctor ID" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;background-color: #F5F7FB;">
-    <button type="submit" style="background-color: #4CAF50; color: white; font-weight: bold; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Search</button>
-</form>
-				</form>
-				<br>
+	<div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.</h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
+	<div class="header" >
+		<div style="border: 1px;height: 15vw;box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);border-radius: 2vw;width:80%;background-image: url('/css/pictures/image.svg');background-size: cover;background-position: center;">
+			
+		</div>
+	
+	</div>
 
+	<div style="border:1px;border-color: #4CAF50;border-radius: 2vw;box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913) ;padding: 1%;margin:2% 10%;width: 80%;">
+		
+		
+		<div >
+			<div style="display: flex;justify-content:center;margin:1%;">
+				<div style="margin-right: 1%;" >
 				<button onclick="window.location.href='/Manager/allFeedbacks'"
-					style="background-color: #4CAF50; color: white; border: none; padding: 10px 68px; border-radius: 5px; cursor: pointer;">Manage
-					Feedbacks</button>
+					style=" background-color:#fff;color:rgb(45, 106, 48); border: 2px solid #4CAF50; padding: 8px 30px; border-radius: 20px; cursor: pointer;">Manage Feedbacks</button>
+					</div>
+				<div >
+				<form action="/Manager/doctorFeedbacks" method="get">
+					 <input type="text" name="id" placeholder="Search Doctor ID..." style="padding: 8px; border-radius: 20px; border: 1px solid #ccc;background-color: #F5F7FB;width: 30vw;">
+    				 <button type="submit" style="background-color: #4CAF50; color: white; font-weight: bold; border: none; padding: 10px 12px; border-radius: 5px; cursor: pointer;margin-left: 1vw;">Search</button>
+				</form>
+				</div>
 			</div>
 		</div>
 		<div>
@@ -167,7 +156,7 @@
 		</div>
 		<div class="department-container">
 			<div class="department" th:each="department : ${departments}">
-				<h2 th:text="${department.name}"></h2>
+				<h2 style="margin-bottom: 1%;" th:text="${department.name}"></h2>
 				<div class="text-container">
 					<div class="doctor-list">
 						<div class="card" th:each="doctor : ${doctors}"

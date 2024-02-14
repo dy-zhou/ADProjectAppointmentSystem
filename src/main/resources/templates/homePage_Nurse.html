@@ -1,50 +1,41 @@
 <html>
-	<style></style>
-	<link rel="stylesheet" href="/static/homepage.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/homePage_Doctor.css">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
 		<title>Home Page</title>
-		<style>
-			 body {
-         font-family: Arial, sans-serif;
-         margin: 0;
-         padding: 0;
-         background-color: #f4f4f4;
-      }
-
-      .card {
-         background-color: white;
-         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-         margin: 10px;
-         padding: 20px;
-         border-radius: 8px;
-         width: 300px;
-         text-align: left;
-      }
-
-      .card apphead {
-         margin-top: 0;
-      }
-
-      .card p {
-         color: #666;
-         margin-bottom: 4px;
-      }
-		</style>
 	</head>
-	<header>
-		<img class="logo-image" src="/images/laps1.svg" alt="Company logo">
-		<input type="text" placeholder="Search">
-		<div>
-			<img class="user-image" src="" alt="user imgae">
-			<a href="/login">Logout</a>
-		</div>
-	</header>
+	
 	<body>
-		<a th:href="@{/Nurse/patientList}">view Patient List</a>
-		
+		<div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.</h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
+	<div class="header" >
+		<div style="border: 1px;height: 15vw;box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);border-radius: 2vw;width:80%;background-image: url('/css/pictures/image.svg');background-size: cover;background-position: center;">	
+		</div>
+	
+	</div>
+		<div style="margin:2% 10%; ">
+		<a th:href="@{/Nurse/patientList}"><button style="height:20vw;width:15vw;border-radius:10px;background-color: rgb(149, 191, 60);color: #fff;border:0 solid #fff;box-shadow:0 4px 8px rgba(196, 181, 176, 0.913);font-size:80vw;">Patient Management</button></a>
+		<a th:href="@{/Nurse/viewAppointmentDetail}"><button style="height:20vw;width:15vw;border-radius:10px;background-color: #4caf50;color: #fff;border:0 solid #fff;box-shadow:0 4px 8px rgba(196, 181, 176, 0.913);font-size: large;">Appointment Management</button></a>
+		</div>
 		
 		
 				
