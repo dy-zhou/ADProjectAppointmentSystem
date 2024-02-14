@@ -83,6 +83,9 @@
 			<thead>
 				<tr>
 					<p>
+						<th>Appointment ID</th>
+					</p>
+					<p>
 						<th>Queue Number</th>
 					</p>
 					<p>
@@ -100,10 +103,17 @@
 					<p>
 						<th>Doctor</th>
 					</p>
+					<p>
+						<th>Status</th>
+					</p>
+					<p>
+						<th>Update Status</th>
+					</p>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="appointment : ${patient.appointments}">
+					<td th:text="${appointment.id}"></td>
 					<td th:text="${appointment.queue_number}"></td>
 					<td th:text="${appointment.date}"></td>
 					<td th:text="${appointment.time}"></td>
@@ -111,6 +121,17 @@
 					<!--<td th:text="${appointment.department.name}"></td>-->
 					<td th:text="${appointment.staff.department.name}"></td>
 					<td th:text="${appointment.staff.name}"></td>
+					<td th:text="${appointment.status}"></td>
+					<td>
+						<form th:action="@{/Nurse/patient/updateStatus/{appointmentId}(appointmentId=${appointment.id})}" th:object="${appointment}" method="POST">
+							<select th:field="*{status}" onchange="submit()">
+			                    <option value="">---Select to Update---</option>
+			                    <option value="Proceeding">Proceeding</option>
+			                    <option value="Completed">Completed</option>
+			                    <option value="Cancelled">Cancelled</option>
+		                	</select>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		<div id="noRecordsMessage">No records found.</div>
@@ -129,7 +150,7 @@
 			var recordsFound = false;
 			
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1]; //date is in the second column
+                td = tr[i].getElementsByTagName("td")[2]; //date is in the second column
                 if (td) {
                     txtValue = td.textContent || td.innerText;
                     if (txtValue.indexOf(filter) > -1) {
@@ -155,7 +176,19 @@
             table.style.display = "table";
             noRecordsMessage.style.display = "none";
         }
+        
+       
     </script>
+    <script th:inline="javascript">
+		  /*<![CDATA[*/
+        // Check if the success message is present in the model
+        var successMessage = /*[[${successMessage}]]*/ null;
+
+        if (successMessage) {
+            alert(successMessage);
+        }
+        /*]]>*/ 
+	</script>
 	
 </body>
 

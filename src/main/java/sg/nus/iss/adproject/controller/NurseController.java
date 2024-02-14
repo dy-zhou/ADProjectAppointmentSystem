@@ -122,15 +122,37 @@ public class NurseController {
 	public String patientDetail(@PathVariable("id") int id, 
 			Model model, HttpSession session) {
 		Patient patient = patientService.getPatientById(id);
-		System.out.println("Patient appointment: " + patient.getAppointments());
+		Appointment appointment = new Appointment();
+		session.setAttribute("patientId", id);
+		
 		if (patient != null) {
 			model.addAttribute("patient", patient);
+			model.addAttribute("patientId", id);
+			model.addAttribute("appointment", appointment);
+			model.addAttribute("successMessage", "");
 //			session.setAttribute("patient", patient);
 //			session.setAttribute("patientId", id);
 			return "patientDetail";
 		} else
 			return "addNewPatient";
 	}
+	
+	//Update Appointment Status
+	@PostMapping("patient/updateStatus/{appointmentId}")
+	public String updateAppointmentStatus(@PathVariable("appointmentId") int appointmentId,
+			Model model, @ModelAttribute("appointment") Appointment appointment,
+			HttpSession session) {
+		Appointment appointmentStaus = appointment;
+		AppointmentStatusEnum status = appointmentStaus.getStatus();
+		
+		Appointment appointmentUpdate = appointmentService.findAppointmentById(appointmentId);
+		appointmentUpdate.setStatus(status);
+		appointmentService.updateAppointment(appointmentUpdate);
+		
+		int pId = (Integer)session.getAttribute("patientId");
+		return "redirect:/Nurse/patient/" + pId;
+	}
+	
 	
 	//Disease Prediction
 //	@GetMapping("patient/disease/{appointmentId}")
@@ -280,8 +302,8 @@ public class NurseController {
 		System.out.println("Morning Time: " + morning);
 		System.out.println("Afternoon Time: " + afternoon);
 		
-		int morningSlots = 0;
-		int afternoonSlots = 0;
+		Integer morningSlots = 0;
+		Integer afternoonSlots = 0;
 		
 		//Check if date available, if not available check slots
 		List<Schedule> selectedStaffSchedule = scheduleService.findSchedulesByStaff(staffId);
@@ -323,6 +345,7 @@ public class NurseController {
 			newSchedule.setStaff(selectedStaff);
 			newSchedule.setPatient_slot(1);
 			scheduleService.createShedule(newSchedule);
+			model.addAttribute("successMessage", "Appointment Succesful!"); 
 			
 		}else if(!dateAvailable) {
 			boolean staffAvailable = false;
@@ -330,13 +353,19 @@ public class NurseController {
 			
 			if(selectedTime.equals(morning)) {
 				morningSlots = scheduleService.findMaxPatientSlotByTimeStart(morning, staffId, selectedDate);
-				if(morningSlots < 20 ) {
+				if (morningSlots==null) {
+					morningSlots =0;
+				}
+				if(morningSlots < 20) {
 					staffAvailable = true;
 				}
 				
 			} else if(selectedTime.equals(afternoon)) {
 				afternoonSlots = scheduleService.findMaxPatientSlotByTimeStart(afternoon, staffId, selectedDate);
-				if(afternoonSlots < 20 ) {
+				if (afternoonSlots==null) {
+					afternoonSlots =0;
+				}
+				if(afternoonSlots < 20) {
 					staffAvailable = true;
 				}
 			}
@@ -394,7 +423,6 @@ public class NurseController {
 			}
 		}
 		
-		//TODO:Alert window when updateAppointment is successful
 		return "redirect:patient/" + patientId;
 		
 		
