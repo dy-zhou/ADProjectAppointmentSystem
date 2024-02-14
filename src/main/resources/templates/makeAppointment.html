@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -211,6 +211,258 @@
         
     </script>
     	
+	
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Possible Disease And Select Doctor</title>
+	<link rel="stylesheet" href="/css/appointment.css">
+	
+	<style>
+		.stepper-wrapper {
+		  margin-top: auto;
+		  display: flex;
+		  justify-content: space-between;
+		  margin-bottom: 20px;
+		  margin-top:7vw;
+		}
+		.stepper-item {
+		  position: relative;
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  flex: 1;
+		}
+		
+		.stepper-item::before {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #ccc;
+		  width: 100%;
+		  top: 25px;
+		  left: -50%;
+		  z-index: 2;
+		}
+		
+		.stepper-item::after {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #ccc;
+		  width: 100%;
+		  top: 25px;
+		  left: 50%;
+		  z-index: 2;
+		}
+		
+		.stepper-item .step-counter {
+		  position: relative;
+		  z-index: 5;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  width: 60px;
+		  height: 60px;
+		  border-radius: 50%;
+		  background: #ccc;
+		  margin-bottom: 6px;
+		  border:3px solid  rgb(217, 240, 220);
+		}
+		
+		.stepper-item.active {
+		  font-weight: bold;
+		}
+		
+		.stepper-item.completed .step-counter {
+		  background-color: #4bb543;
+		}
+		
+		.stepper-item.completed::after {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #4bb543;
+		  width: 100%;
+		  top: 25px;
+		  left: 50%;
+		  z-index: 3;
+		}
+		
+		.stepper-item:first-child::before {
+		  content: none;
+		}
+		.stepper-item:last-child::after {
+		  content: none;
+		}
+		
+				
+		.possibleDisease {
+		  margin-top: 0.5rem;
+		  margin-bottom: 0.5rem;
+		  height: fit-content;
+		  width:fit-content;
+		  border: none;
+		  box-shadow: 0px 0px 2px rgba(0,0,0,1);
+		  background-color: rgb(240,240,240);
+		  margin-left:3vw;
+		}
+		legend {
+		  background-color:#4bb543;
+		  padding: 0.55rem;
+		  font-size: 1.0rem;
+		  color: rgb(238, 238, 238);
+		 border-radius:5px;
+		}
+		legend:after {
+		  content: "";
+		  height: 0;
+		  width:0;
+		  background-color: transparent;
+		  border-top: 0.0rem solid transparent;
+		  border-right:  0.35rem solid black;
+		  border-bottom: 0.45rem solid transparent;
+		  border-left: 0.0rem solid transparent;
+		  position:absolute;
+		  left:-0.075rem;
+		  bottom: -0.45rem;
+		}
+		.apptForm{
+		  margin-top: 1.0rem;
+		  margin-bottom: 0.5rem;
+		  height: fit-content;
+		  width:fit-content;
+		  border: none;
+		  box-shadow: 0px 0px 2px rgba(0,0,0,1);
+		  background-color: rgb(217, 240, 220);
+		  margin-left:30%;
+		  margin-top:5vw;
+		  border-radius: 8px;
+		}
+		#submitButton{
+			margin-top: 2vw;
+			margin-left: 47%;
+			padding: 5px;
+			width:4vw;
+			height:2.5vw;
+			border-radius: 5px;
+			border: 1px solid #999;
+			
+			box-shadow: 0 3px 5px 0 rgba(0,0,0,.2);
+			background-color: #4bb543;
+			color:#fff;
+			
+			
+		}
+		select{
+			padding: 7px;
+			margin-top: 7px;
+			margin-bottom: 7px;
+		}
+		#selectedDate{
+			padding: 5px;
+		}
+		label{
+			margin-left:10px;
+		}
+		#time{
+			margin-left:10px;
+		}
+		
+	</style>
+</head>
+
+<body>
+	
+    <div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.</h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
+	<div class="stepper-wrapper">
+	  <div class="stepper-item completed">
+        <div class="step-counter">0</div>
+        <div class="step-name"><a th:href="@{/Nurse/patientList}">Patient List</a></div>
+      </div>	
+      <div class="stepper-item completed">
+        <div class="step-counter">1</div>
+        <div class="step-name">
+			<a th:href="@{/Nurse/patient/disease/{patientId}(patientId=${patientId})}">Select Disease</a></div>
+      </div>
+      <div class="stepper-item completed">
+        <div class="step-counter">2</div>
+        <div class="step-name"><a href="javascript:history.back()">Select Symptoms</a></div>
+      </div>
+      <div class="stepper-item active">
+        <div class="step-counter">3</div>
+        <div class="step-name">Select Doctor and Time Slot</div>
+      </div>
+    </div>
+	
+
+	<div th:if="${departmentStaff.size() > 0}">
+		<form th:action="@{/Nurse/selectDoctors}" th:object="${newAppointment}" method="POST" id="form">
+			<fieldset class="apptForm">
+				<legend>Make Appointment</legend>
+				<select th:field="*{staff}" id="staff">
+					<option value="">---Select Appointment Doctor---</option>
+					<option th:each="staff : ${departmentStaff}"
+							th:value="${staff.id}"
+							th:text="${staff.name}">
+					</option>
+				</select>
+				<label for="selectedDate">Select Date: </label>
+				<input type="date" id="selectedDate" th:field="*{date}"/>
+				<select th:field="*{time}" id="time">
+					<option value="">---Select Morning or Night---</option>
+					<option th:value="'08:00:00'">Morning</option>
+					<option th:value="'14:00:00'">Night</option>
+				</select>
+					<legend style="margin-top:2vw;width:7.5vw">Possible Disease</legend>
+		<p>Patient may have <b><span th:text="${prediction}"></span></b>.</p>
+		<p>Patient have these symptoms: <b><span th:text="${patientSymptoms}"></span></b>.</p>
+		<span th:unless="${departmentStaff.size() > 0}">No Doctor Available!</span>
+			</fieldset>
+			<button type="submit" id="submitButton" >Submit</button>
+		</form>
+	</div>
+	
+	<script th:inline="javascript">
+        
+        /*<![CDATA[*/
+        // Check if the alert message is present in the model
+        var alertMessage = /*[[${alertMessage}]]*/ null;
+
+        if (alertMessage) {
+            alert(alertMessage);
+        }
+        /*]]>*/    
+        
+        /*<![CDATA[*/
+        // Check if the success message is present in the model
+        var successMessage = /*[[${successMessage}]]*/ null;
+
+        if (successMessage) {
+            alert(successMessage);
+        }
+        /*]]>*/    
+            
+    </script>
 	
 </body>
 </html>

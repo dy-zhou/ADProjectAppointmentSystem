@@ -7,7 +7,22 @@
 		
 		<title>Home Page</title>
 	</head>
-	
+	<style>
+		.doctor-card {
+  background-color: #fff; /* 灰色背景 */
+  padding:8% 10%; /* 内边距 */
+  border-radius: 2%; /* 圆角边框 */
+  width: 20vw; /* 卡片宽度 */
+  display: flex; /* 使用 Flex 布局 */
+  align-items: center; /* 垂直居中 */
+
+  margin-bottom:2vw;
+  box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
+  height:12vw;
+ 
+
+}
+	</style>
 	<body>
 		<div class="navbar">
 		<header>
@@ -32,11 +47,38 @@
 		</div>
 	
 	</div>
-		<div style="margin:2% 10%; ">
-		<a th:href="@{/Nurse/patientList}"><button style="height:20vw;width:15vw;border-radius:10px;background-color: rgb(149, 191, 60);color: #fff;border:0 solid #fff;box-shadow:0 4px 8px rgba(196, 181, 176, 0.913);font-size:80vw;">Patient Management</button></a>
-		<a th:href="@{/Nurse/viewAppointmentDetail}"><button style="height:20vw;width:15vw;border-radius:10px;background-color: #4caf50;color: #fff;border:0 solid #fff;box-shadow:0 4px 8px rgba(196, 181, 176, 0.913);font-size: large;">Appointment Management</button></a>
+		<div style="margin:2% 10%;">
+			<div style="display: flex;justify-content: space-between">
+		<a th:href="@{/Nurse/patientList}"><button style="height:10vw;width:30vw;border-radius:10px;background-color: rgb(149, 191, 60);color: #fff;border:0 solid #fff;box-shadow:0 4px 8px rgba(196, 181, 176, 0.913);font-size:larger;margin-right: 20%;">Patient Management</button></a>
+		<a ><button onclick="toggle()"style="height:10vw;width:30vw;border-radius:10px;background-color: rgb(68, 183, 83);color: #fff;border:0 solid #fff;box-shadow:0 4px 8px rgba(196, 181, 176, 0.913);font-size:larger;">Doctor Schedule</button></a>
 		</div>
-		
+		</div>
+		<div style="margin-left: 6vw; display:none;" id="content">
+		<div style="column-count: 4;column-gap: 2vw;margin:3% 0%; background-color: #fff;border: 2px solid rgb(68, 183, 83);border-radius: 20px;padding-top: 3vw;padding-left: 2vw;padding-right:2vw;width:88vw">
+		<div class="doctor-card" th:each="doctor:${doctorList}">
+			<div>
+				
+				<p><img src="/css/pictures/doctor.svg" alt="doctor" style="height: 2vw;">
+					<label th:text="${doctor.name}" style="font-size: large;;"></label></p>
+				<p>ID  <label th:text="${doctor.id}"></label></p>
+				<p>Department  <label th:text="${doctor.department.name}"></label></p>
+				<p>Room  <label th:text="${doctor.room.name}"></label></p>
+			
+				<a th:href="@{Nurse/viewAppointmentDetails/}+${doctor.id}">Appointment Today</a>
+			</div>
+		</div>
+		</div>
+	</div>
+		<script>
+			function toggle(){
+				var content=document.getElementById('content');
+				if(content.style.display=='none'||content.style.display==''){
+					content.style.display='block';
+				}else{
+					content.style.display='none';
+				}
+			}
+		</script>
 		
 				
 			

@@ -117,6 +117,13 @@ public class NurseController {
 		patientService.addPatient(patient);
 		return "redirect:/Nurse/patientList";
 	}
+	
+	@GetMapping("/viewAppointmentDetails/{id}")
+	public String viewAppointmentDetails(@PathVariable("id") int id,Model model) {
+		List<Appointment>appointmentList=appointmentService.findAppointmentByStaffId(id);
+		model.addAttribute("AppointmentList", appointmentList);
+		return "viewAppointmentDetail";
+	}
 	//Get Patient
 	@GetMapping("patient/{id}")
 	public String patientDetail(@PathVariable("id") int id, 

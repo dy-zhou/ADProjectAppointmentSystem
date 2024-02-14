@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -163,5 +163,201 @@
 	     
      </form>
      
+  </body>    
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Symptoms Selction</title>
+	<link rel="stylesheet" href="/css/Appointment.css">
+	<style>
+		.custom-select {
+		    -webkit-appearance: none;
+		    -moz-appearance: none;
+		    appearance: none;
+		    height: 57px;
+		    padding: 10px 38px 10px 16px;
+		    background-size: 10px;
+		    transition: border-color .1s ease-in-out,box-shadow .1s ease-in-out;
+		    border: 1px solid #ddd;
+		    border-radius: 4px;
+		}
+		.custom-select:hover {
+		    border: 1px solid #999;
+		}
+		.custom-select:focus {
+		    border: 1px solid #999;
+		    box-shadow: 0 3px 5px 0 rgba(0,0,0,.2);
+		    outline: none;
+		}
+		
+		form {
+		    height: 100%;
+		    align-items: center;
+		    justify-content: center;
+		    margin-top: 80px;
+		    text-align: center;
+		    font-family: "Source Sans Pro", sans-serif;
+		    font-size: 1.0rem;
+		    color: #333;
+		}
+		h1 {
+		  font-family: Merriweather, serif;
+		}
+		.custom-select {
+		    font-family: "Source Sans Pro", sans-serif;
+		    font-size: 1.0rem;
+		}
+		#submitBtn{
+			height: 45px;
+			width: 88px;
+			font-size: 1.0rem;
+			margin-left: 13px;
+			border-radius: 5px;
+			border: 0.1px solid #CDDECA;
+			box-shadow: 0 3px 5px 0 rgba(0,0,0,.2);
+			margin-top:2vw;
+			margin-bottom: 2vw;
+		 background-color: #4bb543;
+		 color:#fff
+		}
+		#submitBtn:active {
+		    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.1);
+		    transform: translateY(2px);
+		}
+		.stepper-wrapper {
+		  margin-top: auto;
+		  display: flex;
+		  justify-content: space-between;
+		  margin-bottom: 20px;
+		  margin-top:7vw;
+		}
+		.stepper-item {
+		  position: relative;
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  flex: 1;
+		}
+		
+		.stepper-item::before {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #ccc;
+		  width: 100%;
+		  top: 25px;
+		  left: -50%;
+		  z-index: 2;
+		}
+		
+		.stepper-item::after {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #ccc;
+		  width: 100%;
+		  top: 25px;
+		  left: 50%;
+		  z-index: 2;
+		}
+		
+		.stepper-item .step-counter {
+		  position: relative;
+		  z-index: 5;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  width: 60px;
+		  height: 60px;
+		  border-radius: 50%;
+		  background: #ccc;
+		  margin-bottom: 6px;
+		}
+		
+		.stepper-item.active {
+		  font-weight: bold;
+		}
+	
+		.stepper-item.completed .step-counter {
+			background-color: #4bb543;
+
+		}
+		
+		.stepper-item.completed::after {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #4bb543;
+		  width: 100%;
+		  top: 25px;
+		  left: 50%;
+		  z-index:3;
+		    border: 5px solid #bee5d6;
+		}
+		
+		.stepper-item:first-child::before {
+		  content: none;
+		}
+		.stepper-item:last-child::after {
+		  content: none;
+		}
+	</style>
+</head>
+
+<body>
+    <div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.</h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
+
+	
+	<div class="stepper-wrapper">
+      <div class="stepper-item completed">
+        <div class="step-counter">0</div>
+        <div class="step-name"><a th:href="@{/Nurse/patientList}">Patient List</a></div>
+      </div>
+      <div class="stepper-item active">
+        <div class="step-counter">1</div>
+        <div class="step-name">Select Disease</div>
+      </div>
+      <div class="stepper-item">
+        <div class="step-counter">2</div>
+        <div class="step-name">Select Symptoms</div>
+      </div>
+      <div class="stepper-item">
+        <div class="step-counter">3</div>
+        <div class="step-name">Select Doctor and Time Slot</div>
+      </div>
+    </div>
+    
+	<form th:action="@{/Nurse/selectSymptoms}" method="POST" th:object="${selectedSymptomGroup}" style="width:40vw;height:auto;background-color:#CDDECA ;margin-left:30%;border-radius: 8px;padding:1%">
+			<h1 style="margin-top:2vw;">Select Possible Related Disease</h1>
+	    <select th:field="*{symptomGroup}" class="custom-select">
+			<option value="" style="border-radius: 8px;">Select Possible Related Disease</option>
+			<option th:each="group : ${symptomGroup}" 
+					th:value="${group}" 
+					th:text="${group}">
+			</option>	
+	     </select>
+	     <br>
+     <button type="submit" id="submitBtn">Submit</button>
+	     
+     </form>
   </body>    
 </html>
