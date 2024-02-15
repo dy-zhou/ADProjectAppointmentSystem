@@ -39,7 +39,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public Appointment findAppointmentById(int id) {
 		// TODO Auto-generated method stub
-		return appointmentRepository.findAppointmentById(id);
+		return appointmentRepository.getAppointmentDetail(id);
 	}
 
 	@Override

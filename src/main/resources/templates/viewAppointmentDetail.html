@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -124,6 +124,96 @@
 
     
 
-    <!----><aside class="queue">
+    <aside class="queue">
        
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appointment List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/appointment.css">
+
+
+</head>
+<body>
+
+<div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.<span th:text="${session.staffObj.name}"></span></h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
+
+
+    <div class="main-content1">
+            <div style="margin-left: 5vw;width:14vw;">
+                <form th:action="@{/Doctor/AppointmentDetails}" method="post" style="padding: 10px;  box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913); /* 浅灰色边框 */;border-radius: 8px;height: 20vw;">
+                        <label for="datepicker" style="display: block; margin-bottom: 5px;">Choose a date:</label>
+                        <input type="date" id="datepicker" name="datepicker"style="height:1.5vw; border:1px solid #4CAF50;border-radius: 3px;width:7vw">
+                        <input 	type="submit" value="Submit" style="background-color: #4CAF50; border-radius: 3px;  border: #fff;    color:#fff;font-size: 0.8vw;height: 1.5vw;padding:2.8%;margin-left:1vw;">
+                </form>
+            </div>
+        
+        <divsection class="appointment-section2">
+            <!-- Feedback section -->
+            <div class="feedback">
+                <div class="title-card2">
+                <h1>Appointment </h1>
+                </div>
+            </div>
+            <div style="display: flex;justify-content: space-between" th:each="appointment:${AppointmentList}">
+				<div style="border-radius: 50%;width:1.8vw;height:1.5vw; box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);margin-left: 3vw; box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);; box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);;background-color: #4CAF50;">
+				</div>
+                <div class="appointment-card2" >
+				
+                 <p style="font-weight: bolder;">Patient Name:	<label style="font-weight: normal;"  th:text="${appointment.patient.name}"></label></p>
+				<div style="display:flex;justify-content: space-between;">
+					<div  >
+				
+           
+             <p style="font-weight: bolder;">Patient ID:	<label style="font-weight: normal;"   th:text="${appointment.patient.id}"></label></p>
+            <p style="font-weight: bolder;">Appointment Time:	<label style="font-weight: normal;" th:text="${appointment.time}"></label></p>
+            <p style="font-weight: bolder;">Address:	<label style="font-weight: normal;" th:text="${appointment.patient.address}"></label></pstyle="font-weight: bolder;">
+            <p style="font-weight: bolder;">Gender:	<label style="font-weight: normal;" th:text="${appointment.patient.sex}"></label></p>
+            <a  th:href="@{/Doctor/EditAppointmentDetails/}+${appointment.id}">
+				<button style=" background-color: #4CAF50;border-radius: 8px;padding:0.5vw 2vw; color:#fff; font-size: 0.85vw;border:0 solid;margin-left:20vw;" >
+				  Detail</button></a>
+				 </div>
+            <div style="margin-left:3vw;width:20vw; ">
+ 
+            <p style="font-weight: bolder;">Allergy:	<label style="font-weight: normal;" th:text="${appointment.patient.allergy}"></label></p>
+            <p style="font-weight: bolder;">Medical Condition:	<label style="font-weight: normal;" th:text="${appointment.patient. medical_condition}" ></label></p>
+             <p style="font-weight: bolder;">Addtional info:	<label style="font-weight: normal;" th:text="${appointment.patient.additional_info}"></label></p>
+            
+             
+            </div>
+            
+              </div>
+              </div>
+              
+            </div>
+            
+    </div>
+    
+</div>
+
+
+
+
 

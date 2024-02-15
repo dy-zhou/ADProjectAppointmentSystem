@@ -118,6 +118,7 @@ public class NurseController {
 		return "redirect:/Nurse/patientList";
 	}
 	
+
 	@GetMapping("editPatient/{id}")
 	public String editPatient(@PathVariable("id")int id,
 			Model model) {
@@ -156,6 +157,14 @@ public class NurseController {
 	
 	
 	
+
+	@GetMapping("/viewAppointmentDetails/{id}")
+	public String viewAppointmentDetails(@PathVariable("id") int id,Model model) {
+		List<Appointment>appointmentList=appointmentService.findAppointmentByStaffId(id);
+		model.addAttribute("AppointmentList", appointmentList);
+		return "viewAppointmentDetail";
+	}
+
 	//Get Patient
 	@GetMapping("patient/{id}")
 	public String patientDetail(@PathVariable("id") int id, 

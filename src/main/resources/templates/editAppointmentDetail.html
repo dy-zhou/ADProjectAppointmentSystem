@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -157,4 +157,83 @@
 
 
 
-		<aside class="queue">
+		<aside class="queue">-->
+		<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Appointment List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/appointment.css">
+</head>
+<body>
+
+    <div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.<span th:text="${session.staffObj.name}"></span></h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
+<div style="display:flex; justify-content: space-between;margin-top: 2vw;">
+  <div class="appointment-card1">
+    <form th:action="@{/Doctor/EditAppointmentDetails/}+${Appointment.id}" th:object="${Appointment}" method="post">
+      <label for="medical_condition" style="display: block; margin-bottom: 5px;padding:2%;  width:8vw;border-radius: 5px;">Medical Condition:</label>
+      <input type="text" id="medical_condition" th:value="*{medical_condition}" th:field="*{medical_condition}" required style="display: block; margin-bottom: 5px;width:23vw; height:7vw;border-radius: 8px;border:1px solid rgb(192, 192, 192);">
+      <button type="submit" style="margin-left:84%;border-radius: 8px;  background-color: #4CAF50;padding-top:2%;padding-right: 2%;padding-top: 1.5%;padding-bottom: 1.5%;  border:0 solid #fff; /* 浅灰色边框 */;color:#fff">Submit</button>
+    </form>
+  </div>
+
+  <div class="appointment-card2" th:object="${Appointment}">
+    <div style="display:flex; justify-content: space-between;">
+      <div style="margin-left:2vw;">
+        <p th:text="${Appointment.patient.name}"><strong>Patient Name:</strong></p>
+        <p th:text="${Appointment.patient.id}"><strong>Patient ID:</strong></p>
+        <p>Appointment Time:<label th:text="${Appointment.time}"></label></p>
+        <p>Address:<label th:text="${Appointment.patient.address}"></label></p>
+      </div>
+      <div style="margin-right:13vw;">
+        <p>Gender:<label th:text="${Appointment.patient.sex}"></label></p>
+        <p>Allergy:<label th:text="${Appointment.patient.allergy}"></label></p>
+        <p>Medical Condition:<label th:text="${Appointment.medical_condition}"></label></p>
+        <p>Addtional info: <label th:text="${Appointment.patient.additional_information}"></label></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+           <div class="appointment-card3 " th:each="medical_record:${medicalRecords}">
+				<div style="display:flex;justify-content: space-between;margin-left:3vw;">
+			<div style="margin-left:10vw;">
+				<p th:text="${medical_record.patient.name}"><strong>Patient Name:</strong></p>
+				<p th:text="${medical_record.patient.id}"><strong>Patient ID:</strong></p>
+				<p>Appointment Time:<label th:text="${medical_record.time}"></label></p>
+				<p>Gender:<label th:text="${medical_record.patient.sex}"></label></p>
+			</div>
+			<div style="margin-right:15vw;">
+				<p>Allergy:<label th:text="${medical_record.patient.allergy}"></label></p>
+				<p>Addtional info: <label th:text="${medical_record.patient.additional_information}"></label></p>
+				<p>Symptoms:<label th:text="${medical_record.patient.medical_condition}"></label></p>
+				<p>Medical Condition:<label th:text="${medical_record.medical_condition}"></label></p>
+
+			</div>
+			</div>
+           </div>
+				</div>
+                    </div>
+</body>	

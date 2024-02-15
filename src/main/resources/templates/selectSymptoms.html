@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -165,6 +165,226 @@
 			</div>			 
         </fieldset>
     	<button type="submit" id="submitButton">Submit</button>
+	</form>
+</body>
+
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Symptoms Selction</title>
+	<link rel="stylesheet" href="/css/appointment.css">
+	<style>
+
+		div.checkbox-container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            user-select: none;
+        }
+
+        /* Hide the default checkbox input */
+        div.checkbox-container input {
+            position: absolute;
+           top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+            border: 1px solid #ddd;
+            margin-left:5px ;
+        }
+       
+        /* Style the checked state */
+        div.checkbox-container input:checked  {
+            background-color:#4bb543;
+        }
+
+
+        /* Show the checkmark when the checkbox is checked */
+        div.checkbox-container input:checked {
+            display: block;
+            background-color: #4bb543;
+            width: 23px;
+            height: 23px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+           
+        }
+        
+		.sympCheck{
+		column-count: 2;
+		column-gap: 4vw;
+		margin-left: 20vw;
+		background-color:#CDDECA;
+		padding-right: 0;
+		padding-left: 4%;
+		padding-top: 2%;
+		padding-bottom: 2%;
+		width: 60%;
+		border-radius: 0 0 10px 10px;
+ 
+		}
+		
+		.stepper-wrapper {
+		  margin-top: auto;
+		  display: flex;
+		  justify-content: space-between;
+		  margin-bottom: 20px;
+		  margin-top:7vw;
+		}
+		.stepper-item {
+		  position: relative;
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  flex: 1;
+		}
+		
+		.stepper-item::before {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #ccc;
+		  width: 100%;
+		  top: 25px;
+		  left: -50%;
+		  z-index: 2;
+		}
+		
+		.stepper-item::after {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #ccc;
+		  width: 100%;
+		  top: 25px;
+		  left: 50%;
+		  z-index: 2;
+		}
+		
+		.stepper-item .step-counter {
+		  position: relative;
+		  z-index: 5;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  width: 60px;
+		  height: 60px;
+		  border-radius: 50%;
+		  background: #ccc;
+		  margin-bottom: 6px;
+		}
+		
+		.stepper-item.active {
+		  font-weight: bold;
+		}
+		
+		.stepper-item.completed .step-counter {
+		  background-color: #4bb543;
+		  		    border: 5px solid #bee5d6;
+		}
+		
+		.stepper-item.completed::after {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #4bb543;
+		  width: 100%;
+		  top: 25px;
+		  left: 50%;
+		  z-index: 3;
+
+		}
+		
+		.stepper-item:first-child::before {
+		  content: none;
+		}
+		.stepper-item:last-child::after {
+		  content: none;
+		}
+		
+		.submitButton{
+			margin-left: 50%;
+			margin-top: 2vw;
+			margin-bottom: 2vw;;
+			padding: 1% 2%;
+			background-color: #4bb543;
+			color: #Fff;
+			border-radius: 5px;
+			border: 0px solid #999;
+			box-shadow: 0 3px 5px 0 rgba(0,0,0,.2);
+		}
+	</style>
+</head>
+
+<body>
+    <div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.<span th:text="${session.staffObj.name}"></span></h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
+	
+	<div class="stepper-wrapper">
+	  <div class="stepper-item completed">
+        <div class="step-counter">0</div>
+        <div class="step-name"><a th:href="@{/Nurse/patientList}">Patient List</a></div>
+      </div>	
+      <div class="stepper-item completed">
+        <div class="step-counter">1</div>
+        <div class="step-name">
+			<a th:href="@{/Nurse/patient/disease/{patientId}(patientId=${patientId})}">Select Disease</a></div>
+      </div>
+      <div class="stepper-item active">
+        <div class="step-counter">2</div>
+        <div class="step-name">Select Symptoms</div>
+      </div>
+      <div class="stepper-item">
+        <div class="step-counter">3</div>
+        <div class="step-name">Select Doctor and Time Slot</div>
+      </div>
+    </div>
+    
+	
+    <form th:action="@{/Nurse/makeAppointment}" th:object="${selectedSymptoms}"method="POST" >
+        	<div style="background-color: #CDDECA;margin-left: 20vw;padding: 2%;width: 60%;border-radius: 10px 10px 0 0;">
+            <h1>Symptoms for <span th:text="${selectedSymptomGroup.symptomGroup}"></span> </h1>
+            </div>
+            <div class="sympCheck">
+				
+				<div th:each="symptom : ${relatedSymptoms}" class="checkbox-container">
+				
+					<input type="checkbox" 
+						th:value="${symptom}"
+						th:text="${symptom}"
+						th:field="*{symptoms}" >
+					
+						
+					
+					</input>
+				<br>
+				
+				</div>
+			</div>			 
+   
+    	<button type="submit" class="submitButton"  >Submit</button>
 	</form>
 </body>
 

@@ -5,15 +5,16 @@ body {
   background-color: #fff;
   box-sizing: border-box;
 }
-.navbar h3{
-  font-weight: normal;
-}
+
 .navbar{
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%; /* 确保导航条占据整个容器宽度 */
-  box-shadow: 0 2px 4px 0 rgba(6, 0, 0, 0.2); /* 添加水平和垂直偏移的阴影，以及模糊距离和颜色 */
+  box-shadow: 0 2px 4px 0 rgba(6,0,0,0.2); /* 添加水平和垂直偏移的阴影，以及模糊距离和颜色 */
+}
+.search-container h3{
+  font-weight: normal;
 }
 
 .search-container {
@@ -21,10 +22,8 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  width:100%
-
+  width:100%;
 }
-
 .header-content {
   display: flex;
   justify-content: space-between;
@@ -34,7 +33,7 @@ body {
 }
 
 .log-card{
-  width:10vw;
+width:10vw;
   height:3vw;
   border-radius: 8px;
   background-color: #4CAF50;
@@ -51,8 +50,9 @@ body {
 }
 .main-content1 {
   display: flex;
-  justify-content: space-between;
-  padding: 5px;
+  justify-content:space-between;
+  padding:2vw;
+  margin-left: 0;
   display: flex;
   width:90%;
 }
@@ -62,7 +62,7 @@ body {
   width: 5vw; /* 图片高度 */
   object-fit: cover; /* 可选，保持图片的纵横比 */
   margin-bottom:10px;
-  margin-left:2vw;
+  margin-left: 2vw;
 
 }
 
@@ -75,45 +75,38 @@ body {
 }
 
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding: 1%;
-  justify-content:center;
- 
- background-color: rgb(255, 255, 255);
+
+#search-button:hover {
+  background-color: #45a049;
 }
+
+
+
+
+
+
 
 .title-card1{
-  padding: 5px; /* 内边距 */
+  padding: 10px; /* 内边距 */
   border-radius: 8px; /* 圆角边框 */
-  width: 40%; /* 卡片宽度 */
+  width: 13vw /* 卡片宽度 */;
   align-items: center; /* 垂直居中 */
   height: 3vw;
-  margin-left:4.5vw;
-  margin-bottom: 1vw;
-  margin-top: 4vw;
+  margin-left:1vw;
+  margin-bottom: 2vw;
+  margin-top: 1vw;
 
-
-}
-.title-card1 a{
-  margin-left:30vw;
-  font-size: medium;
 }
 .title-card2{
-  padding: 5px; /* 内边距 */
+  padding: 10px; /* 内边距 */
   border-radius: 8px; /* 圆角边框 */
-  width: 40%; /* 卡片宽度 */
+  width: 55vw; /* 卡片宽度 */
   align-items: center; /* 垂直居中 */
   height: 3vw;
-  margin-left:5.5vw;
-  margin-bottom: 1vw;
-  margin-top: 4vw;
+  margin-left:2vw;
+  margin-bottom: 2vw;
+  margin-top: 0.5vw;
 
-}
-.title-card2 a{
-  margin-left:31vw;
-  font-size: medium;
 }
 
 
@@ -121,9 +114,13 @@ body {
 .appointment-section1{
   flex: 3;
   background-color: #fff;
-  padding: 1vw;
-  margin-right: 3vw;
+  margin-right: 10vw;
   border-radius: 1%;
+  box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
+  max-height: 43vw;
+  width:20vw !important;
+  margin-top: 1vw;
+
 }
 .appointment-section2{
   flex: 3;
@@ -131,31 +128,45 @@ body {
   padding: 1vw;
   margin-right: 1vw;
   border-radius:1%;
+  height: auto;
+  width:60vw;
+  box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
+  margin-left: 2vw;
 }
 
 .appointment-card1 {
-  background-color: #fff; /* 灰色背景 */
-  padding: 3% 4% 2% 4%; /* 内边距 */
-  border-radius: 2%; /* 圆角边框 */
-  width: 35vw; /* 卡片宽度 */
-  display: flex; /* 使用 Flex 布局 */
-  align-items: center; /* 垂直居中 */
-  margin:2vw 5vw;
-  box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
-  height:auto;
-  justify-content: space-between;
-}
-.appointment-card2 {
-  background-color: #fff; /* 灰色背景 */
-  padding: 4%; /* 内边距 */
-  border-radius: 2%; /* 圆角边框 */
-  width: 35vw; /* 卡片宽度 */
-  display: flex; /* 使用 Flex 布局 */
-  align-items: center; /* 垂直居中 */
-  margin:2vw 6vw;
+  padding: 1%; /* 内边距 */
+  border-radius: 10px; /* 圆角边框 */
+  width: 25vw; /* 卡片宽度 */
+  margin-left:4.5vw;
+  margin-bottom: 1vw;
   box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
   height:auto;
   
+}
+.appointment-card2 {
+  padding: 2%; /* 内边距 */
+  border-radius: 10px; /* 圆角边框 */
+  width: 57vw; /* 卡片宽度 */
+  margin-right:4.5vw;
+  margin-left:3vw;
+  margin-bottom: 1vw;
+  box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
+  height:auto;
+  
+}
+.appointment-card3 {
+  padding: 1%; /* 内边距 */
+  border-radius: 10px; /* 圆角边框 */
+  width: 89vw; /* 卡片宽度 */
+  margin:2vw 4.5vw;
+  margin-bottom: 1vw;
+  box-shadow: 0 4px 8px rgb(142, 116, 106);
+  height:auto;
+  
+}
+.h2{
+	size:auto;
 }
 .patient-photo1 {
   width: 50px; /* 图片宽度 */
@@ -163,3 +174,18 @@ body {
   border-radius: 50%; /* 圆形图片 */
   margin-right: 10px; /* 图片与文本之间的距离 */
 }
+.appointment-list {
+
+}
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            text-align: center;
+        }

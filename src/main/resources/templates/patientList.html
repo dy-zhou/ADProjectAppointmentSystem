@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -172,6 +172,222 @@
 		</tbody>
 	</table>
 	<a th:href="@{/Nurse/newPatient}"><button>Add New Patient</button></a>
+</body>
+To add button to direct to predict disease
+</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/appointment.css">
+<head>
+	<meta charset="UTF-8">
+	<title>View Patients</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #fff;
+		}
+
+		h2 {
+			color: #333;
+		}
+
+		table {
+			width: 90vw;
+			border-collapse: collapse;
+			margin-top: 20px;
+			border-radius: 5px;
+			overflow: hidden;
+			margin-left:5vw;
+			border-radius: 10px;
+		}
+
+		th,
+		td {
+			border: 1px solid #ddd;
+			padding: 10px;
+			text-align: left;
+		}
+
+
+        		tr:nth-child(even) {
+			background-color: #CDDECA;
+		}
+
+		th {
+			background-color: #4D9F35;
+			text-align: center;
+			color: #E7EFE6;
+		}
+
+		tr:nth-child(odd) {
+			background-color: #E7EFE6;
+		}
+				th:not(:nth-child(2)),
+		td:not(:nth-child(2)) {
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		button {
+			display: inline-block;
+			padding: 10px 20px;
+			background-color: #4D9F35;
+			color: #fff;
+			text-decoration: none;
+			border-radius: 8px;
+			margin-top: 10px;
+			border-color: #fff;
+			margin-left: 85%;
+			
+		}
+
+		button:hover {
+			background-color: #0056b3;
+		}
+		
+		.stepper-wrapper {
+		  margin-top: 7vw;
+		  display: flex;
+		  justify-content: space-between;
+		  margin-bottom: 20px;
+		}
+		.stepper-item {
+		  position: relative;
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  flex: 1;
+		}
+		
+		.stepper-item::before {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #ccc;
+		  width: 100%;
+		  top: 25px;
+		  left: -50%;
+		  z-index: 2;
+		}
+		
+		.stepper-item::after {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 8px solid #ccc;
+		  width: 100%;
+		  top: 25px;
+		  left: 50%;
+		  z-index: 2;
+		}
+		
+		.stepper-item .step-counter {
+		  position: relative;
+		  z-index: 3;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  width: 60px;
+		  height: 60px;
+		  border-radius: 50%;
+		  background: #ccc;
+		  margin-bottom: 6px;
+		}
+		
+		.stepper-item.active {
+		  font-weight: bold;
+		  
+		}
+		
+		.stepper-item.completed .step-counter {
+		  background-color: #4bb543;
+		}
+		
+		.stepper-item.completed::after {
+		  position: absolute;
+		  content: "";
+		  border-bottom: 2px solid #4bb543;
+		  width: 100%;
+		  top: 20px;
+		  left: 50%;
+		  z-index: 3;
+		}
+		
+		.stepper-item:first-child::before {
+		  content: none;
+		}
+		.stepper-item:last-child::after {
+		  content: none;
+		}
+	</style>
+</head>
+
+<body>
+    <div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.<span th:text="${session.staffObj.name}"></span></h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
+	
+	<div class="stepper-wrapper">
+	  <div class="stepper-item active">
+        <div class="step-counter">0</div>
+         <div class="step-name">Patient List</div>
+      </div>	
+      <div class="stepper-item">
+        <div class="step-counter">1</div>
+        <div class="step-name">Select Disease</div>
+        <div>(Click on Make Appointment below)</div>
+      </div>
+      <div class="stepper-item">
+        <div class="step-counter">2</div>
+        <div class="step-name">Select Symptoms</div>
+      </div>
+      <div class="stepper-item">
+        <div class="step-counter">3</div>
+        <div class="step-name">Select Doctor and Time Slot</div>
+      </div>
+    </div>
+    
+	<h1 style="margin-left:45vw;margin-top: 3vw;"> Patients </h1 >
+	
+		<a th:href="@{/Nurse/newPatient}" ><button>Add New Patient</button></a>
+	<table >
+		<thead style="background-color: #4D9F35;">
+			<tr >
+				<th>ID</th>
+				<th>Name</th>
+				<th>Address</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="patient : ${patients}">
+				<td th:text="${patient.id}"></td>
+				<td>
+					 <a th:href="@{patient/{id}(id=${patient.id})}" 
+					 th:text="${patient.name}"></a>
+				</td>
+				<td th:text="${patient.address}"></td>
+				<td><a th:href="@{patient/disease/{patientId}(patientId =${patient.id})}">Make Appointment</a></td>
+			</tr>
+		</tbody>
+	</table>
+	
 </body>
 <!--To add button to direct to predict disease-->
 </html>
