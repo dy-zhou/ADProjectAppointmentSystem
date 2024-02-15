@@ -3,6 +3,8 @@ package sg.nus.iss.adproject.interfacemethods;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import sg.nus.iss.adproject.model.Appointment;
 import sg.nus.iss.adproject.model.AppointmentStatusEnum;
 

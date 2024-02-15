@@ -33,6 +33,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Integer
 	@Query("SELECT a FROM Appointment a WHERE a.date = :date")
 	public List<Appointment> findAppointmentByDate(@Param("date")LocalDate date);
 	
+	
 	@Modifying
 	@Query("Update Appointment a set a.medical_condition= :medical_condition WHERE a.id= :id" )
 	public void updateAppointmentMedicalCondition(@Param("id")int id,@Param("medical_condition")String medical_condition);
