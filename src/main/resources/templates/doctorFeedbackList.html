@@ -29,9 +29,13 @@
 		}
 
 		table {
-			width: 100%;
+			width: 93%;
+			margin: 0 auto;
 			border-collapse: collapse;
-			margin-top: 20px;
+			margin-top: 2%;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 3px 3px 5px rgb(192, 192, 192);
 		}
 
 		th,
@@ -42,13 +46,18 @@
 		}
 
 		th {
-			background-color: #f2f2f2;
+			background-color: #4D9F35;
 			text-align: center;
+			color: #E7EFE6;
 		}
 
 
 		tr:nth-child(even) {
-			background-color: #f9f9f9;
+			background-color: #CDDECA;
+		}
+
+		tr:nth-child(odd) {
+			background-color: #E7EFE6;
 		}
 
 		th:not(:nth-child(2)),
@@ -57,12 +66,6 @@
 			vertical-align: middle;
 		}
 
-
-
-		.button-container {
-			text-align: center;
-			margin-top: 20px;
-		}
 
 		.back-button {
 			padding: 10px 20px;
@@ -191,6 +194,56 @@
 			justify-content: center;
 			margin-top: 2%;
 		}
+
+		#backToHomePage {
+			padding: 10px 20px;
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			text-decoration: none;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			margin-top: 20px;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#backToHomePage:hover {
+			background-color: #45a049;
+		}
+
+		#scoreDropdown {
+			background-color: rgba(255, 255, 255, 0.7);
+			border: none;
+			padding: 3px;
+			border-radius: 5px;
+		}
+
+		#feedbackTable th:first-child,
+		#feedbackTable td:first-child {
+			min-width: 40px;
+		}
+
+		#chooseButton {
+			padding: 10px 20px;
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			text-decoration: none;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			margin-top: 20px;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#chooseButton:hover {
+			background-color: #45a049;
+		}
 	</style>
 </head>
 
@@ -203,7 +256,7 @@
 						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
 						<img src="/css/pictures/logo.png" alt="Company logo formal"
 							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
-						<img src="tom.jpg" alt="Tom" class="user-photo">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
 						<h3>Hello.</h3>
 						<div class="log-card">
 							<a href="/login">Logout</a>
@@ -304,9 +357,11 @@
 		});
 	</script>
 
-	<div class="button-container">
-		<button id="chooseButton" class="choose-button" style="display: inline-block;margin-right: 1%;">Back To
-			Homepage</button>
+	<div>
+		<button id="chooseButton">
+			Back To Home Page
+		</button>
+
 	</div>
 	<script>
 		var currentUrl = window.location.href;

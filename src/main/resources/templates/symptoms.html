@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Symptoms Selction</title>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<style>
 		.custom-select {
 		    -webkit-appearance: none;
@@ -37,6 +38,7 @@
 		}
 		h1 {
 		  font-family: Merriweather, serif;
+		  text-align: center;
 		}
 		.custom-select {
 		    font-family: "Source Sans Pro", sans-serif;
@@ -126,6 +128,33 @@
 		.stepper-item:last-child::after {
 		  content: none;
 		}
+	
+        area {
+		  outline-color: white;
+		  outline-style: solid;
+		  outline-width: 2px;
+		}
+		
+
+		.area-text {
+		  background-color: rgba(0, 0, 0, 0.5);
+		  color: white;
+		  padding: 5px;
+		  border-radius: 5px;
+		  font-size: 14px;
+		  z-index: 100; 
+		  position: absolute;
+		  left: 750px;
+		  text-align: center;
+		}
+		
+		#image-map-container {
+		  display: flex;
+		  justify-content: center; 
+		  align-items: center;
+		}
+		
+		
 	</style>
 </head>
 
@@ -150,19 +179,75 @@
       </div>
     </div>
     
+
 	<form th:action="@{/Nurse/selectSymptoms}" method="POST" th:object="${selectedSymptomGroup}">
 		<h1>Select Possible Related Disease</h1>
-	    <select th:field="*{symptomGroup}" class="custom-select">
-			<option value="">Select Possible Related Disease</option>
-			<option th:each="group : ${symptomGroup}" 
-					th:value="${group}" 
-					th:text="${group}">
-			</option>	
-	     </select>
-     <button type="submit" id="submitBtn">Submit</button>
-	     
-     </form>
+	    <div id="image-map-container" style="position: relative; display: flex;">
+	        <img src="/BodyAnatomy.jpg" usemap="#image-map">
+	        <div class="map-selector"></div>
+	        <input type="hidden" th:field="*{symptomGroup}" id="selected-area" />
+			<input type="submit" value="Submit" id="submitBtn" style="display: inline-block; margin-bottom: 110px;">
+	    </div>
+	
+	    <script>
+			//Variable for areas and hidden input
+	        var areas = document.querySelectorAll('#image-map area');
+	        var hiddenInput = document.getElementById('selected-area');
+					
+			
+			
+			//Handle on area click
+	        function handleAreaClick(area) {
+			  hiddenInput.value = area.getAttribute('alt');
+	
+			  
+			  // Create a temporary element to display the alt text
+			  var textElement = document.createElement('span');
+			  textElement.textContent = area.getAttribute('alt');
+			  textElement.classList.add('area-text');
+			  
+			  var containerOffset = document.getElementById('image-map-container').getBoundingClientRect();
+			  console.log(containerOffset);			
+			  // Position the element to side of picture
+			  textElement.style.position = 'absolute';
+			  textElement.style.right = 380 + 'px';
+			  textElement.style.top = 550 + 'px';
+			
+			
+			  // Append the element to the body and remove it after a delay
+			  document.body.appendChild(textElement);
+			  document.addEventListener('click', function(event) {
+			    var clickedElement = event.target;
+			    if (clickedElement != area && !clickedElement.closest('#image-map-container')) {
+			      document.body.removeChild(textElement);
+			    }
+			  });
+			  
+			}
+			
+			areas.forEach(function (area, index) {
+			  area.addEventListener('click', handleAreaClick);
+			});
+			
+			
+	    </script>
+	    
+	
+	</form>
+	<!--Mapping of the image -->
+	<map name="image-map">
+		<area target="" alt="Head" title="Head" href="javascript:void(0)" coords="200,13,175,20,170,44,182,54,204,59,224,55,239,33,219,14" onclick="handleAreaClick(this)" shape="poly">
+	    <area target="" alt="Infectious Disease" title="Infectious Disease" href="javascript:void(0)" coords="202,93,26" onclick="handleAreaClick(this)" shape="circle">
+	    <area target="" alt="Stomach" title="Stomach" href="javascript:void(0)" coords="234,290,217,313,197,325,181,331,155,350,139,386,141,410,150,431,173,440,188,445,204,443,219,445,238,448,251,434,259,413,255,367,259,340,255,305,253,293" onclick="handleAreaClick(this)" shape="poly">
+	    <area target="" alt="Lungs" title="Lungs" href="javascript:void(0)" coords="199,184,173,186,154,206,141,234,134,265,140,283,171,279,198,273,223,271,251,274,266,284,270,246,254,212,231,187" onclick="handleAreaClick(this)" shape="poly">
+	    <area target="" alt="Bone Inflammation" title="Bone Inflammation" href="javascript:void(0)" coords="258,502,248,512,247,539,245,558,238,594,232,621,224,643,225,660,229,671,229,691,233,710,232,732,231,762,232,786,230,810,237,820,248,810,255,766,268,521,269,509" onclick="handleAreaClick(this)" shape="poly">
+	    <area target="" alt="Urinal Disease" title="Urinal Disease" href="javascript:void(0)" coords="201,465,187,472,180,481,190,490,196,498,201,507,212,497,221,488,226,477" onclick="handleAreaClick(this)" shape="poly">
+	    <area target="" alt="Heart, Blood, Vessels" title="Heart, Blood, Vessels" href="javascript:void(0)" coords="303,263,310,279,314,299,322,320,323,345,326,367,315,374,299,376,292,352,289,322,284,293,281,269,293,266" onclick="handleAreaClick(this)" shape="poly">
+	    <area target="" alt="Skin" title="Skin" href="javascript:void(0)" coords="111,168,181,145,126,261,121,310,115,351,108,389,97,428,90,445,67,443,88,215" onclick="handleAreaClick(this)" shape="poly">
+    	<area target="" alt="Skin" title="Skin" href="javascript:void(0)" coords="243,150,281,169,299,177,311,205,317,232,316,249,295,254,273,227,254,193,233,168" onclick="handleAreaClick(this)" shape="poly">
+	</map>
      
+
   </body>    
 </html>-->
 

@@ -126,7 +126,7 @@
 			<p>Gender:<label th:text="${Appointment.patient.sex}"></label></p>
 			<p>Allergy:<label th:text="${Appointment.patient.allergy}"></label></p>
 			<p>Medical Condition:<label th:text="${Appointment.patient.medical_condition}"></label></p>
-			<p>Addtional info: <label th:text="${Appointment.patient.additional_info}"></label></p>
+			<p>Addtional info: <label th:text="${Appointment.patient.additional_information}"></label></p>
 
 		</div>
 		<form th:action="@{/Doctor/EditAppointmentDetails/}+${Appointment.id}" th:object="${Appointment}" method="post">
@@ -144,7 +144,7 @@
 				<p>Appointment Time:<label th:text="${medical_record.time}"></label></p>
 				<p>Gender:<label th:text="${medical_record.patient.sex}"></label></p>
 				<p>Allergy:<label th:text="${medical_record.patient.allergy}"></label></p>
-				<p>Addtional info: <label th:text="${medical_record.patient.additional_info}"></label></p>
+				<p>Addtional info: <label th:text="${medical_record.patient.additional_information}"></label></p>
 				<br>
 				<p>Symptoms:<label th:text="${medical_record.patient.medical_condition}"></label></p>
 				<p>Medical Condition:<label th:text="${medical_record.medical_condition}"></label></p>
