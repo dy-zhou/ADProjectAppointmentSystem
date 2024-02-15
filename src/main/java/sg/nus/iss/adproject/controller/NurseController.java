@@ -118,12 +118,53 @@ public class NurseController {
 		return "redirect:/Nurse/patientList";
 	}
 	
+
+	@GetMapping("editPatient/{id}")
+	public String editPatient(@PathVariable("id")int id,
+			Model model) {
+		Patient updatePatient = patientService.getPatientById(id);
+		model.addAttribute("updatePatient", updatePatient);
+		
+		return "editPatient";
+		
+	}
+	
+	@PostMapping("updatePatient/{id}")
+	public String updatePatient(Model model, 
+			@ModelAttribute("updatePatient") Patient updatePatient,
+			@PathVariable("id")int id) {
+		int patientId = id;
+		
+		patientService.updatePatient(id, updatePatient);
+		
+		System.out.println("Patient ID: " + patientId);
+		return "redirect:/Nurse/patient/" + patientId;
+		
+	}
+	
+	@PostMapping("deletePatient/{id}")
+	public String deletePatient(Model model, 
+			@ModelAttribute("updatePatient") Patient updatePatient,
+			@PathVariable("id")int id) {
+		
+		int patientId = id;
+		model.addAttribute("id", patientId);
+		Patient patient = updatePatient;
+		patient.setName(null);
+		return "redirect:/Nurse/patient/" + patientId;
+		
+	}
+	
+	
+	
+
 	@GetMapping("/viewAppointmentDetails/{id}")
 	public String viewAppointmentDetails(@PathVariable("id") int id,Model model) {
 		List<Appointment>appointmentList=appointmentService.findAppointmentByStaffId(id);
 		model.addAttribute("AppointmentList", appointmentList);
 		return "viewAppointmentDetail";
 	}
+
 	//Get Patient
 	@GetMapping("patient/{id}")
 	public String patientDetail(@PathVariable("id") int id, 
@@ -435,6 +476,7 @@ public class NurseController {
 		
 	}
 	
+
 
 	
 	

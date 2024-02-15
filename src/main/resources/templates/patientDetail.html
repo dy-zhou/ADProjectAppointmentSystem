@@ -98,6 +98,8 @@
 	</div>
 	<div class="appointment-card1" style="width: 90%;margin-left: 5vw;padding: 1% 3%;">
     <h2>Patient Details</h2>
+
+ 
     	<div style="display: flex;justify-content: space-between;">
 			<div>
         	<p><strong>ID:</strong> <span th:text="${patient.id}"></span></p>
@@ -109,10 +111,11 @@
         	<p><strong>Allergy:</strong> <span th:text="${patient.allergy}"></span></p>
         	<p><strong>Medical Condition:</strong> <span th:text="${patient.medical_condition}"></span></p>
         	<p><strong>Additional Information:</strong> <span th:text="${patient.additional_information}"></span></p>
-			<a th:href="@{/Nurse/patientList}">Edit</a>
+			<a th:href="@{/Nurse/editPatient/{id}(id =${patient.id})}">Edit</a>
 			</div>
 			
     	</div>
+
     </div>
     <div class="appointment-card1" style="width: 90%;margin-left: 5vw;padding: 2% 3%;">
 	<h2>Appointments:</h2>
