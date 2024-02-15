@@ -214,6 +214,8 @@
 	
 </body>
 </html>-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -332,13 +334,14 @@
 		  margin-top: 1.0rem;
 		  margin-bottom: 0.5rem;
 		  height: fit-content;
-		  width:fit-content;
+		  width:40%;
 		  border: none;
 		  box-shadow: 0px 0px 2px rgba(0,0,0,1);
 		  background-color: rgb(217, 240, 220);
-		  margin-left:30%;
+		  margin-left:25%;
 		  margin-top:5vw;
 		  border-radius: 8px;
+		  padding: 2% 4%;
 		}
 		#submitButton{
 			margin-top: 2vw;
@@ -418,7 +421,7 @@
 	<div th:if="${departmentStaff.size() > 0}">
 		<form th:action="@{/Nurse/selectDoctors}" th:object="${newAppointment}" method="POST" id="form">
 			<fieldset class="apptForm">
-				<legend>Make Appointment</legend>
+				<h2>Make Appointment</h2>
 				<select th:field="*{staff}" id="staff">
 					<option value="">---Select Appointment Doctor---</option>
 					<option th:each="staff : ${departmentStaff}"
@@ -433,7 +436,7 @@
 					<option th:value="'08:00:00'">Morning</option>
 					<option th:value="'14:00:00'">Night</option>
 				</select>
-					<legend style="margin-top:2vw;width:7.5vw">Possible Disease</legend>
+					<h3 style="margin-top:2vw;">Possible Disease</h3>
 		<p>Patient may have <b><span th:text="${prediction}"></span></b>.</p>
 		<p>Patient have these symptoms: <b><span th:text="${patientSymptoms}"></span></b>.</p>
 		<span th:unless="${departmentStaff.size() > 0}">No Doctor Available!</span>

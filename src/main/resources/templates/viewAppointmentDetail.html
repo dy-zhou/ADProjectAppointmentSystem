@@ -150,7 +150,7 @@
 						<img src="/css/pictures/logo.png" alt="Company logo formal"
 							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
 						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
-						<h3>Hello.</h3>
+						<h3>Hello.<span th:text="${session.staff}"></span></h3>
 						<div class="log-card">
 							<a href="/login">Logout</a>
 						</div>
@@ -191,17 +191,24 @@
             <p style="font-weight: bolder;">Appointment Time:	<label style="font-weight: normal;" th:text="${appointment.time}"></label></p>
             <p style="font-weight: bolder;">Address:	<label style="font-weight: normal;" th:text="${appointment.patient.address}"></label></pstyle="font-weight: bolder;">
             <p style="font-weight: bolder;">Gender:	<label style="font-weight: normal;" th:text="${appointment.patient.sex}"></label></p>
-            </div>
+            <a  th:href="@{/Doctor/EditAppointmentDetails/}+${appointment.id}">
+				<button style=" background-color: #4CAF50;border-radius: 8px;padding:0.5vw 2vw; color:#fff; font-size: 0.85vw;border:0 solid;margin-left:20vw;" >
+				  Detail</button></a>
+				 </div>
             <div style="margin-left:3vw;width:20vw; ">
  
             <p style="font-weight: bolder;">Allergy:	<label style="font-weight: normal;" th:text="${appointment.patient.allergy}"></label></p>
             <p style="font-weight: bolder;">Medical Condition:	<label style="font-weight: normal;" th:text="${appointment.patient. medical_condition}" ></label></p>
              <p style="font-weight: bolder;">Addtional info:	<label style="font-weight: normal;" th:text="${appointment.patient.additional_info}"></label></p>
-             <a type="button"  style=" width:5vw; background-color: #4CAF50;;border-radius: 8px;padding-top: 0.5vw;padding-bottom: 0.5vw; padding-left:2vw;padding-right: 2vw/* 浅灰色边框 */     ;color:#fff; font-size: 0.85vw;;" th:href="@{/Doctor/EditAppointmentDetails/}+${appointment.id}">Detail</a>
+            
+             
             </div>
+            
               </div>
               </div>
+              
             </div>
+            
     </div>
     
 </div>
