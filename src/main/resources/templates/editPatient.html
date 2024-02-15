@@ -1,76 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<link rel="stylesheet" href="/css/newstylesheet.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <head>
 	<meta charset="UTF-8">
-	<title>Edit Patient Information</title>
-	<style>
-		#submitButton{
-			margin-top: 10px;
-			margin-left: 2px;
-			padding: 5px;
-			width: 70px;
-			height: 30px;
-			border-radius: 5px;
-			border: 1px solid #999;
-			box-shadow: 0 3px 5px 0 rgba(0,0,0,.2);
-			background-color: #4bb543;
-			color: rgb(238, 238, 238);
-			margin-left: 525px;
-		}
-		label {
-		  color: rgb(0, 0, 0);
-		  font-size: 1.2 rem;
-		}
-		fieldset {
-		  margin-top: 0.5rem;
-		  margin-bottom: 0.5rem;
-		  height: fit-content;
-		  width:600px;
-		  border: none;
-		  box-shadow: 0px 0px 2px rgba(0,0,0,1);
-		  background-color: rgb(240,240,240);
-		}
-		legend {
-		  background-color:#4bb543;
-		  padding: 0.55rem;
-		  font-size: 1.0rem;
-		  color: rgb(238, 238, 238);
-		  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-		  transform: translateX(-1.1rem);
-		  box-shadow: -1px 1px 1px rgba(0,0,0,0.8);
-		}
-		legend:after {
-		  content: "";
-		  height: 0;
-		  width:0;
-		  background-color: transparent;
-		  border-top: 0.0rem solid transparent;
-		  border-right:  0.35rem solid black;
-		  border-bottom: 0.45rem solid transparent;
-		  border-left: 0.0rem solid transparent;
-		  position:absolute;
-		  left:-0.075rem;
-		  bottom: -0.45rem;
-		}
-		
-		input[type="text"] {
-		    width: 498px; 
-		}
-		select{
-			width: 100px;
-		}
-	</style>
+	<title>Add New Patient</title>
 </head>
 
 <body>
+	<div class="navbar">
+		<header>
+			<div class="header-content">
+				<nav>
+					<div class="search-container">
+
+						<img src="/css/pictures/logo2.png" alt="Company logo" class="hospital-photo">
+						<img src="/css/pictures/logo.png" alt="Company logo formal"
+							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
+						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
+						<h3>Hello.<span th:text="${session.staffObj.name}"></span></h3>
+						<div class="log-card">
+							<a href="/login">Logout</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+	</div>
+		<div class="header">
+
+		<h1>Edit Patient Information</h1>
+	</div>
 	
 	
-	<form action="#" th:action="@{/Nurse/updatePatient/{id}(id =${updatePatient.id})}" th:object="${updatePatient}" method="post">
+<!--	<form action="#" th:action="@{/Nurse/updatePatient/{id}(id =${updatePatient.id})}" th:object="${updatePatient}" method="post">
 		<fieldset>
 			<legend>Edit Patient Information</legend>
-		<table>
-			<tr>
+		<table>-->
+<!--			<tr>
 				<td><label for="name">Name:</label></td>
 				<td><input type="text" id="name" th:field="*{name}" /></td>
 			</tr>
@@ -110,6 +78,65 @@
 	</form>
 	<a th:href="@{/Nurse/patient/{id}(id =${updatePatient.id})}" class="goback-button" >Go Back</a>
 </body>
+-->
 
+</html>
+	<div style="display: flex;align-items: center;justify-content: center;">
+		<div class="addnewpatient-patient-card">
+			<div class="main-content">
+				<section class="custom-style">
+					<form action="#" th:action="@{/Nurse/updatePatient/{id}(id =${updatePatient.id})}" method="post" th:object="${updatePatient}">
+						<div>
+							<label for="name">Name</label>
+							<input type="text" id="name" name="name" th:field="*{name}">
+						</div>
+
+
+						<div>
+							<label for="address">Address</label>
+							<input type="text" id="address" name="address" th:field="*{address}">
+						</div>
+
+
+						<div>
+							<label for="sex">Gender</label>
+							<select id="sex" name="sex" th:field="*{sex}">
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+							</select>
+						</div>
+
+						<div>
+							<label for="allergy">Allergy</label>
+							<input type="text" id="allergy" name="allergy" th:field="*{allergy}">
+						</div>
+
+						<div>
+							<label for="additional_information">Additional Information</label>
+							<input type="text" id="additional_information" name="additional_information"
+								th:field="*{additional_information}">
+						</div>
+
+						<div>
+							<label for="medical_condition">Medical Condition</label>
+							<input type="text" id="medical_condition" name="medical_condition"
+								th:field="*{medical_condition}">
+						</div>
+
+						<div class="button-container">
+							<a onclick="history.go(-1); return false"><button
+									style="background-color: #4CAF50; color: white;border: none;border-radius: 5px;cursor: pointer;font-weight: bold;font-size:medium;padding:10px 30px;margin-right: 10vw;">Go Back</button></a>
+							<input type="submit"
+								style="background-color: #4CAF50; color: white;border: none;border-radius: 5px;cursor: pointer;font-weight: bold;font-size:medium;padding:10px 30px;"
+								value="update"></input>
+						</div>
+					</form>
+				</section>
+
+
+			</div>
+		</div>
+	</div>
+</body>
 
 </html>
