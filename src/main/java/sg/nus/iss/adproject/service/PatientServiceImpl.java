@@ -45,8 +45,7 @@ public class PatientServiceImpl implements PatientService {
 			existingPatient.setSex(newPatientInfo.getSex());
 			existingPatient.setAllergy(newPatientInfo.getAllergy());
 			existingPatient.setMedical_condition(newPatientInfo.getMedical_condition());
-			existingPatient.setAdditional_info(newPatientInfo.getAdditional_information());
-
+			existingPatient.setAdditional_information(newPatientInfo.getAdditional_information());
 			patientRepository.save(existingPatient);
 		} else {
 			// SHOW ERROR HTML
