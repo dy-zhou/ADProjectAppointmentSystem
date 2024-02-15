@@ -70,7 +70,11 @@
         <p><strong>Allergy:</strong> <span th:text="${patient.allergy}"></span></p>
         <p><strong>Medical Condition:</strong> <span th:text="${patient.medical_condition}"></span></p>
         <p><strong>Additional Information:</strong> <span th:text="${patient.additional_information}"></span></p>
-		<a th:href="@{/Nurse/patientList}" class="goback-button">Go Back</a>
+		<p>
+			<a th:href="@{/Nurse/patientList}" class="goback-button" >Go Back</a>
+			<a th:href="@{/Nurse/editPatient/{id}(id =${patient.id})}" style="margin-left: 20px;">Update Details</a>
+		</p>
+		
     </div>
 	<h2>Appointments details</h2>
 	<label for="dateFilter">Filter by Date:</label>
@@ -117,7 +121,7 @@
 					<td th:text="${appointment.queue_number}"></td>
 					<td th:text="${appointment.date}"></td>
 					<td th:text="${appointment.time}"></td>
-					<td th:text="${appointment.patient.medical_condition}"></td>
+					<td th:text="${appointment.medical_condition}"></td>
 					<!--<td th:text="${appointment.department.name}"></td>-->
 					<td th:text="${appointment.staff.department.name}"></td>
 					<td th:text="${appointment.staff.name}"></td>

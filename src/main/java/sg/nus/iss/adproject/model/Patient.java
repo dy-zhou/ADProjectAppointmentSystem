@@ -80,7 +80,7 @@ public class Patient {
 	public String getAdditional_information() {
 		return additional_information;
 	}
-	public void setAdditional_info(String additional_information) {
+	public void setAdditional_information(String additional_information) {
 		this.additional_information = additional_information;
 	}
 
