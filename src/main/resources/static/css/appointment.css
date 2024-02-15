@@ -174,10 +174,7 @@ width:10vw;
   border-radius: 50%; /* 圆形图片 */
   margin-right: 10px; /* 图片与文本之间的距离 */
 }
-.appointment-list {
-
-}
-        .button {
+      .button {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
