@@ -21,7 +21,7 @@
 						<img src="/css/pictures/logo.png" alt="Company logo formal"
 							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
 						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
-						<h3>Hello.</h3>
+						<h3>Hello.<span th:text="${session.staffObj.name}"></span></h3>
 						<div class="log-card">
 							<a href="/login">Logout</a>
 						</div>

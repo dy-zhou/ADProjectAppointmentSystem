@@ -150,7 +150,7 @@
 						<img src="/css/pictures/logo.png" alt="Company logo formal"
 							style="width: 15vw;  object-fit: cover;margin-left: 30vw;">
 						<img src="/css/pictures/tom.jpg" alt="Tom" class="user-photo">
-						<h3>Hello.<span th:text="${session.staff}"></span></h3>
+						<h3>Hello.<span th:text="${session.staffObj.name}"></span></h3>
 						<div class="log-card">
 							<a href="/login">Logout</a>
 						</div>
@@ -199,7 +199,7 @@
  
             <p style="font-weight: bolder;">Allergy:	<label style="font-weight: normal;" th:text="${appointment.patient.allergy}"></label></p>
             <p style="font-weight: bolder;">Medical Condition:	<label style="font-weight: normal;" th:text="${appointment.patient. medical_condition}" ></label></p>
-             <p style="font-weight: bolder;">Addtional info:	<label style="font-weight: normal;" th:text="${appointment.patient.additional_info}"></label></p>
+             <p style="font-weight: bolder;">Addtional info:	<label style="font-weight: normal;" th:text="${appointment.patient.additional_information}"></label></p>
             
              
             </div>
