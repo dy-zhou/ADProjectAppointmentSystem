@@ -197,6 +197,7 @@ To add button to direct to predict disease
 			width: 90vw;
 			border-collapse: collapse;
 			margin-top: 20px;
+			margin-bottom: 50px;
 			border-radius: 5px;
 			overflow: hidden;
 			margin-left:5vw;
@@ -239,8 +240,14 @@ To add button to direct to predict disease
 			border-radius: 8px;
 			margin-top: 10px;
 			border-color: #fff;
-			margin-left: 85%;
 			
+			
+		}
+		#addNewPatient{
+			margin-left: 85%;
+		}
+		#home{
+			margin-left: 5%;
 		}
 
 		button:hover {
@@ -319,6 +326,7 @@ To add button to direct to predict disease
 		.stepper-item:last-child::after {
 		  content: none;
 		}
+		
 	</style>
 </head>
 
@@ -363,9 +371,10 @@ To add button to direct to predict disease
       </div>
     </div>
     
+	<a th:href="@{/Nurse}" ><button id="home">Home</button></a>
 	<h1 style="margin-left:45vw;margin-top: 3vw;"> Patients </h1 >
 	
-		<a th:href="@{/Nurse/newPatient}" ><button>Add New Patient</button></a>
+		<a th:href="@{/Nurse/newPatient}" ><button id="addNewPatient">Add New Patient</button></a>
 	<table >
 		<thead style="background-color: #4D9F35;">
 			<tr >
@@ -387,7 +396,6 @@ To add button to direct to predict disease
 			</tr>
 		</tbody>
 	</table>
-	
 </body>
 <!--To add button to direct to predict disease-->
 </html>
