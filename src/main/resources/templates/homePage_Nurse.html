@@ -9,19 +9,17 @@
 	</head>
 	<style>
 		.doctor-card {
-  background-color: #fff; /* 灰色背景 */
-  padding:8% 10%; /* 内边距 */
-  border-radius: 2%; /* 圆角边框 */
-  width: 20vw; /* 卡片宽度 */
-  display: flex; /* 使用 Flex 布局 */
-  align-items: center; /* 垂直居中 */
-
-  margin-bottom:2vw;
-  box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
-  height:12vw;
- 
-
-}
+		  background-color: #fff; /* 灰色背景 */
+		  padding:8% 10%; /* 内边距 */
+		  border-radius: 2%; /* 圆角边框 */
+		  width: 20vw; /* 卡片宽度 */
+		  height:16vw;
+		  display: flex; /* 使用 Flex 布局 */
+		  align-items: center; /* 垂直居中 */
+		  margin-bottom:2vw;
+		  box-shadow: 0 4px 8px rgba(196, 181, 176, 0.913);
+		
+		}
 	</style>
 	<body>
 		<div class="navbar">
@@ -54,21 +52,22 @@
 		</div>
 		</div>
 		<div style="margin-left: 6vw; display:none;" id="content">
-		<div style="column-count: 4;column-gap: 2vw;margin:3% 0%; background-color: #fff;border: 2px solid rgb(68, 183, 83);border-radius: 20px;padding-top: 3vw;padding-left: 2vw;padding-right:2vw;width:88vw">
-		<div class="doctor-card" th:each="doctor:${doctorList}">
-			<div>
-				
-				<p><img src="/css/pictures/doctor.svg" alt="doctor" style="height: 2vw;">
-					<label th:text="${doctor.name}" style="font-size: large;;"></label></p>
-				<p>ID  <label th:text="${doctor.id}"></label></p>
-				<p>Department  <label th:text="${doctor.department.name}"></label></p>
-				<p>Room  <label th:text="${doctor.room.name}"></label></p>
-			
-				<a th:href="@{Nurse/viewAppointmentDetails/}+${doctor.id}">Appointment Today</a>
+			<!--<div style="column-count: 4;column-gap: 2vw; margin:3% 0%; background-color: #fff;border: 2px solid rgb(68, 183, 83);border-radius: 20px;padding-top: 3vw; padding-left: 2vw;padding-right:2vw;width:88vw; ">-->
+			<div style="display:grid; grid-template-columns: repeat(4,1fr);gap:2vw; margin:3% 0%; background-color: #fff;border: 2px solid rgb(68, 183, 83);border-radius: 20px;padding-top: 3vw; padding-bottom: 3vw;padding-left: 2vw;padding-right:2vw;width:90vw; ">
+				<div class="doctor-card" th:each="doctor:${doctorList}">
+					<div>
+						
+						<p><img src="/css/pictures/doctor.svg" alt="doctor" style="height: 2vw;">
+							<label th:text="${doctor.name}" style="font-size: large;;"></label></p>
+						<p>ID  <label th:text="${doctor.id}"></label></p>
+						<p>Department  <label th:text="${doctor.department.name}"></label></p>
+						<p>Room  <label th:text="${doctor.room.name}"></label></p>
+					
+						<a th:href="@{Nurse/viewAppointmentDetails/}+${doctor.id}">Appointment Today</a>
+					</div>
+				</div>
 			</div>
 		</div>
-		</div>
-	</div>
 		<script>
 			function toggle(){
 				var content=document.getElementById('content');
