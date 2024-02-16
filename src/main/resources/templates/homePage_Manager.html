@@ -163,9 +163,9 @@
 							th:if="${doctor.department.name == department.name and doctor.designation == 'doctor'}">
 							<p>
 								<span class="name" th:text="${doctor.name}"></span><br>
-								<span class="label" th:text="${'Doctor ID: '}"></span> <span
+								 <span>ID: </span><span
 									th:text="${doctor.id}"></span><br>
-								<span class="label" th:text="${'Room: '}"></span><span
+								<span>Room: </span><span
 									th:text="${doctor.room != null ? doctor.room.name : 'No room assigned'}"></span><br>
 								<span class="average-score" th:text="${doctorAverageScores[doctor.id]}"></span><br>
 								<span class="details-link"><a th:href="@{/Manager/doctorFeedbacks(id=*{doctor.id})}"
