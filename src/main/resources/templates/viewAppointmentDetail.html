@@ -65,9 +65,14 @@
     				<input type="date" id="dateFilter" onchange="filterTableByDate()">
     				<button onclick="clearDateFilter()" id="clear">Clear</button>        
                 </div>
-                <div style="margin-top: 10%;">
-					<a th:href="@{/Nurse}" >
-						<button  style=" background-color: #4CAF50;border-radius: 8px;padding:0.5vw 1vw; border:none; color:#fff;">Go Back</button>
+                <div th:if="${session.staffDesignation=='doctor'}" style="margin-top: 10%;">
+					<a th:href="@{/Doctor}">
+						<button   style=" background-color: #4CAF50;border-radius: 8px;padding:0.5vw 1vw; border:none; color:#fff;">Go Back</button>
+					</a>
+				</div>
+				<div th:if="${session.staffDesignation=='nurse'}" style="margin-top: 10%;">
+					<a th:href="@{/Nurse}">
+						<button   style=" background-color: #4CAF50;border-radius: 8px;padding:0.5vw 1vw; border:none; color:#fff;">Go Back</button>
 					</a>
 				</div>
             </div>
