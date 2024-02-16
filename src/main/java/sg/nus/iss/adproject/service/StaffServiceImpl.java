@@ -1,6 +1,7 @@
 package sg.nus.iss.adproject.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,13 @@ public class StaffServiceImpl implements StaffService{
 	public List<Staff> findAllDoctors() {
 		
 		return staffRepository.findStaffByDesignation("doctor");
+	}
+
+
+	@Override
+	public List<Staff> findStaffByDepartmentAndDesignation(int id, String designation) {
+		// TODO Auto-generated method stub
+		return staffRepository.findStaffByDepartmentAndDesignation(id, designation);
 	}
 
 
