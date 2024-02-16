@@ -16,6 +16,6 @@ public interface ScheduleRepository extends JpaRepository<Schedule,Integer> {
 	@Query("Select s From Schedule s WHERE staff.id= :id")
 	List<Schedule> findSchedulesByStaff(@Param("id") int id);
 	
-	@Query(value = "SELECT MAX(patient_slot) FROM schedule WHERE time_start = :timeStart AND staff_id = :staffId AND date = :date", nativeQuery = true)
+	@Query("SELECT MAX(patient_slot) FROM Schedule s WHERE time_start = CAST(:timeStart AS java.sql.Time) AND s.staff.id = :staffId AND date = :date")
     Integer findMaxPatientSlotByTimeStart(@Param("timeStart") LocalTime timeStart,  @Param("staffId") int staffId, @Param("date")LocalDate date);
 }
