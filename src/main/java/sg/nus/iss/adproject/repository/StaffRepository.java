@@ -1,6 +1,7 @@
 package sg.nus.iss.adproject.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,5 +22,8 @@ public interface StaffRepository extends JpaRepository<Staff,Integer> {
 	List<Staff> findstaffsByDepartmentId(@Param("id")int id);
 
 	List<Staff> findStaffByDesignation(String designation);
+	
+	@Query("SELECT st from Staff st WHERE st.department.id=:id AND st.designation=:designation")
+	List<Staff>findStaffByDepartmentAndDesignation(@Param("id")int id, @Param("designation")String designation);
 
 }

@@ -173,8 +173,10 @@ public class DoctorController {
 
 	
 	@GetMapping("/AppointmentDetails")
-	public String showAppointmentDetails(Model model) {
-		List<Appointment>appointmentList=appointmentService.findAllAppointments();
+	public String showAppointmentDetails(Model model,HttpSession sessionObj) {
+		Staff staff=(Staff) sessionObj.getAttribute("staffObj");
+		int id=staff.getId();
+		List<Appointment>appointmentList=appointmentService.findAppointmentByStaffId(id);
 		model.addAttribute("AppointmentList",appointmentList);
 		return "viewAppointmentDetail";
 	}

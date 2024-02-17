@@ -295,7 +295,8 @@ public class NurseController {
 		model.addAttribute("newAppointment", newAppointment);
 		
 		//Get doctor list from department id
-		List<Staff> availableStaff = staffService.findStaffByDepartmentId(diseseDepartment.getId());
+		List<Staff> availableStaff = staffService.findStaffByDepartmentAndDesignation(diseseDepartment.getId(), "doctor");
+		System.out.println("Available Staff length:" + availableStaff.size());
 		
 		model.addAttribute("departmentStaff", availableStaff);
 		return "makeAppointment";

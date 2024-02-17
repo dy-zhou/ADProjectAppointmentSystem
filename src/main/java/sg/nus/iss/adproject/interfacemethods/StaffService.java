@@ -1,6 +1,9 @@
 package sg.nus.iss.adproject.interfacemethods;
 
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.repository.query.Param;
 
 import sg.nus.iss.adproject.model.Staff;
 
@@ -13,6 +16,7 @@ public interface StaffService {
 	Staff Authentication(String username,String password);
 	//add this
 	List<Staff> findAllDoctors();
+	List<Staff>findStaffByDepartmentAndDesignation(int id, String designation);
 
 
 }
